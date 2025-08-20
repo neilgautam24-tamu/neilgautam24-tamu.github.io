@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neil Gautam</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="#home">Neil Gautam</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Neil Gautam</h1>
+                    <p class="subtitle">neilgautam.24@tamu.edu</p>
+                    
+                    <div class="bio">
+                        <p>I am an MS in Computer Science student at <strong>Texas A&M University</strong> with a focus on Machine Learning and Computer Vision. Currently working as a Student Assistant at the C2B Lab under Dr. Reza Avazmohammadi, developing novel approaches for 4D heart motion tracking and diffusion-based image registration.</p>
+                        
+                        <p>Previously, I worked as a <strong>Machine Learning Engineer-2</strong> at AfterShoot, where I spearheaded AI portrait enhancement solutions that reduced photo editing time from hours to minutes. I have extensive experience in developing and deploying ML systems across various domains including computer vision, NLP, and anomaly detection.</p>
+                        
+                        <p><strong>Research Interests:</strong> Computer Vision, 3D Reconstruction, Diffusion Models, Medical Imaging, Scene Understanding</p>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="mailto:neilgautam.24@tamu.edu" class="social-link"><i class="fas fa-envelope"></i> Email</a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="#" class="social-link"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                        <a href="#" class="social-link"><i class="fas fa-file-pdf"></i> Resume</a>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Aug '24 - Present</div>
+                            <div class="timeline-content">MS Computer Science, Texas A&M University</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Nov '23 - Jul '24</div>
+                            <div class="timeline-content">ML Engineer-2, AfterShoot</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Jan '23 - Oct '23</div>
+                            <div class="timeline-content">ML Engineer, Savart</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Jul '22 - Dec '22</div>
+                            <div class="timeline-content">Deep Learning Intern, HyperVerge</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Aug '18 - May '22</div>
+                            <div class="timeline-content">B.Tech IT, Delhi Technological University</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news" class="news-section">
+            <div class="container">
+                <h2>News</h2>
+                <div class="news-items">
+                    <div class="news-item">
+                        <strong>May 2025:</strong> Started working on Holistic Human Scene/Object Understanding and Manipulation project with Prof. Cheng Zhang.
+                    </div>
+                    <div class="news-item">
+                        <strong>Jan 2025:</strong> Developed HG-SCRUB framework for human and scene decomposition with material learning.
+                    </div>
+                    <div class="news-item">
+                        <strong>Sep 2024:</strong> Started as Student Assistant at C2B Lab, Texas A&M University.
+                    </div>
+                    <div class="news-item">
+                        <strong>Aug 2024:</strong> Began MS in Computer Science at Texas A&M University with 4.0 GPA.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience-section">
+            <div class="container">
+                <h2>Experience</h2>
+                <div class="experience-items">
+                    <div class="experience-item">
+                        <h3>Student Assistant, C2B Lab</h3>
+                        <div class="experience-meta">Sep 2024 - Present | College Station, TX</div>
+                        <p><strong>Advisor:</strong> Dr. Reza Avazmohammadi</p>
+                        <ul>
+                            <li>Working on 4D Motion tracking of Heart by mapping 2D based motion to 3D using motion interpolation</li>
+                            <li>Devised novel Semi-Supervised Diffusion based Image Registration approach for 2D motion tracking of Rat's Heart</li>
+                            <li>Developed Geometry aware Diffusion based 3D Reconstruction Model for precise mesh generation of Rat's Heart</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">Matlab</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Machine Learning Engineer-2, AfterShoot</h3>
+                        <div class="experience-meta">Nov 2023 - Jul 2024 | Delhi, India</div>
+                        <ul>
+                            <li>Spearheaded development of AI portrait enhancement and retouching, reducing photoshop time from 10+ hours to 2-3 hours for ~1000 photos</li>
+                            <li>Engineered and deployed U-Net based generative model for teeth correction capabilities in portrait photos</li>
+                            <li>Accelerated photo editing workflow by 40% by designing lightweight models automating HSL filters in Lightroom Classic</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">Rust</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">GCP</span>
+                            <span class="tech-tag">Azure</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Machine Learning Engineer, Savart</h3>
+                        <div class="experience-meta">Jan 2023 - Oct 2023 | Hyderabad, India</div>
+                        <ul>
+                            <li>Fine-tuned LLAMA-2 and Alpaca models on financial annual reports, boosting efficiency from weeks to days</li>
+                            <li>Engineered dynamic OCR pipeline & automated information extraction, processing 50K+ documents</li>
+                            <li>Enhanced QA accuracy by 35% through strategic optimization of reader models (RoBERTa, BART, XLM)</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">PyTorch</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>Deep Learning Intern, HyperVerge Ltd</h3>
+                        <div class="experience-meta">Jul 2022 - Dec 2022 | Bangalore, India</div>
+                        <p><strong>Supervisor:</strong> Hariprasad P S</p>
+                        <ul>
+                            <li>Spearheaded R&D for ID tampering detection system processing 15M monthly requests across global markets</li>
+                            <li>Developed tampering detection system achieving 98% catch rate with <1% false positive rate</li>
+                            <li>Proposed novel anomaly detection approach (ATAC-Net) selected among best 5% for spotlight presentation at ICIP 2024</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="research-section">
+            <div class="container">
+                <h2>Research Projects</h2>
+                <div class="research-items">
+                    <div class="research-item">
+                        <h3>Holistic Human (Body & Hand) Scene/Object Understanding and Manipulation</h3>
+                        <div class="research-meta">May 2025 - Present | Advisor: Prof. Cheng Zhang</div>
+                        <p>Working on developing text-driven framework for scene/object interaction & manipulation for sequential and concurrent long tasks with dexterous hand control and scene understanding.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3>HG-SCRUB</h3>
+                        <div class="research-meta">Jan 2025 - May 2025</div>
+                        <p>Developed a novel framework that achieves decomposition of the human and the scene in separate representation and learn their material & physical component (Normals, Albedo, Roughness & Metallic). Added explicit normal learning using depth derivation based gradients and applied baking for the human gaussians to model indirect illumination.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3>Free-Generation</h3>
+                        <div class="research-meta">Aug 2024 - Dec 2024 | Advisor: Prof. Cheng Zhang, Texas A&M University</div>
+                        <p>Conducted empirical research on Training-Free Trajectory Control Methods in Video Diffusion Models, identifying critical domain shifts in Attention Block Statistics. Formulated innovative Statistical Post-Mask Normalization approaches that significantly enhanced run-time trajectory control performance.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="publications-section">
+            <div class="container">
+                <h2>Publications</h2>
+                <div class="publications-items">
+                    <div class="publication-item">
+                        <h3>ATAC-Net: Zoomed view works better for Anomaly Detection</h3>
+                        <p class="authors"><strong>Shaurya Gupta, Neil Gautam, Anurag Malyala</strong></p>
+                        <p class="venue">IEEE International Conference on Image Processing (ICIP) 2024</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Paper</a>
+                            <a href="#" class="project-link">Code</a>
+                        </div>
+                    </div>
+
+                    <div class="publication-item">
+                        <h3>Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</h3>
+                        <p class="authors"><strong>Neil Gautam, Dr. Dinesh Kumar Vishwakarma</strong></p>
+                        <p class="venue">IEEE Transactions on Cognitive and Developmental Systems (TCDS)</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Paper</a>
+                        </div>
+                    </div>
+
+                    <div class="publication-item">
+                        <h3>Ensemble Learning Using Vision Transformer and Convolutional Network for Person ReID</h3>
+                        <p class="authors"><strong>Gupta, Neil Gautam, Dr. Vishwakarma</strong></p>
+                        <p class="venue">IEEE International Conference on Computing, Communication and Multimedia Computing (ICCMC)</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <h2>Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>ML Tools</h3>
+                        <div class="skills-tags">
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">Keras</span>
+                            <span class="skill-tag">Hugging Face</span>
+                            <span class="skill-tag">scikit-learn</span>
+                            <span class="skill-tag">Open3D</span>
+                            <span class="skill-tag">Pandas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Languages</h3>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Rust</span>
+                            <span class="skill-tag">Matlab</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Cloud/MLOps</h3>
+                        <div class="skills-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Google Cloud</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Vision/NLP</h3>
+                        <div class="skills-tags">
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">Diffusion Models</span>
+                            <span class="skill-tag">CNNs</span>
+                            <span class="skill-tag">RNNs</span>
+                            <span class="skill-tag">BERT</span>
+                            <span class="skill-tag">3D Gaussian Splatting</span>
+                            <span class="skill-tag">NeRF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>neilgautam.24@tamu.edu</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (979) 721-3148</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>College Station, TX</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Neil Gautam. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
