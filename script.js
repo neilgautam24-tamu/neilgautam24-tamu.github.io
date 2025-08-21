@@ -68,33 +68,6 @@ function updateActiveNavigation() {
 
 window.addEventListener('scroll', updateActiveNavigation);
 
-// Skill bars animation
-function animateSkillBars() {
-    const skillBars = document.querySelectorAll('.skill-progress');
-    
-    const observerOptions = {
-        threshold: 0.7,
-        rootMargin: '0px 0px -100px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const skillBar = entry.target;
-                const targetWidth = skillBar.dataset.width;
-                if (targetWidth) {
-                    skillBar.style.width = targetWidth + '%';
-                }
-            }
-        });
-    }, observerOptions);
-    
-    skillBars.forEach(bar => observer.observe(bar));
-}
-
-// Initialize skill bars animation
-animateSkillBars();
-
 // Simple fade-in animation for sections
 function initScrollAnimations() {
     const sections = document.querySelectorAll('section');
@@ -133,4 +106,4 @@ window.addEventListener('load', () => {
 // Set initial body opacity
 document.body.style.opacity = '0';
 
-console.log('Portfolio loaded successfully!');
+console.log('Academic portfolio loaded successfully!');
