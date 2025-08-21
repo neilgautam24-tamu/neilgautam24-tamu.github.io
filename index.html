@@ -31,217 +31,240 @@
     <main class="main">
         <div class="container">
             <!-- About Section -->
-            <section class="section">
-                <h2>About</h2>
-                <p class="intro">
-                    I am an MS in Computer Science student at Texas A&M University with a focus on Machine Learning and Computer Vision. 
-                    Currently working as a Student Assistant at the C2B Lab under Dr. Reza Avazmohammadi, developing novel approaches 
-                    for 4D heart motion tracking and diffusion-based image registration.
-                </p>
-                <p class="intro">
-                    Previously, I worked as a Machine Learning Engineer-2 at AfterShoot, where I spearheaded AI portrait enhancement 
-                    solutions that reduced photo editing time from hours to minutes. I have extensive experience in developing and 
-                    deploying ML systems across various domains including computer vision, NLP, and anomaly detection.
-                </p>
-                <div class="research-interests">
-                    <h3>Research Interests</h3>
-                    <p>Computer Vision, 3D Reconstruction, Diffusion Models, Medical Imaging, Scene Understanding</p>
+            <section class="section" id="about">
+                <div class="section-container">
+                    <h2 class="section-title">About</h2>
+                    <div class="section-content">
+                        <p class="intro">
+                            I am an MS in Computer Science student at Texas A&M University with a focus on Machine Learning and Computer Vision. 
+                            I am currently working under the supervision of <strong>Prof. Cheng Zhang</strong> as my main advisor, developing novel approaches 
+                            for egocentric scene understanding and manipulation. Additionally, I work part-time as a Student Assistant at the C2B Lab 
+                            under Dr. Reza Avazmohammadi, focusing on 4D heart motion tracking and diffusion-based image registration.
+                        </p>
+                        <p class="intro">
+                            Previously, I worked as a Machine Learning Engineer-2 at AfterShoot, where I spearheaded AI portrait enhancement 
+                            solutions that reduced photo editing time from hours to minutes. I have extensive experience in developing and 
+                            deploying ML systems across various domains including computer vision, NLP, and anomaly detection.
+                        </p>
+                        <div class="research-interests">
+                            <h3>Research Interests</h3>
+                            <p>Computer Vision, 3D Reconstruction, Diffusion Models, Medical Imaging, Scene Understanding</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Education Section -->
-            <section class="section">
-                <h2>Education</h2>
-                <div class="education-item">
-                    <div class="education-header">
-                        <h3>Master of Science in Computer Science</h3>
-                        <span class="date">Aug 2024 - Jun 2026 (Tentative)</span>
-                    </div>
-                    <div class="education-details">
-                        <p><strong>Texas A&M University</strong>, College Station, TX</p>
-                        <p>GPA: 4.0/4.0</p>
-                    </div>
-                </div>
+            <section class="section" id="education">
+                <div class="section-container">
+                    <h2 class="section-title">Education</h2>
+                    <div class="section-content">
+                        <div class="education-item">
+                            <div class="education-header">
+                                <h3>Master of Science in Computer Science</h3>
+                                <span class="date">Aug 2024 - Jun 2026 (Tentative)</span>
+                            </div>
+                            <div class="education-details">
+                                <p><strong>Texas A&M University</strong>, College Station, TX</p>
+                                <p>GPA: 4.0/4.0</p>
+                            </div>
+                        </div>
 
-                <div class="education-item">
-                    <div class="education-header">
-                        <h3>Bachelor of Technology (B.Tech), Information Technology</h3>
-                        <span class="date">Aug 2018 - May 2022</span>
-                    </div>
-                    <div class="education-details">
-                        <p><strong>Delhi Technological University</strong>, Delhi, India</p>
-                        <p>GPA: 8.6/10.0</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Experience Section -->
-            <section class="section">
-                <h2>Experience</h2>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3>Student Assistant, C2B Lab</h3>
-                        <span class="date">Sep 2024 - Present</span>
-                    </div>
-                    <div class="experience-details">
-                        <p><strong>Advisor:</strong> Dr. Reza Avazmohammadi (PyTorch, Matlab, Python)</p>
-                        <p><strong>Location:</strong> College Station, TX</p>
-                        <ul>
-                            <li>Currently working on 4D Motion tracking of Heart by mapping 2D based motion to 3D using motion interpolation to 3D</li>
-                            <li>Devised novel Semi-Supervised Diffusion based Image Registration approach for achieving 2D motion tracking of Rat's Heart</li>
-                            <li>Developed Geometry aware (2D slice prior) Diffusion based 3D Reconstruction Model for precise mesh generation of Rat's Heart</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3>Machine Learning Engineer-2, AfterShoot</h3>
-                        <span class="date">Nov 2023 - Jul 2024</span>
-                    </div>
-                    <div class="experience-details">
-                        <p><strong>Technologies:</strong> Python, C++, Rust, RunPod, GCP, Azure, PyTorch, TensorFlow</p>
-                        <p><strong>Location:</strong> Delhi, India</p>
-                        <ul>
-                            <li>Spearheaded development of AI portrait enhancement and retouching, delivering features such as teeth correction, whitening, skin retouching. This product reduced photoshop time from approximately 10s of hours to < 2-3 hour for around 1000 photos</li>
-                            <li>Engineered and deployed U-Net based generative model that allowed generative teeth correction capabilities in portrait photos</li>
-                            <li>Accelerated photo editing workflow by 40% by designing lightweight models automating HSL filters in Lightroom Classic</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3>Machine Learning Engineer, Savart</h3>
-                        <span class="date">Jan 2023 - Oct 2023</span>
-                    </div>
-                    <div class="experience-details">
-                        <p><strong>Technologies:</strong> Python, C++, AWS, GCP, Azure, PyTorch</p>
-                        <p><strong>Location:</strong> Hyderabad, India</p>
-                        <ul>
-                            <li>Fine-tuned LLAMA-2 and Alpaca models on financial annual reports that boosted qualitative company profiling capabilities to be used in equity market analysis. Boosted the efficiency of Equity market research from weeks to days</li>
-                            <li>Engineered dynamic OCR pipeline & automated information extraction. Processing more than 50K documents for corpus creation</li>
-                            <li>Enhanced QA accuracy by 35% through strategic optimization of reader models (RoBERTa, BART, XLM) on novel dataset</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3>Deep Learning Intern, HyperVerge Ltd</h3>
-                        <span class="date">Jul 2022 - Dec 2022</span>
-                    </div>
-                    <div class="experience-details">
-                        <p><strong>Supervisor:</strong> Hariprasad P S</p>
-                        <p><strong>Location:</strong> Bangalore, India</p>
-                        <ul>
-                            <li>Spearheaded R&D for industry-leading ID tampering detection system that processes 15 million monthly requests across global markets, serving over 100 clients with state-of-the-art tampering detection system</li>
-                            <li>Developed tampering detection system achieved unprecedented 98% catch rate with less than 1% false positive rate</li>
-                            <li>Proposed a novel anomaly detection approach (ATAC-Net) using memory-based semi-supervised architecture after experimenting with MemSeg, DeviationNet, WS-DAN to create precise tampering localization in documents across diverse document types. This work was selected among the best 5% and chosen for the spotlight presentation at ICIP 2024</li>
-                        </ul>
+                        <div class="education-item">
+                            <div class="education-header">
+                                <h3>Bachelor of Technology (B.Tech), Information Technology</h3>
+                                <span class="date">Aug 2018 - May 2022</span>
+                            </div>
+                            <div class="education-details">
+                                <p><strong>Delhi Technological University</strong>, Delhi, India</p>
+                                <p>GPA: 8.6/10.0</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Research Projects Section -->
-            <section class="section">
-                <h2>Research Projects</h2>
+            <section class="section" id="research">
+                <div class="section-container">
+                    <h2 class="section-title">Research Projects</h2>
+                    <div class="section-content">
+                        <div class="research-item featured">
+                            <div class="research-header">
+                                <h3>Holistic Human (Body & Hand) Scene/Object Understanding and Manipulation</h3>
+                                <span class="date">May 2025 - Present</span>
+                            </div>
+                            <div class="research-details">
+                                <p><strong>Advisor:</strong> Prof. Cheng Zhang (Main Advisor)</p>
+                                <p>Working on developing the text driven framework for scene/object interaction & manipulation for sequential and concurrent long task with dexterous hand control and scene understanding.</p>
+                            </div>
+                        </div>
 
-                <div class="research-item">
-                    <div class="research-header">
-                        <h3>Holistic Human (Body & Hand) Scene/Object Understanding and Manipulation</h3>
-                        <span class="date">May 2025 - Present</span>
-                    </div>
-                    <div class="research-details">
-                        <p><strong>Advisor:</strong> Prof. Cheng Zhang</p>
-                        <p>Working on developing the text driven framework for scene/object interaction & manipulation for sequential and concurrent long task with dexterous hand control and scene understanding.</p>
+                        <div class="research-item">
+                            <div class="research-header">
+                                <h3>HG-SCRUB</h3>
+                                <span class="date">Jan 2025 - May 2025</span>
+                            </div>
+                            <div class="research-details">
+                                <p>Developed a novel framework that achieves decomposition of the human and the scene in separate representation and learn their material & physical component (Normals, Albedo, Roughness & Metallic). Added explicit normal learning using depth derivation based gradients and applied baking for the human gaussians to model indirect illumination.</p>
+                            </div>
+                        </div>
+
+                        <div class="research-item">
+                            <div class="research-header">
+                                <h3>Free-Generation</h3>
+                                <span class="date">Aug 2024 - Dec 2024</span>
+                            </div>
+                            <div class="research-details">
+                                <p><strong>Advisor:</strong> Prof. Cheng Zhang, Texas A&M University</p>
+                                <p>Conducted empirical research on Training-Free Trajectory Control Methods in Video Diffusion Models, identifying critical domain shifts in Attention Block Statistics.</p>
+                                <p>Formulated innovative Statistical Post-Mask Normalization approaches that significantly enhanced run-time trajectory control performance.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="research-item">
-                    <div class="research-header">
-                        <h3>HG-SCRUB</h3>
-                        <span class="date">Jan 2025 - May 2025</span>
-                    </div>
-                    <div class="research-details">
-                        <p>Developed a novel framework that achieves decomposition of the human and the scene in separate representation and learn their material & physical component (Normals, Albedo, Roughness & Metallic). Added explicit normal learning using depth derivation based gradients and applied baking for the human gaussians to model indirect illumination.</p>
-                    </div>
-                </div>
+            <!-- Experience Section -->
+            <section class="section" id="experience">
+                <div class="section-container">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="section-content">
 
-                <div class="research-item">
-                    <div class="research-header">
-                        <h3>Free-Generation</h3>
-                        <span class="date">Aug 2024 - Dec 2024</span>
-                    </div>
-                    <div class="research-details">
-                        <p><strong>Advisor:</strong> Prof. Cheng Zhang, Texas A&M University</p>
-                        <p>Conducted empirical research on Training-Free Trajectory Control Methods in Video Diffusion Models, identifying critical domain shifts in Attention Block Statistics.</p>
-                        <p>Formulated innovative Statistical Post-Mask Normalization approaches that significantly enhanced run-time trajectory control performance.</p>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3>Student Assistant, C2B Lab (Part-time)</h3>
+                                <span class="date">Sep 2024 - Present</span>
+                            </div>
+                            <div class="experience-details">
+                                <p><strong>Advisor:</strong> Dr. Reza Avazmohammadi (PyTorch, Matlab, Python)</p>
+                                <p><strong>Location:</strong> College Station, TX</p>
+                                <ul>
+                                    <li>Currently working on 4D Motion tracking of Heart by mapping 2D based motion to 3D using motion interpolation to 3D</li>
+                                    <li>Devised novel Semi-Supervised Diffusion based Image Registration approach for achieving 2D motion tracking of Rat's Heart</li>
+                                    <li>Developed Geometry aware (2D slice prior) Diffusion based 3D Reconstruction Model for precise mesh generation of Rat's Heart</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3>Machine Learning Engineer-2, AfterShoot</h3>
+                                <span class="date">Nov 2023 - Jul 2024</span>
+                            </div>
+                            <div class="experience-details">
+                                <p><strong>Technologies:</strong> Python, C++, Rust, RunPod, GCP, Azure, PyTorch, TensorFlow</p>
+                                <p><strong>Location:</strong> Delhi, India</p>
+                                <ul>
+                                    <li>Spearheaded development of AI portrait enhancement and retouching, delivering features such as teeth correction, whitening, skin retouching. This product reduced photoshop time from approximately 10s of hours to < 2-3 hour for around 1000 photos</li>
+                                    <li>Engineered and deployed U-Net based generative model that allowed generative teeth correction capabilities in portrait photos</li>
+                                    <li>Accelerated photo editing workflow by 40% by designing lightweight models automating HSL filters in Lightroom Classic</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3>Machine Learning Engineer, Savart</h3>
+                                <span class="date">Jan 2023 - Oct 2023</span>
+                            </div>
+                            <div class="experience-details">
+                                <p><strong>Technologies:</strong> Python, C++, AWS, GCP, Azure, PyTorch</p>
+                                <p><strong>Location:</strong> Hyderabad, India</p>
+                                <ul>
+                                    <li>Fine-tuned LLAMA-2 and Alpaca models on financial annual reports that boosted qualitative company profiling capabilities to be used in equity market analysis. Boosted the efficiency of Equity market research from weeks to days</li>
+                                    <li>Engineered dynamic OCR pipeline & automated information extraction. Processing more than 50K documents for corpus creation</li>
+                                    <li>Enhanced QA accuracy by 35% through strategic optimization of reader models (RoBERTa, BART, XLM) on novel dataset</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <h3>Deep Learning Intern, HyperVerge Ltd</h3>
+                                <span class="date">Jul 2022 - Dec 2022</span>
+                            </div>
+                            <div class="experience-details">
+                                <p><strong>Supervisor:</strong> Hariprasad P S</p>
+                                <p><strong>Location:</strong> Bangalore, India</p>
+                                <ul>
+                                    <li>Spearheaded R&D for industry-leading ID tampering detection system that processes 15 million monthly requests across global markets, serving over 100 clients with state-of-the-art tampering detection system</li>
+                                    <li>Developed tampering detection system achieved unprecedented 98% catch rate with less than 1% false positive rate</li>
+                                    <li>Proposed a novel anomaly detection approach (ATAC-Net) using memory-based semi-supervised architecture after experimenting with MemSeg, DeviationNet, WS-DAN to create precise tampering localization in documents across diverse document types. This work was selected among the best 5% and chosen for the spotlight presentation at ICIP 2024</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Technical Skills Section -->
-            <section class="section">
-                <h2>Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>ML Tools</h3>
-                        <p>PyTorch, TensorFlow, Keras, Hugging Face Transformers, scikit-learn, Open3D, Pyvista, Pandas, Matplotlib</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Languages</h3>
-                        <p>Python, C++, JavaScript, Ruby, SQL, Rust, Matlab</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Cloud/MLOps</h3>
-                        <p>AWS, Google Cloud (GCP), Azure, Docker, Git</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Vision/NLP</h3>
-                        <p>OpenCV, Image Processing, Diffusion Models, CNNs, RNNs, LLAMA-2, Alpaca, BERT, RoBERTa</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Techniques</h3>
-                        <p>Attention Mechanisms, Anomaly Detection, Generative Models, Extractive QA, 3D Gaussian Splatting, NeRF</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Coursework</h3>
-                        <p>Vision Foundation Models, ML for 3D Visualization & Graphics, Machine Learning, Software Engineering, Analysis of Algorithm, Distributed System & Cloud Computing</p>
+            <section class="section" id="skills">
+                <div class="section-container">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div class="section-content">
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <h3>ML Tools</h3>
+                                <p>PyTorch, TensorFlow, Keras, Hugging Face Transformers, scikit-learn, Open3D, Pyvista, Pandas, Matplotlib</p>
+                            </div>
+                            <div class="skill-category">
+                                <h3>Languages</h3>
+                                <p>Python, C++, JavaScript, Ruby, SQL, Rust, Matlab</p>
+                            </div>
+                            <div class="skill-category">
+                                <h3>Cloud/MLOps</h3>
+                                <p>AWS, Google Cloud (GCP), Azure, Docker, Git</p>
+                            </div>
+                            <div class="skill-category">
+                                <h3>Vision/NLP</h3>
+                                <p>OpenCV, Image Processing, Diffusion Models, CNNs, RNNs, LLAMA-2, Alpaca, BERT, RoBERTa</p>
+                            </div>
+                            <div class="skill-category">
+                                <h3>Techniques</h3>
+                                <p>Attention Mechanisms, Anomaly Detection, Generative Models, Extractive QA, 3D Gaussian Splatting, NeRF</p>
+                            </div>
+                            <div class="skill-category">
+                                <h3>Coursework</h3>
+                                <p>Vision Foundation Models, ML for 3D Visualization & Graphics, Machine Learning, Software Engineering, Analysis of Algorithm, Distributed System & Cloud Computing</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Publications Section -->
-            <section class="section">
-                <h2>Publications</h2>
+            <section class="section" id="publications">
+                <div class="section-container">
+                    <h2 class="section-title">Publications</h2>
+                    <div class="section-content">
+                        <div class="publication-item featured">
+                            <h3>ATAC-Net: Zoomed view works better for Anomaly Detection</h3>
+                            <p class="authors"><strong>Shaurya Gupta, Neil Gautam, Anurag Malyala</strong></p>
+                            <p class="venue">ICIP 2024</p>
+                            <div class="publication-links">
+                                <a href="#">Paper</a>
+                                <a href="#">Code</a>
+                            </div>
+                        </div>
 
-                <div class="publication-item">
-                    <h3>ATAC-Net: Zoomed view works better for Anomaly Detection</h3>
-                    <p class="authors"><strong>Shaurya Gupta, Neil Gautam, Anurag Malyala</strong></p>
-                    <p class="venue">ICIP 2024</p>
-                    <div class="publication-links">
-                        <a href="#">Paper</a>
-                        <a href="#">Code</a>
-                    </div>
-                </div>
+                        <div class="publication-item">
+                            <h3>Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</h3>
+                            <p class="authors"><strong>Neil Gautam, Dr. Dinesh Kumar Vishwakarma</strong></p>
+                            <p class="venue">IEEE TCDS</p>
+                            <div class="publication-links">
+                                <a href="#">Paper</a>
+                            </div>
+                        </div>
 
-                <div class="publication-item">
-                    <h3>Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</h3>
-                    <p class="authors"><strong>Neil Gautam, Dr. Dinesh Kumar Vishwakarma</strong></p>
-                    <p class="venue">IEEE TCDS</p>
-                    <div class="publication-links">
-                        <a href="#">Paper</a>
-                    </div>
-                </div>
-
-                <div class="publication-item">
-                    <h3>Ensemble Learning Using Vision Transformer and Convolutional Network for Person ReID</h3>
-                    <p class="authors"><strong>Gupta, Neil Gautam, Dr. Vishwakarma</strong></p>
-                    <p class="venue">IEEE ICCMC</p>
-                    <div class="publication-links">
-                        <a href="#">Paper</a>
+                        <div class="publication-item">
+                            <h3>Ensemble Learning Using Vision Transformer and Convolutional Network for Person ReID</h3>
+                            <p class="authors"><strong>Gupta, Neil Gautam, Dr. Vishwakarma</strong></p>
+                            <p class="venue">IEEE ICCMC</p>
+                            <div class="publication-links">
+                                <a href="#">Paper</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
