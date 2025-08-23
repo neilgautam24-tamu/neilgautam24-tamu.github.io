@@ -3,425 +3,652 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neil Gautam - ML Researcher</title>
+    <title>Neil Gautam | Neural Networks & Reality</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Source+Code+Pro:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-    
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="header-text">
-                    <h1 class="name">Neil Gautam</h1>
-                    <p class="title">Machine Learning Researcher</p>
-                    <div class="contact-info">
-                        <span>neilgautam.24@tamu.edu</span>
-                        <span>•</span>
-                        <span>+1 (979) 721-3148</span>
-                        <span>•</span>
-                        <span>College Station, TX</span>
-                    </div>
-                    <div class="links">
-                        <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank">LinkedIn</a>
-                        <a href="https://github.com/neilgautam24-tamu" target="_blank">GitHub</a>
-                        <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank">Google Scholar</a>
+    <!-- Animated Background -->
+    <div class="neural-bg">
+        <canvas id="neural-canvas"></canvas>
+    </div>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <div class="nav-items">
+            <a href="#hero" class="nav-item active" data-section="hero">
+                <span class="nav-icon">█</span>
+                <span class="nav-text">INIT</span>
+            </a>
+            <a href="#about" class="nav-item" data-section="about">
+                <span class="nav-icon">▣</span>
+                <span class="nav-text">ABOUT</span>
+            </a>
+            <a href="#research" class="nav-item" data-section="research">
+                <span class="nav-icon">◈</span>
+                <span class="nav-text">RESEARCH</span>
+            </a>
+            <a href="#publications" class="nav-item" data-section="publications">
+                <span class="nav-icon">◊</span>
+                <span class="nav-text">PAPERS</span>
+            </a>
+            <a href="#experience" class="nav-item" data-section="experience">
+                <span class="nav-icon">◉</span>
+                <span class="nav-text">EXP</span>
+            </a>
+            <a href="#contact" class="nav-item" data-section="contact">
+                <span class="nav-icon">◎</span>
+                <span class="nav-text">LINK</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section hero-section">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <span class="control red"></span>
+                    <span class="control yellow"></span>
+                    <span class="control green"></span>
+                </div>
+                <div class="terminal-title">neil_gautam@ml_researcher:~$</div>
+            </div>
+            <div class="terminal-content">
+                <div class="typing-text">
+                    <span class="prompt">$</span> <span class="command">whoami</span>
+                    <div class="output">
+                        <span class="name-glitch">NEIL GAUTAM</span>
+                        <div class="role-text">Machine Learning Researcher</div>
+                        <div class="specialization">[ Computer Vision • 3D Reconstruction • Diffusion Models ]</div>
                     </div>
                 </div>
-                <div class="header-visual">
-                    <div class="profile-card">
-                        <div class="research-metrics">
-                            <div class="metric">
-                                <span class="metric-number">4.0</span>
-                                <span class="metric-label">GPA</span>
+                <div class="typing-text delay-1">
+                    <span class="prompt">$</span> <span class="command">cat research_focus.txt</span>
+                    <div class="output">
+                        <div class="focus-item">► Holistic Human Scene Understanding</div>
+                        <div class="focus-item">► 4D Medical Imaging & Heart Motion Tracking</div>
+                        <div class="focus-item">► Diffusion-based 3D Reconstruction</div>
+                        <div class="focus-item">► Neural Rendering & Gaussian Splatting</div>
+                    </div>
+                </div>
+                <div class="typing-text delay-2">
+                    <span class="prompt">$</span> <span class="command">echo $CONTACT</span>
+                    <div class="output contact-links">
+                        <a href="mailto:neilgautam.24@tamu.edu" class="contact-link">
+                            <span class="link-icon">@</span> neilgautam.24@tamu.edu
+                        </a>
+                        <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" class="contact-link">
+                            <span class="link-icon">IN</span> LinkedIn
+                        </a>
+                        <a href="https://github.com/neilgautam24-tamu" target="_blank" class="contact-link">
+                            <span class="link-icon">GH</span> GitHub
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank" class="contact-link">
+                            <span class="link-icon">GS</span> Scholar
+                        </a>
+                    </div>
+                </div>
+                <div class="cursor-line">
+                    <span class="prompt">$</span> <span class="blinking-cursor">█</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Stats -->
+        <div class="floating-stats">
+            <div class="stat-card" style="--delay: 0.5s">
+                <div class="stat-number">4.0</div>
+                <div class="stat-label">GPA</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+            </div>
+            <div class="stat-card" style="--delay: 0.8s">
+                <div class="stat-number">3</div>
+                <div class="stat-label">PUBLICATIONS</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 80%"></div></div>
+            </div>
+            <div class="stat-card" style="--delay: 1.1s">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">PROJECTS</div>
+                <div class="stat-bar"><div class="stat-fill" style="width: 90%"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title glitch-text" data-text="NEURAL_PROFILE">NEURAL_PROFILE</h2>
+                <div class="section-subtitle">Bridging Theory & Reality Through AI</div>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <div class="text-block fade-in-up">
+                        <div class="block-header">[CURRENT_STATUS]</div>
+                        <p>MS Computer Science @ Texas A&M University (GPA: 4.0/4.0). Specializing in Computer Vision, 3D Reconstruction, and Diffusion Models under the guidance of <a href="https://czhang0528.github.io/" target="_blank" class="highlight-link">Prof. Cheng Zhang</a>.</p>
+                    </div>
+                    
+                    <div class="text-block fade-in-up" style="--delay: 0.2s">
+                        <div class="block-header">[RESEARCH_PHILOSOPHY]</div>
+                        <p>I believe in transforming ambitious theoretical breakthroughs into production-ready solutions that genuinely improve human lives. Whether developing novel architectures for medical imaging or deploying scalable ML systems, I thrive on turning complex ideas into reality.</p>
+                    </div>
+                    
+                    <div class="text-block fade-in-up" style="--delay: 0.4s">
+                        <div class="block-header">[DUAL_RESEARCH_TRACK]</div>
+                        <p>Currently pursuing dual research tracks: holistic human-scene understanding with <a href="https://czhang0528.github.io/" target="_blank" class="highlight-link">Prof. Cheng Zhang</a> and 4D heart motion tracking using diffusion models with <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank" class="highlight-link">Dr. Reza Avazmohammadi</a> at C2B Lab.</p>
+                    </div>
+                </div>
+                
+                <div class="skills-matrix">
+                    <div class="matrix-header">SKILL_MATRIX.exe</div>
+                    <div class="skill-categories">
+                        <div class="skill-category">
+                            <div class="category-name">[RESEARCH_DOMAINS]</div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Computer Vision</span>
+                                <span class="skill-tag">3D Reconstruction</span>
+                                <span class="skill-tag">Diffusion Models</span>
+                                <span class="skill-tag">Medical Imaging</span>
+                                <span class="skill-tag">Gaussian Splatting</span>
+                                <span class="skill-tag">NeRF</span>
+                                <span class="skill-tag">Scene Understanding</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-number">3</span>
-                                <span class="metric-label">Publications</span>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <div class="category-name">[ML_FRAMEWORKS]</div>
+                            <div class="skill-progress">
+                                <div class="progress-item">
+                                    <span>PyTorch</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+                                </div>
+                                <div class="progress-item">
+                                    <span>TensorFlow</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+                                </div>
+                                <div class="progress-item">
+                                    <span>Hugging Face</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+                                </div>
                             </div>
-                            <div class="metric">
-                                <span class="metric-number">5+</span>
-                                <span class="metric-label">Projects</span>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <div class="category-name">[LANGUAGES]</div>
+                            <div class="skill-progress">
+                                <div class="progress-item">
+                                    <span>Python</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 98%"></div></div>
+                                </div>
+                                <div class="progress-item">
+                                    <span>C++</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
+                                </div>
+                                <div class="progress-item">
+                                    <span>CUDA</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Main Content -->
-    <main class="main">
+    <!-- Research Timeline Section -->
+    <section id="research" class="section research-section">
         <div class="container">
-            <!-- About Section -->
-            <section class="section" id="about">
-                <div class="section-container">
-                    <h2 class="section-title">About</h2>
-                    <div class="about-grid">
-                        <div class="about-text">
-                            <p class="intro">
-                                I am an MS in Computer Science student at Texas A&M University (GPA: 4.0/4.0) specializing in 
-                                <strong>Computer Vision</strong>, <strong>3D Reconstruction</strong>, and <strong>Diffusion Models</strong>. 
-                                My research focuses on developing novel approaches for egocentric scene understanding, medical imaging, 
-                                and bridging the gap between theoretical ML breakthroughs and real-world applications.
+            <div class="section-header">
+                <h2 class="section-title glitch-text" data-text="RESEARCH_TIMELINE">RESEARCH_TIMELINE</h2>
+                <div class="section-subtitle">Neural Networks Meet Reality</div>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item active" data-year="2025">
+                    <div class="timeline-dot">
+                        <div class="dot-pulse"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="project-card featured">
+                            <div class="project-status ongoing">ACTIVE</div>
+                            <h3 class="project-title">Holistic Human Scene/Object Understanding</h3>
+                            <div class="project-meta">
+                                <span class="project-date">May 2025 - Present</span>
+                                <span class="project-advisor">
+                                    Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a>
+                                </span>
+                            </div>
+                            <p class="project-desc">
+                                Developing text-driven frameworks for holistic human-scene interaction and manipulation. 
+                                Advancing sequential and concurrent task execution in 3D environments with dexterous hand control.
                             </p>
-                            <p class="intro">
-                                Under the supervision of <a href="https://czhang0528.github.io/" target="_blank" class="advisor-link">Prof. Cheng Zhang</a>, I work on holistic human scene/object 
-                                understanding and manipulation. Additionally, I contribute to medical imaging research at the C2B Lab 
-                                under <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank" class="advisor-link">Dr. Reza Avazmohammadi</a>, developing diffusion-based approaches for 4D heart motion 
-                                tracking and image registration.
-                            </p>
-                        </div>
-                        <div class="research-interests-compact">
-                            <h3>Research Interests</h3>
-                            <div class="interests-grid">
-                                <span class="interest-tag">Computer Vision</span>
-                                <span class="interest-tag">3D Reconstruction</span>
-                                <span class="interest-tag">Diffusion Models</span>
-                                <span class="interest-tag">Medical Imaging</span>
-                                <span class="interest-tag">Scene Understanding</span>
-                                <span class="interest-tag">Gaussian Splatting</span>
-                                <span class="interest-tag">NeRF</span>
-                                <span class="interest-tag">Anomaly Detection</span>
+                            <div class="project-tags">
+                                <span class="tag">Scene Understanding</span>
+                                <span class="tag">Human Motion</span>
+                                <span class="tag">3D Interaction</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Research Projects Section -->
-            <section class="section alt-bg" id="research">
-                <div class="section-container">
-                    <h2 class="section-title">Research Projects</h2>
-                    <div class="research-grid">
-                        <div class="research-item featured">
-                            <div class="research-status ongoing">Ongoing</div>
-                            <h3>Holistic Human (Body & Hand) Scene/Object Understanding and Manipulation</h3>
-                            <p class="research-period">May 2025 - Present</p>
-                            <p class="advisor">Advisor: <a href="https://czhang0528.github.io/" target="_blank" class="advisor-link">Prof. Cheng Zhang</a></p>
-                            <p class="research-desc">
-                                Developing a text-driven framework for scene/object interaction and manipulation for sequential 
-                                and concurrent long tasks with dexterous hand control and scene understanding.
-                            </p>
-                            <div class="keywords">
-                                <span class="keyword">Scene Understanding</span>
-                                <span class="keyword">Human Motion</span>
-                                <span class="keyword">Object Manipulation</span>
+                
+                <div class="timeline-item" data-year="2025">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="project-card">
+                            <div class="project-status completed">UNDER REVIEW</div>
+                            <h3 class="project-title">HG-SCRUB: Human-Gaussian Scene Representation</h3>
+                            <div class="project-meta">
+                                <span class="project-date">Jan 2025 - May 2025</span>
                             </div>
-                        </div>
-
-                        <div class="research-item">
-                            <div class="research-status completed">Under Review</div>
-                            <h3>HG-SCRUB: Human-Gaussian Scene Representation with Unified Baking</h3>
-                            <p class="research-period">Jan 2025 - May 2025</p>
-                            <p class="research-desc">
-                                Novel framework achieving decomposition of human and scene in separate representations 
-                                while learning material and physical components (Normals, Albedo, Roughness, Metallic).
+                            <p class="project-desc">
+                                Novel framework achieving decomposition of human and scene representations while learning 
+                                material properties (Normals, Albedo, Roughness, Metallic) with explicit normal learning.
                             </p>
-                            <div class="keywords">
-                                <span class="keyword">3D Gaussian Splatting</span>
-                                <span class="keyword">Material Decomposition</span>
-                                <span class="keyword">Neural Rendering</span>
-                            </div>
-                        </div>
-
-                        <div class="research-item">
-                            <div class="research-status completed">Completed</div>
-                            <h3>Free-Generation: Training-Free Trajectory Control in Video Diffusion</h3>
-                            <p class="research-period">Aug 2024 - Dec 2024</p>
-                            <p class="advisor">Advisor: <a href="https://czhang0528.github.io/" target="_blank" class="advisor-link">Prof. Cheng Zhang</a></p>
-                            <p class="research-desc">
-                                Empirical research on Training-Free Trajectory Control Methods in Video Diffusion Models, 
-                                identifying critical domain shifts in Attention Block Statistics.
-                            </p>
-                            <div class="keywords">
-                                <span class="keyword">Video Diffusion</span>
-                                <span class="keyword">Trajectory Control</span>
-                                <span class="keyword">Attention Mechanisms</span>
-                            </div>
-                        </div>
-
-                        <div class="research-item">
-                            <div class="research-status ongoing">Ongoing</div>
-                            <h3>4D Heart Motion Tracking & Diffusion-Based Medical Imaging</h3>
-                            <p class="research-period">Sep 2024 - Present</p>
-                            <p class="advisor">Advisor: <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank" class="advisor-link">Dr. Reza Avazmohammadi</a></p>
-                            <p class="research-desc">
-                                Developing 4D motion tracking of heart by mapping 2D-based motion to 3D using motion interpolation. 
-                                Novel Semi-Supervised Diffusion-based Image Registration approach.
-                            </p>
-                            <div class="keywords">
-                                <span class="keyword">Medical Imaging</span>
-                                <span class="keyword">Diffusion Models</span>
-                                <span class="keyword">4D Reconstruction</span>
+                            <div class="project-tags">
+                                <span class="tag">3D Gaussian Splatting</span>
+                                <span class="tag">Material Decomposition</span>
+                                <span class="tag">Neural Rendering</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Publications Section -->
-            <section class="section" id="publications">
-                <div class="section-container">
-                    <h2 class="section-title">Publications</h2>
-                    <div class="publications-grid">
-                        <div class="publication-item featured">
-                            <div class="pub-badge spotlight">SPOTLIGHT PRESENTATION</div>
-                            <h3 class="paper-title" data-abstract="The application of deep learning in visual anomaly detection has gained widespread popularity due to its potential use in quality control and manufacturing. Current standard methods are Unsupervised, where a clean dataset is utilised to detect deviations and flag anomalies during testing. However, incorporating a few samples when the type of anomalies is known beforehand can significantly enhance performance. Thus, we propose ATAC-Net, a framework that trains to detect anomalies from a minimal set of known prior anomalies. Furthermore, we introduce attention-guided cropping, which provides a closer view of suspect regions during the training phase. Our framework is a reliable and easy-to-understand system for detecting anomalies, and we substantiate its superiority to some of the current state-of-the-art techniques in a comparable setting.">
-                                ATAC-Net: Zoomed view works better for Anomaly Detection
-                            </h3>
-                            <p class="authors">Shaurya Gupta, <strong>Neil Gautam</strong>, Anurag Malyala</p>
-                            <p class="venue">IEEE International Conference on Image Processing (ICIP) 2024</p>
-                            <p class="description">
-                                Novel memory-based semi-supervised architecture for document tampering detection, 
-                                achieving 98% catch rate with <1% false positive rate through attention-guided cropping.
-                            </p>
-                            <div class="publication-links">
-                                <a href="https://arxiv.org/abs/2406.14398" target="_blank" class="pub-link">Paper</a>
-                                <a href="#" class="pub-link">Code</a>
-                                <a href="#" class="pub-link">Project Page</a>
+                
+                <div class="timeline-item" data-year="2024">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="project-card">
+                            <div class="project-status completed">COMPLETED</div>
+                            <h3 class="project-title">Free-Generation: Training-Free Video Diffusion Control</h3>
+                            <div class="project-meta">
+                                <span class="project-date">Aug 2024 - Dec 2024</span>
+                                <span class="project-advisor">
+                                    Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a>
+                                </span>
                             </div>
-                        </div>
-
-                        <div class="publication-item">
-                            <h3>Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</h3>
-                            <p class="authors"><strong>Neil Gautam</strong>, Dr. Dinesh Kumar Vishwakarma</p>
-                            <p class="venue">IEEE Transactions on Cognitive and Developmental Systems (TCDS)</p>
-                            <p class="description">
-                                Sequential ConvNet pipeline for automated video content moderation using 
-                                temporal-spatial feature extraction and classification.
+                            <p class="project-desc">
+                                Empirical research on Training-Free Trajectory Control Methods in Video Diffusion Models. 
+                                Identified critical domain shifts in Attention Block Statistics.
                             </p>
-                            <div class="publication-links">
-                                <a href="https://arxiv.org/abs/2406.14398" target="_blank" class="pub-link">Paper</a>
-                            </div>
-                        </div>
-
-                        <div class="publication-item">
-                            <h3>Ensemble Learning Using Vision Transformer and Convolutional Network for Person ReID</h3>
-                            <p class="authors">Gupta, <strong>Neil Gautam</strong>, Dr. Vishwakarma</p>
-                            <p class="venue">IEEE International Conference on Computing, Communication and Multimedia Computing (ICCMC)</p>
-                            <p class="description">
-                                Novel ensemble approach combining Vision Transformers and CNNs for improved person re-identification 
-                                performance across challenging scenarios.
-                            </p>
-                            <div class="publication-links">
-                                <a href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" class="pub-link">Paper</a>
+                            <div class="project-tags">
+                                <span class="tag">Video Diffusion</span>
+                                <span class="tag">Trajectory Control</span>
+                                <span class="tag">Attention Mechanisms</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Experience & Education Combined -->
-            <section class="section alt-bg" id="experience-education">
-                <div class="section-container">
-                    <div class="split-section">
-                        <!-- Experience Column -->
-                        <div class="column">
-                            <h2 class="section-title">Experience</h2>
-                            
-                            <div class="experience-item research">
-                                <div class="exp-header">
-                                    <h3>Graduate Research Assistant</h3>
-                                    <span class="date-compact">May 2025 - Present</span>
-                                </div>
-                                <p class="company">Texas A&M University | <a href="https://czhang0528.github.io/" target="_blank" class="advisor-link">Prof. Cheng Zhang</a></p>
-                                <ul class="compact-list">
-                                    <li>Leading research on text-driven frameworks for holistic human-scene interaction</li>
-                                    <li>Developing novel approaches for egocentric scene understanding</li>
-                                    <li>Advancing state-of-the-art in sequential task execution in 3D environments</li>
-                                </ul>
+                
+                <div class="timeline-item" data-year="2024">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="project-card">
+                            <div class="project-status ongoing">ACTIVE</div>
+                            <h3 class="project-title">4D Heart Motion Tracking via Diffusion Models</h3>
+                            <div class="project-meta">
+                                <span class="project-date">Sep 2024 - Present</span>
+                                <span class="project-advisor">
+                                    Advisor: <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank">Dr. Reza Avazmohammadi</a>
+                                </span>
                             </div>
-
-                            <div class="experience-item research">
-                                <div class="exp-header">
-                                    <h3>Student Assistant, C2B Lab</h3>
-                                    <span class="date-compact">Sep 2024 - Present</span>
-                                </div>
-                                <p class="company">Texas A&M University | <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank" class="advisor-link">Dr. Reza Avazmohammadi</a></p>
-                                <ul class="compact-list">
-                                    <li>Developing 4D motion tracking of heart using motion interpolation</li>
-                                    <li>Novel Semi-Supervised Diffusion-based Image Registration</li>
-                                    <li>Geometry-aware diffusion-based 3D reconstruction for heart mesh generation</li>
-                                </ul>
-                            </div>
-
-                            <div class="experience-item industry">
-                                <div class="exp-header">
-                                    <h3>Machine Learning Engineer-2</h3>
-                                    <span class="date-compact">Nov 2023 - Jul 2024</span>
-                                </div>
-                                <p class="company">AfterShoot | Delhi, India</p>
-                                <div class="impact-badge">40% workflow acceleration</div>
-                                <ul class="compact-list">
-                                    <li>Spearheaded AI portrait enhancement: teeth correction, whitening, skin retouching</li>
-                                    <li>Engineered U-Net based generative model for portrait enhancement</li>
-                                    <li>Reduced photo editing time from 10+ hours to <3 hours for 1000+ photos</li>
-                                </ul>
-                            </div>
-
-                            <div class="experience-item industry">
-                                <div class="exp-header">
-                                    <h3>Machine Learning Engineer</h3>
-                                    <span class="date-compact">Jan 2023 - Oct 2023</span>
-                                </div>
-                                <p class="company">Savart | Hyderabad, India</p>
-                                <div class="impact-badge">35% QA accuracy improvement</div>
-                                <ul class="compact-list">
-                                    <li>Fine-tuned LLAMA-2 and Alpaca models on financial reports</li>
-                                    <li>Engineered dynamic OCR pipeline processing 50K+ documents</li>
-                                    <li>Reduced equity market research time from weeks to days</li>
-                                </ul>
-                            </div>
-
-                            <div class="experience-item research-intern">
-                                <div class="exp-header">
-                                    <h3>Deep Learning Research Intern</h3>
-                                    <span class="date-compact">Jul 2022 - Dec 2022</span>
-                                </div>
-                                <p class="company">HyperVerge Ltd | <a href="https://www.linkedin.com/in/hariprasad-p-s-162b0778/" target="_blank" class="advisor-link">Hariprasad P S</a></p>
-                                <div class="impact-badge">98% catch rate achieved</div>
-                                <ul class="compact-list">
-                                    <li>Led R&D for ID tampering detection system serving 100+ global clients</li>
-                                    <li>Developed ATAC-Net: selected for ICIP 2024 spotlight (top 5%)</li>
-                                    <li>Achieved <1% false positive rate in tampering detection</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Education Column -->
-                        <div class="column">
-                            <h2 class="section-title">Education</h2>
-                            
-                            <div class="education-card">
-                                <div class="degree-header">
-                                    <h3>Master of Science in Computer Science</h3>
-                                    <div class="gpa-highlight">4.0/4.0</div>
-                                </div>
-                                <p class="university">Texas A&M University | Aug 2024 - Jun 2026</p>
-                                <p class="concentration">Concentration: Thesis Option</p>
-                                
-                                <div class="coursework-compact">
-                                    <h4>Current Coursework (Fall 2025)</h4>
-                                    <div class="course-tags">
-                                        <span class="course-tag">Deep Reinforcement Learning</span>
-                                        <span class="course-tag">Generative AI</span>
-                                        <span class="course-tag">Research</span>
-                                    </div>
-                                    
-                                    <h4>Completed Coursework</h4>
-                                    <div class="course-list">
-                                        <div class="course-item-compact">
-                                            <span class="course-name">Vision Foundation Models</span>
-                                            <span class="grade">A</span>
-                                        </div>
-                                        <div class="course-item-compact">
-                                            <span class="course-name">ML for 3D Visualization & Graphics</span>
-                                            <span class="grade">A</span>
-                                        </div>
-                                        <div class="course-item-compact">
-                                            <span class="course-name">Machine Learning</span>
-                                            <span class="grade">A</span>
-                                        </div>
-                                        <div class="course-item-compact">
-                                            <span class="course-name">Analysis of Algorithms</span>
-                                            <span class="grade">A</span>
-                                        </div>
-                                        <div class="course-item-compact">
-                                            <span class="course-name">Software Engineering</span>
-                                            <span class="grade">A</span>
-                                        </div>
-                                        <div class="course-item-compact">
-                                            <span class="course-name">Distributed Systems & Cloud Computing</span>
-                                            <span class="grade">A</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="education-card">
-                                <div class="degree-header">
-                                    <h3>Bachelor of Technology (B.Tech)</h3>
-                                    <div class="gpa-highlight">8.6/10.0</div>
-                                </div>
-                                <p class="university">Delhi Technological University | Aug 2018 - May 2022</p>
-                                <p class="concentration">Information Technology</p>
-                            </div>
-
-                            <!-- Technical Skills -->
-                            <div class="skills-compact">
-                                <h2 class="section-title">Technical Skills</h2>
-                                <div class="skills-categories">
-                                    <div class="skill-cat">
-                                        <h4>Research Domains</h4>
-                                        <p>Computer Vision, 3D Reconstruction, Diffusion Models, Medical Imaging, Gaussian Splatting, NeRF</p>
-                                    </div>
-                                    <div class="skill-cat">
-                                        <h4>Deep Learning</h4>
-                                        <p>PyTorch, TensorFlow, Hugging Face, Vision Transformers, CNNs, RNNs, Attention Mechanisms</p>
-                                    </div>
-                                    <div class="skill-cat">
-                                        <h4>Programming</h4>
-                                        <p>Python, C++, JavaScript, Rust, Matlab, CUDA, SQL</p>
-                                    </div>
-                                    <div class="skill-cat">
-                                        <h4>Tools & Cloud</h4>
-                                        <p>AWS, GCP, Azure, Docker, Git, Open3D, OpenCV, scikit-learn</p>
-                                    </div>
-                                </div>
+                            <p class="project-desc">
+                                Novel Semi-Supervised Diffusion-based approach for 4D heart motion tracking and 
+                                geometry-aware 3D reconstruction for precise cardiac mesh generation.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Medical Imaging</span>
+                                <span class="tag">4D Reconstruction</span>
+                                <span class="tag">Diffusion Models</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Publications Section -->
+    <section id="publications" class="section publications-section">
         <div class="container">
-            <p>&copy; 2025 Neil Gautam. All rights reserved.</p>
+            <div class="section-header">
+                <h2 class="section-title glitch-text" data-text="PUBLICATIONS">PUBLICATIONS</h2>
+                <div class="section-subtitle">Peer-Reviewed Research Output</div>
+            </div>
+            
+            <div class="publications-grid">
+                <div class="publication-card featured" data-abstract="The application of deep learning in visual anomaly detection has gained widespread popularity due to its potential use in quality control and manufacturing. Current standard methods are Unsupervised, where a clean dataset is utilised to detect deviations and flag anomalies during testing. However, incorporating a few samples when the type of anomalies is known beforehand can significantly enhance performance. Thus, we propose ATAC-Net, a framework that trains to detect anomalies from a minimal set of known prior anomalies. Furthermore, we introduce attention-guided cropping, which provides a closer view of suspect regions during the training phase. Our framework is a reliable and easy-to-understand system for detecting anomalies, and we substantiate its superiority to some of the current state-of-the-art techniques in a comparable setting.">
+                    <div class="paper-badge spotlight">SPOTLIGHT</div>
+                    <div class="paper-venue">ICIP 2024</div>
+                    <h3 class="paper-title">ATAC-Net: Zoomed view works better for Anomaly Detection</h3>
+                    <p class="paper-authors">Shaurya Gupta, <strong>Neil Gautam</strong>, Anurag Malyala</p>
+                    <p class="paper-description">
+                        Novel memory-based semi-supervised architecture achieving 98% catch rate with <1% false positive 
+                        rate through attention-guided cropping for document tampering detection.
+                    </p>
+                    <div class="paper-links">
+                        <a href="https://arxiv.org/abs/2406.14398" target="_blank" class="paper-link">
+                            <span class="link-icon">📄</span> Paper
+                        </a>
+                        <a href="#" class="paper-link">
+                            <span class="link-icon">💻</span> Code
+                        </a>
+                    </div>
+                    <div class="paper-metrics">
+                        <div class="metric">
+                            <span class="metric-value">98%</span>
+                            <span class="metric-label">Catch Rate</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value"><1%</span>
+                            <span class="metric-label">False Positive</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="publication-card">
+                    <div class="paper-venue">IEEE TCDS</div>
+                    <h3 class="paper-title">Obscenity Detection in Videos through Sequential ConvNet Pipeline</h3>
+                    <p class="paper-authors"><strong>Neil Gautam</strong>, Dr. Dinesh Kumar Vishwakarma</p>
+                    <p class="paper-description">
+                        Sequential ConvNet pipeline for automated video content moderation using temporal-spatial 
+                        feature extraction and classification methodologies.
+                    </p>
+                    <div class="paper-links">
+                        <a href="https://arxiv.org/abs/2406.14398" target="_blank" class="paper-link">
+                            <span class="link-icon">📄</span> Paper
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="publication-card">
+                    <div class="paper-venue">IEEE ICCMC</div>
+                    <h3 class="paper-title">Ensemble Learning Using Vision Transformer and CNN for Person ReID</h3>
+                    <p class="paper-authors">Gupta, <strong>Neil Gautam</strong>, Dr. Vishwakarma</p>
+                    <p class="paper-description">
+                        Novel ensemble approach combining Vision Transformers and CNNs for improved person 
+                        re-identification performance across challenging scenarios.
+                    </p>
+                    <div class="paper-links">
+                        <a href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" class="paper-link">
+                            <span class="link-icon">📄</span> Paper
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title glitch-text" data-text="EXPERIENCE_LOG">EXPERIENCE_LOG</h2>
+                <div class="section-subtitle">From Research Labs to Production Systems</div>
+            </div>
+            
+            <div class="experience-grid">
+                <div class="experience-card research">
+                    <div class="card-header">
+                        <div class="role-icon">🧠</div>
+                        <div class="role-info">
+                            <h3>Graduate Research Assistant</h3>
+                            <div class="company">Texas A&M University</div>
+                            <div class="duration">May 2025 - Present</div>
+                        </div>
+                    </div>
+                    <p class="role-description">
+                        Leading research on text-driven frameworks for holistic human-scene interaction under 
+                        <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a>. Advancing state-of-the-art 
+                        in 3D scene understanding and manipulation.
+                    </p>
+                    <div class="achievements">
+                        <div class="achievement">► Developing novel egocentric scene understanding approaches</div>
+                        <div class="achievement">► Creating dexterous hand control frameworks</div>
+                        <div class="achievement">► Advancing sequential task execution in 3D environments</div>
+                    </div>
+                </div>
+                
+                <div class="experience-card research">
+                    <div class="card-header">
+                        <div class="role-icon">🫀</div>
+                        <div class="role-info">
+                            <h3>Student Assistant, C2B Lab</h3>
+                            <div class="company">Texas A&M University</div>
+                            <div class="duration">Sep 2024 - Present</div>
+                        </div>
+                    </div>
+                    <p class="role-description">
+                        Developing 4D heart motion tracking systems using diffusion models under 
+                        <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank">Dr. Reza Avazmohammadi</a>. 
+                        Pioneering medical imaging applications.
+                    </p>
+                    <div class="achievements">
+                        <div class="achievement">► Novel Semi-Supervised Diffusion-based Image Registration</div>
+                        <div class="achievement">► Geometry-aware 3D cardiac mesh reconstruction</div>
+                        <div class="achievement">► 2D to 3D motion interpolation for heart tracking</div>
+                    </div>
+                </div>
+                
+                <div class="experience-card industry">
+                    <div class="card-header">
+                        <div class="role-icon">🎨</div>
+                        <div class="role-info">
+                            <h3>Machine Learning Engineer-2</h3>
+                            <div class="company">AfterShoot</div>
+                            <div class="duration">Nov 2023 - Jul 2024</div>
+                        </div>
+                    </div>
+                    <div class="impact-metrics">
+                        <div class="metric">40% workflow acceleration</div>
+                        <div class="metric">10h → 3h processing time</div>
+                    </div>
+                    <p class="role-description">
+                        Spearheaded AI portrait enhancement solutions, delivering production-grade features including 
+                        teeth correction, whitening, and skin retouching systems.
+                    </p>
+                    <div class="achievements">
+                        <div class="achievement">► Engineered U-Net based generative enhancement models</div>
+                        <div class="achievement">► Deployed automated HSL filter optimization systems</div>
+                        <div class="achievement">► Reduced photo editing workflows by 40%</div>
+                    </div>
+                </div>
+                
+                <div class="experience-card industry">
+                    <div class="card-header">
+                        <div class="role-icon">📈</div>
+                        <div class="role-info">
+                            <h3>Machine Learning Engineer</h3>
+                            <div class="company">Savart</div>
+                            <div class="duration">Jan 2023 - Oct 2023</div>
+                        </div>
+                    </div>
+                    <div class="impact-metrics">
+                        <div class="metric">35% QA accuracy boost</div>
+                        <div class="metric">weeks → days analysis time</div>
+                    </div>
+                    <p class="role-description">
+                        Fine-tuned LLAMA-2 and Alpaca models on financial reports, revolutionizing equity market 
+                        analysis through advanced NLP applications.
+                    </p>
+                    <div class="achievements">
+                        <div class="achievement">► Processed 50K+ financial documents for corpus creation</div>
+                        <div class="achievement">► Optimized reader models (RoBERTa, BART, XLM)</div>
+                        <div class="achievement">► Transformed research timelines from weeks to days</div>
+                    </div>
+                </div>
+                
+                <div class="experience-card research-intern">
+                    <div class="card-header">
+                        <div class="role-icon">🔍</div>
+                        <div class="role-info">
+                            <h3>Deep Learning Research Intern</h3>
+                            <div class="company">HyperVerge Ltd</div>
+                            <div class="duration">Jul 2022 - Dec 2022</div>
+                        </div>
+                    </div>
+                    <div class="impact-metrics">
+                        <div class="metric">98% detection accuracy</div>
+                        <div class="metric">15M+ monthly requests</div>
+                        <div class="metric">ICIP 2024 spotlight</div>
+                    </div>
+                    <p class="role-description">
+                        Led R&D for industry-leading document tampering detection under 
+                        <a href="https://www.linkedin.com/in/hariprasad-p-s-162b0778/" target="_blank">Hariprasad P S</a>. 
+                        Served 100+ global clients with state-of-the-art detection systems.
+                    </p>
+                    <div class="achievements">
+                        <div class="achievement">► Developed ATAC-Net: novel anomaly detection architecture</div>
+                        <div class="achievement">► Achieved unprecedented 98% catch rate with <1% false positives</div>
+                        <div class="achievement">► Research selected for ICIP 2024 spotlight presentation (top 5%)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title glitch-text" data-text="INITIALIZE_CONTACT">INITIALIZE_CONTACT</h2>
+                <div class="section-subtitle">Ready to push the boundaries of ML research?</div>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <span class="control red"></span>
+                            <span class="control yellow"></span>
+                            <span class="control green"></span>
+                        </div>
+                        <div class="terminal-title">connection_established.py</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="contact-command">
+                            <span class="prompt">$</span> <span class="command">establish_connection --mode=collaboration</span>
+                        </div>
+                        <div class="contact-output">
+                            <div class="output-line">Establishing secure neural link...</div>
+                            <div class="output-line success">✓ Connection established</div>
+                            <div class="output-line">Ready for research collaboration</div>
+                        </div>
+                        
+                        <div class="contact-methods">
+                            <a href="mailto:neilgautam.24@tamu.edu" class="contact-method primary">
+                                <div class="method-icon">@</div>
+                                <div class="method-info">
+                                    <div class="method-label">Primary Channel</div>
+                                    <div class="method-value">neilgautam.24@tamu.edu</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" class="contact-method">
+                                <div class="method-icon">IN</div>
+                                <div class="method-info">
+                                    <div class="method-label">Professional Network</div>
+                                    <div class="method-value">LinkedIn Profile</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://github.com/neilgautam24-tamu" target="_blank" class="contact-method">
+                                <div class="method-icon">{ }</div>
+                                <div class="method-info">
+                                    <div class="method-label">Code Repository</div>
+                                    <div class="method-value">GitHub Portfolio</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank" class="contact-method">
+                                <div class="method-icon">📚</div>
+                                <div class="method-info">
+                                    <div class="method-label">Research Publications</div>
+                                    <div class="method-value">Google Scholar</div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="location-info">
+                            <div class="location-line">
+                                <span class="prompt">$</span> <span class="command">get_location</span>
+                            </div>
+                            <div class="location-output">
+                                📍 College Station, TX | Texas A&M University<br>
+                                🎓 MS Computer Science, GPA: 4.0/4.0<br>
+                                🔬 Research Focus: ML, Computer Vision, 3D Reconstruction
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="education-summary">
+                    <div class="edu-card current">
+                        <div class="edu-header">
+                            <div class="edu-icon">🎓</div>
+                            <div class="edu-info">
+                                <h3>Master of Science in Computer Science</h3>
+                                <div class="edu-school">Texas A&M University</div>
+                                <div class="edu-duration">Aug 2024 - Jun 2026</div>
+                            </div>
+                            <div class="edu-gpa perfect">4.0</div>
+                        </div>
+                        
+                        <div class="coursework-grid">
+                            <div class="course-category">
+                                <div class="category-label">Current (Fall 2025)</div>
+                                <div class="course-pills">
+                                    <span class="course-pill active">Deep Reinforcement Learning</span>
+                                    <span class="course-pill active">Generative AI</span>
+                                    <span class="course-pill active">Research</span>
+                                </div>
+                            </div>
+                            
+                            <div class="course-category">
+                                <div class="category-label">Completed</div>
+                                <div class="course-pills">
+                                    <span class="course-pill completed">Vision Foundation Models</span>
+                                    <span class="course-pill completed">ML for 3D Graphics</span>
+                                    <span class="course-pill completed">Machine Learning</span>
+                                    <span class="course-pill completed">Analysis of Algorithms</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="edu-card">
+                        <div class="edu-header">
+                            <div class="edu-icon">🎯</div>
+                            <div class="edu-info">
+                                <h3>Bachelor of Technology</h3>
+                                <div class="edu-school">Delhi Technological University</div>
+                                <div class="edu-duration">Aug 2018 - May 2022</div>
+                            </div>
+                            <div class="edu-gpa high">8.6</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Abstract Tooltip -->
     <div id="abstract-tooltip" class="abstract-tooltip">
+        <div class="tooltip-header">PAPER_ABSTRACT.txt</div>
         <div class="tooltip-content">
-            <h4>Abstract</h4>
             <p id="tooltip-text"></p>
         </div>
     </div>
 
-    <script>
-        // Abstract hover functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const paperTitle = document.querySelector('.paper-title[data-abstract]');
-            const tooltip = document.getElementById('abstract-tooltip');
-            const tooltipText = document.getElementById('tooltip-text');
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-outline"></div>
+    </div>
 
-            if (paperTitle && tooltip) {
-                paperTitle.addEventListener('mouseenter', function(e) {
-                    const abstract = this.getAttribute('data-abstract');
-                    tooltipText.textContent = abstract;
-                    tooltip.style.display = 'block';
-                    
-                    // Position tooltip
-                    const rect = this.getBoundingClientRect();
-                    tooltip.style.left = rect.left + 'px';
-                    tooltip.style.top = (rect.bottom + 10) + 'px';
-                });
-
-                paperTitle.addEventListener('mouseleave', function() {
-                    tooltip.style.display = 'none';
-                });
-
-                // Hide tooltip when scrolling
-                window.addEventListener('scroll', function() {
-                    tooltip.style.display = 'none';
-                });
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
