@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neil Gautam | Neural Networks & Reality</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Source+Code+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Animated Background -->
@@ -13,104 +13,132 @@
         <canvas id="neural-canvas"></canvas>
     </div>
 
-    <!-- Floating Navigation -->
-    <nav class="floating-nav">
-        <div class="nav-items">
-            <a href="#hero" class="nav-item active" data-section="hero">
-                <span class="nav-icon">█</span>
-                <span class="nav-text">INIT</span>
-            </a>
-            <a href="#about" class="nav-item" data-section="about">
-                <span class="nav-icon">▣</span>
-                <span class="nav-text">ABOUT</span>
-            </a>
-            <a href="#research" class="nav-item" data-section="research">
-                <span class="nav-icon">◈</span>
-                <span class="nav-text">RESEARCH</span>
-            </a>
-            <a href="#publications" class="nav-item" data-section="publications">
-                <span class="nav-icon">◊</span>
-                <span class="nav-text">PAPERS</span>
-            </a>
-            <a href="#experience" class="nav-item" data-section="experience">
-                <span class="nav-icon">◉</span>
-                <span class="nav-text">EXP</span>
-            </a>
-            <a href="#contact" class="nav-item" data-section="contact">
-                <span class="nav-icon">◎</span>
-                <span class="nav-text">LINK</span>
-            </a>
+    <!-- Improved Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-items">
+                <a href="#hero" class="nav-item active" data-section="hero">
+                    <div class="nav-icon">●</div>
+                    <div class="nav-content">
+                        <span class="nav-label">INIT</span>
+                        <span class="nav-desc">Start</span>
+                    </div>
+                </a>
+                <a href="#about" class="nav-item" data-section="about">
+                    <div class="nav-icon">◆</div>
+                    <div class="nav-content">
+                        <span class="nav-label">PROFILE</span>
+                        <span class="nav-desc">About Me</span>
+                    </div>
+                </a>
+                <a href="#research" class="nav-item" data-section="research">
+                    <div class="nav-icon">▲</div>
+                    <div class="nav-content">
+                        <span class="nav-label">RESEARCH</span>
+                        <span class="nav-desc">Projects</span>
+                    </div>
+                </a>
+                <a href="#publications" class="nav-item" data-section="publications">
+                    <div class="nav-icon">■</div>
+                    <div class="nav-content">
+                        <span class="nav-label">PAPERS</span>
+                        <span class="nav-desc">Publications</span>
+                    </div>
+                </a>
+                <a href="#experience" class="nav-item" data-section="experience">
+                    <div class="nav-icon">◉</div>
+                    <div class="nav-content">
+                        <span class="nav-label">EXPERIENCE</span>
+                        <span class="nav-desc">Work & Research</span>
+                    </div>
+                </a>
+                <a href="#contact" class="nav-item" data-section="contact">
+                    <div class="nav-icon">✦</div>
+                    <div class="nav-content">
+                        <span class="nav-label">CONNECT</span>
+                        <span class="nav-desc">Get in Touch</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="hero" class="section hero-section">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <span class="control red"></span>
-                    <span class="control yellow"></span>
-                    <span class="control green"></span>
+        <div class="hero-container">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-controls">
+                        <span class="control red"></span>
+                        <span class="control yellow"></span>
+                        <span class="control green"></span>
+                    </div>
+                    <div class="terminal-title">neil_gautam@ml_researcher:~$</div>
                 </div>
-                <div class="terminal-title">neil_gautam@ml_researcher:~$</div>
+                <div class="terminal-content">
+                    <div class="typing-text">
+                        <span class="prompt">$</span> <span class="command">whoami</span>
+                        <div class="output">
+                            <div class="name-display">NEIL GAUTAM</div>
+                            <div class="role-text">Machine Learning Researcher</div>
+                            <div class="specialization">[ Computer Vision • 3D Reconstruction • Diffusion Models ]</div>
+                        </div>
+                    </div>
+                    <div class="typing-text delay-1">
+                        <span class="prompt">$</span> <span class="command">cat research_focus.txt</span>
+                        <div class="output">
+                            <div class="focus-item">► Holistic Human Scene Understanding</div>
+                            <div class="focus-item">► 4D Medical Imaging & Heart Motion Tracking</div>
+                            <div class="focus-item">► Diffusion-based 3D Reconstruction</div>
+                            <div class="focus-item">► Neural Rendering & Gaussian Splatting</div>
+                        </div>
+                    </div>
+                    <div class="typing-text delay-2">
+                        <span class="prompt">$</span> <span class="command">echo $CONTACT</span>
+                        <div class="output contact-links">
+                            <a href="mailto:neilgautam.24@tamu.edu" class="contact-link">
+                                <span class="link-icon">@</span> neilgautam.24@tamu.edu
+                            </a>
+                            <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" class="contact-link">
+                                <span class="link-icon">IN</span> LinkedIn
+                            </a>
+                            <a href="https://github.com/neilgautam24-tamu" target="_blank" class="contact-link">
+                                <span class="link-icon">GH</span> GitHub
+                            </a>
+                            <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank" class="contact-link">
+                                <span class="link-icon">GS</span> Scholar
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cursor-line">
+                        <span class="prompt">$</span> <span class="blinking-cursor">█</span>
+                    </div>
+                </div>
             </div>
-            <div class="terminal-content">
-                <div class="typing-text">
-                    <span class="prompt">$</span> <span class="command">whoami</span>
-                    <div class="output">
-                        <span class="name-glitch">NEIL GAUTAM</span>
-                        <div class="role-text">Machine Learning Researcher</div>
-                        <div class="specialization">[ Computer Vision • 3D Reconstruction • Diffusion Models ]</div>
-                    </div>
-                </div>
-                <div class="typing-text delay-1">
-                    <span class="prompt">$</span> <span class="command">cat research_focus.txt</span>
-                    <div class="output">
-                        <div class="focus-item">► Holistic Human Scene Understanding</div>
-                        <div class="focus-item">► 4D Medical Imaging & Heart Motion Tracking</div>
-                        <div class="focus-item">► Diffusion-based 3D Reconstruction</div>
-                        <div class="focus-item">► Neural Rendering & Gaussian Splatting</div>
-                    </div>
-                </div>
-                <div class="typing-text delay-2">
-                    <span class="prompt">$</span> <span class="command">echo $CONTACT</span>
-                    <div class="output contact-links">
-                        <a href="mailto:neilgautam.24@tamu.edu" class="contact-link">
-                            <span class="link-icon">@</span> neilgautam.24@tamu.edu
-                        </a>
-                        <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" class="contact-link">
-                            <span class="link-icon">IN</span> LinkedIn
-                        </a>
-                        <a href="https://github.com/neilgautam24-tamu" target="_blank" class="contact-link">
-                            <span class="link-icon">GH</span> GitHub
-                        </a>
-                        <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank" class="contact-link">
-                            <span class="link-icon">GS</span> Scholar
-                        </a>
-                    </div>
-                </div>
-                <div class="cursor-line">
-                    <span class="prompt">$</span> <span class="blinking-cursor">█</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- Floating Stats -->
-        <div class="floating-stats">
-            <div class="stat-card" style="--delay: 0.5s">
-                <div class="stat-number">4.0</div>
-                <div class="stat-label">GPA</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
-            </div>
-            <div class="stat-card" style="--delay: 0.8s">
-                <div class="stat-number">3</div>
-                <div class="stat-label">PUBLICATIONS</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 80%"></div></div>
-            </div>
-            <div class="stat-card" style="--delay: 1.1s">
-                <div class="stat-number">5+</div>
-                <div class="stat-label">PROJECTS</div>
-                <div class="stat-bar"><div class="stat-fill" style="width: 90%"></div></div>
+            <!-- Fixed Stats Panel -->
+            <div class="stats-panel">
+                <div class="stats-header">PERFORMANCE_METRICS</div>
+                <div class="stat-item">
+                    <div class="stat-number">4.0</div>
+                    <div class="stat-label">GPA</div>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">PUBLICATIONS</div>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 85%"></div></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">PROJECTS</div>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 95%"></div></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">YEARS EXP</div>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 75%"></div></div>
+                </div>
             </div>
         </div>
     </section>
@@ -119,23 +147,23 @@
     <section id="about" class="section about-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title glitch-text" data-text="NEURAL_PROFILE">NEURAL_PROFILE</h2>
+                <h2 class="section-title">NEURAL_PROFILE.exe</h2>
                 <div class="section-subtitle">Bridging Theory & Reality Through AI</div>
             </div>
             
-            <div class="about-grid">
-                <div class="about-text">
-                    <div class="text-block fade-in-up">
+            <div class="content-grid">
+                <div class="main-content">
+                    <div class="text-block">
                         <div class="block-header">[CURRENT_STATUS]</div>
                         <p>MS Computer Science @ Texas A&M University (GPA: 4.0/4.0). Specializing in Computer Vision, 3D Reconstruction, and Diffusion Models under the guidance of <a href="https://czhang0528.github.io/" target="_blank" class="highlight-link">Prof. Cheng Zhang</a>.</p>
                     </div>
                     
-                    <div class="text-block fade-in-up" style="--delay: 0.2s">
+                    <div class="text-block">
                         <div class="block-header">[RESEARCH_PHILOSOPHY]</div>
                         <p>I believe in transforming ambitious theoretical breakthroughs into production-ready solutions that genuinely improve human lives. Whether developing novel architectures for medical imaging or deploying scalable ML systems, I thrive on turning complex ideas into reality.</p>
                     </div>
                     
-                    <div class="text-block fade-in-up" style="--delay: 0.4s">
+                    <div class="text-block">
                         <div class="block-header">[DUAL_RESEARCH_TRACK]</div>
                         <p>Currently pursuing dual research tracks: holistic human-scene understanding with <a href="https://czhang0528.github.io/" target="_blank" class="highlight-link">Prof. Cheng Zhang</a> and 4D heart motion tracking using diffusion models with <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank" class="highlight-link">Dr. Reza Avazmohammadi</a> at C2B Lab.</p>
                     </div>
@@ -161,16 +189,19 @@
                             <div class="category-name">[ML_FRAMEWORKS]</div>
                             <div class="skill-progress">
                                 <div class="progress-item">
-                                    <span>PyTorch</span>
-                                    <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+                                    <span class="tech-name">PyTorch</span>
+                                    <div class="progress-bar"><div class="progress-fill" data-width="95%"></div></div>
+                                    <span class="progress-percent">95%</span>
                                 </div>
                                 <div class="progress-item">
-                                    <span>TensorFlow</span>
-                                    <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+                                    <span class="tech-name">TensorFlow</span>
+                                    <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+                                    <span class="progress-percent">85%</span>
                                 </div>
                                 <div class="progress-item">
-                                    <span>Hugging Face</span>
-                                    <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+                                    <span class="tech-name">Hugging Face</span>
+                                    <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
+                                    <span class="progress-percent">90%</span>
                                 </div>
                             </div>
                         </div>
@@ -179,16 +210,19 @@
                             <div class="category-name">[LANGUAGES]</div>
                             <div class="skill-progress">
                                 <div class="progress-item">
-                                    <span>Python</span>
-                                    <div class="progress-bar"><div class="progress-fill" style="width: 98%"></div></div>
+                                    <span class="tech-name">Python</span>
+                                    <div class="progress-bar"><div class="progress-fill" data-width="98%"></div></div>
+                                    <span class="progress-percent">98%</span>
                                 </div>
                                 <div class="progress-item">
-                                    <span>C++</span>
-                                    <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
+                                    <span class="tech-name">C++</span>
+                                    <div class="progress-bar"><div class="progress-fill" data-width="80%"></div></div>
+                                    <span class="progress-percent">80%</span>
                                 </div>
                                 <div class="progress-item">
-                                    <span>CUDA</span>
-                                    <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
+                                    <span class="tech-name">CUDA</span>
+                                    <div class="progress-bar"><div class="progress-fill" data-width="75%"></div></div>
+                                    <span class="progress-percent">75%</span>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +236,7 @@
     <section id="research" class="section research-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title glitch-text" data-text="RESEARCH_TIMELINE">RESEARCH_TIMELINE</h2>
+                <h2 class="section-title">RESEARCH_TIMELINE.exe</h2>
                 <div class="section-subtitle">Neural Networks Meet Reality</div>
             </div>
             
@@ -315,7 +349,7 @@
     <section id="publications" class="section publications-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title glitch-text" data-text="PUBLICATIONS">PUBLICATIONS</h2>
+                <h2 class="section-title">PUBLICATIONS.db</h2>
                 <div class="section-subtitle">Peer-Reviewed Research Output</div>
             </div>
             
@@ -386,11 +420,11 @@
     <section id="experience" class="section experience-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title glitch-text" data-text="EXPERIENCE_LOG">EXPERIENCE_LOG</h2>
+                <h2 class="section-title">EXPERIENCE_LOG.sys</h2>
                 <div class="section-subtitle">From Research Labs to Production Systems</div>
             </div>
             
-            <div class="experience-grid">
+            <div class="experience-timeline">
                 <div class="experience-card research">
                     <div class="card-header">
                         <div class="role-icon">🧠</div>
@@ -399,6 +433,7 @@
                             <div class="company">Texas A&M University</div>
                             <div class="duration">May 2025 - Present</div>
                         </div>
+                        <div class="experience-type">RESEARCH</div>
                     </div>
                     <p class="role-description">
                         Leading research on text-driven frameworks for holistic human-scene interaction under 
@@ -420,6 +455,7 @@
                             <div class="company">Texas A&M University</div>
                             <div class="duration">Sep 2024 - Present</div>
                         </div>
+                        <div class="experience-type">RESEARCH</div>
                     </div>
                     <p class="role-description">
                         Developing 4D heart motion tracking systems using diffusion models under 
@@ -441,6 +477,7 @@
                             <div class="company">AfterShoot</div>
                             <div class="duration">Nov 2023 - Jul 2024</div>
                         </div>
+                        <div class="experience-type">INDUSTRY</div>
                     </div>
                     <div class="impact-metrics">
                         <div class="metric">40% workflow acceleration</div>
@@ -465,6 +502,7 @@
                             <div class="company">Savart</div>
                             <div class="duration">Jan 2023 - Oct 2023</div>
                         </div>
+                        <div class="experience-type">INDUSTRY</div>
                     </div>
                     <div class="impact-metrics">
                         <div class="metric">35% QA accuracy boost</div>
@@ -489,10 +527,10 @@
                             <div class="company">HyperVerge Ltd</div>
                             <div class="duration">Jul 2022 - Dec 2022</div>
                         </div>
+                        <div class="experience-type">RESEARCH</div>
                     </div>
                     <div class="impact-metrics">
                         <div class="metric">98% detection accuracy</div>
-                        <div class="metric">15M+ monthly requests</div>
                         <div class="metric">ICIP 2024 spotlight</div>
                     </div>
                     <p class="role-description">
@@ -514,7 +552,7 @@
     <section id="contact" class="section contact-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title glitch-text" data-text="INITIALIZE_CONTACT">INITIALIZE_CONTACT</h2>
+                <h2 class="section-title">INITIALIZE_CONTACT.run</h2>
                 <div class="section-subtitle">Ready to push the boundaries of ML research?</div>
             </div>
             
@@ -643,10 +681,9 @@
         </div>
     </div>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor">
-        <div class="cursor-dot"></div>
-        <div class="cursor-outline"></div>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress">
+        <div class="progress-bar"></div>
     </div>
 
     <script src="script.js"></script>
