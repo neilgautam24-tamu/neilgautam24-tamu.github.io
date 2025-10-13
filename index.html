@@ -1,360 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Neil Gautam | AI Researcher</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="styles.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Neil Gautam | AI Researcher & Machine Learning Engineer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav class="top-nav">
-  <div class="nav-container">
-    <div class="nav-brand">Neil Gautam</div>
-    <div class="nav-items">
-      <a href="#home" class="nav-item active">HOME</a>
-      <a href="#profile" class="nav-item">PROFILE</a>
-      <a href="#experience" class="nav-item">EXPERIENCE</a>
-      <a href="#research" class="nav-item">RESEARCH</a>
-      <a href="#publications" class="nav-item">PUBLICATIONS</a>
-      <a href="#contact" class="nav-item">CONTACT</a>
+<header class="top-nav">
+    <div class="nav-container">
+        <a href="#profile" class="nav-brand">NEIL GAUTAM</a>
+        <nav class="nav-items">
+            <a href="#education" class="nav-link">Education</a>
+            <a href="#publications" class="nav-link">Publications</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#skills" class="nav-link">Skills</a>
+        </nav>
     </div>
-  </div>
-</nav>
+</header>
 
 <main>
-  <!-- Home / Intro -->
-  <section id="home" class="section hero-section">
-    <div class="container hero-flex">
-      <div>
-        <span class="block-label">$ whoami</span>
-        <h1>Neil Gautam</h1>
-        <div class="subtitle">AI Researcher</div>
-        <div class="topic-tags">Embodied AI &bullet; Human-Centric Computer Vision &bullet; Egocentric Systems</div>
-        <div class="about-research">
-          <span class="block-label">$ cat research_focus.txt</span>
-          <div class="research-summary">
-            <p>My research interest lies at the intersection of embodied AI and human-centric computer vision, where I develop intelligent systems that can understand and predict how humans perceive, navigate, and interact with complex 3D environments. Drawing from my experience building production-scale vision systems and generative models, I've evolved toward addressing fundamental questions about human behavior prediction and spatial scene understanding.</p>
-            <p>My current focus centers on egocentric vision and affordance modeling—developing frameworks that move beyond traditional computer vision to predict how humans will interact with their environment over time, bridging 2D visual perception with 3D spatial reasoning through advanced generative architectures, particularly diffusion models applied across diverse domains from healthcare to robust vision systems.</p>
-            <p>What drives my research is the conviction that truly intelligent AI must understand the intentionality behind human actions, not just recognize visual patterns. My interdisciplinary approach combines computer vision, generative AI, and biomedical applications, positioning me to tackle fundamental challenges in embodied AI where spatial-temporal understanding of human behavior is critical. Whether developing memory-based architectures for anomaly detection, real-time monitoring systems that construct 3D scene representations, or geometry-aware reconstruction models for medical imaging analysis, I'm consistently working toward AI systems that don't just process visual data, but comprehend the physics, intentionality, and temporal dynamics of how humans move through and interact with their world—creating AI that truly understands human behavior in 3D space.</p>
-          </div>
+    <section id="profile" class="section">
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <div class="profile-image-container">
+                    <img src="https://raw.githubusercontent.com/your-username/your-repo-name/main/profile.jpg" alt="A professional headshot of Neil Gautam">
+                </div>
+                <h1 class="hero-name">Neil Gautam</h1>
+                <h2 class="hero-subtitle">MS in CS @ Texas A&M University</h2>
+                <div class="social-links">
+                    <a href="mailto:neilgautam.24@tamu.edu" title="Email"><i class="bi bi-envelope-at-fill"></i></a>
+                    <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="bi bi-mortarboard-fill"></i></a>
+                    <a href="https://github.com/neilgautam24-tamu" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+                    <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                </div>
+                <a href="https://drive.google.com/file/d/1QFU0I7sAdPhYXPIQPxvXqwLlMdpaIhPL/view?usp=sharing" target="_blank" class="btn btn-primary"><i class="bi bi-download"></i> Download Resume</a>
+            </div>
+            <div class="hero-right">
+                <h3 class="mono-heading">$ introduction</h3>
+                <div class="bio-text">
+                    <p>I am a Master's student in Computer Science at Texas A&M University, specializing in advanced areas of Deep Learning under the guidance of <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a>. My research expertise and interests are uniquely positioned at the intersection of <strong>Embodied AI</strong>, <strong>Generative Models</strong>, and <strong>Human-Centric Computer Vision</strong>. My academic and industrial experience is dedicated to translating cutting-edge techniques, such as <strong>3D Gaussian Splatting</strong> and <strong>Vision Transformers</strong>, into high-impact, generalized AI solutions across diverse domains, from autonomous systems to clinical diagnostics.</p>
+                    <p>My core research vision is twofold, focusing first on creating truly intelligent and capable agents. My primary work centers on developing generalized AI models for <strong>Egocentric driven scene understanding</strong>. This involves creating end-to-end frameworks that utilize first-person views to predict <strong>fine-grained affordance</strong>—what actions an agent can take with an object—and establish effective scene navigation strategies. This foundational work aims to empower intelligent agents to successfully execute complex, <strong>long-horizon tasks</strong> in real-world environments.</p>
+                    <p>Complementing my work in Embodied AI, I am deeply passionate about applying advanced <strong>Diffusion-based Generative models</strong> to critical problems in <strong>Biomedical Analysis</strong>. Specifically, my focus is on leveraging these powerful models for <strong>cardiac motion analysis</strong> from echocardiogram images. My contributions in this area, including the development of algorithms for synthetic data generation and precise 3D heart mesh reconstruction, are driven by the goal of developing accurate, non-invasive solutions for disease prediction and functional assessment, directly benefiting clinical diagnostics.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Profile & Education -->
-  <section id="profile" class="section alt-bg">
-    <div class="container profile-two-col">
-      <div class="profile-ed">
-        <h2 class="section-title">Profile & Education</h2>
-        <div class="edu-degree-block">
-          <div class="edu-block">
-            <div class="edu-logo">TAMU</div>
-            <div>
-              <span class="edu-title">Master of Science in Computer Science</span>
-              <span class="edu-inst">Texas A&amp;M University</span>
-              <span class="edu-dates">Aug 2024 – Jun 2026 (Expected), College Station, TX</span>
-              <span class="edu-details">GPA: 4.0 / 4.0</span>
-              <span class="edu-advisors">
-                Advisors: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a>, 
-                <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank">Dr. Reza Avazmohammadi</a>
-              </span>
-              <span class="edu-courses">Coursework: Vision Foundation Models, ML for 3D Visualization &amp; Graphics, Generative AI, Deep Reinforcement Learning, Research</span>
+    <section id="education" class="section">
+        <div class="container">
+            <h3 class="mono-heading">$ education</h3>
+            <div class="grid-2-col">
+                <div class="edu-card">
+                    <div class="edu-header">
+                        <i class="bi bi-mortarboard-fill"></i>
+                        <h4 class="edu-degree">Master of Science in Computer Science</h4>
+                    </div>
+                    <p class="edu-university">Texas A&M University</p>
+                    <p class="edu-meta">Aug 2024 – Jun 2026 (Tentative) &bullet; GPA: 4.0/4.0</p>
+                    <p class="edu-courses-title">Relevant Courses:</p>
+                    <div class="edu-course-pills">
+                        <span>Vision Foundation Models</span>
+                        <span>ML for 3D Viz & Graphics</span>
+                        <span>Generative AI</span>
+                    </div>
+                </div>
+                <div class="edu-card">
+                     <div class="edu-header">
+                        <i class="bi bi-mortarboard"></i>
+                        <h4 class="edu-degree">Bachelor of Technology in Information Technology</h4>
+                    </div>
+                    <p class="edu-university">Delhi Technological University</p>
+                    <p class="edu-meta">Aug 2018 – May 2022 &bullet; GPA: 8.6/10.0</p>
+                </div>
             </div>
-          </div>
-          <div class="edu-block">
-            <div class="edu-logo">DTU</div>
-            <div>
-              <span class="edu-title">B.Tech in Information Technology</span>
-              <span class="edu-inst">Delhi Technological University</span>
-              <span class="edu-dates">Aug 2018 – May 2022, Delhi, India</span>
-              <span class="edu-details">GPA: 8.6 / 10.0</span>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="profile-skills">
-        <h2 class="section-title">Skills Overview</h2>
-        <div class="skill-cat"><div class="cat-label">Domains</div>
-          <div class="skills-list">
-            <span class="tag">Embodied AI</span>
-            <span class="tag">Egocentric Vision</span>
-            <span class="tag">Human-Centric CV</span>
-            <span class="tag">3D Scene Understanding</span>
-            <span class="tag">Diffusion Models</span>
-            <span class="tag">Medical Imaging</span>
-            <span class="tag">3D Gaussian Splatting</span>
-            <span class="tag">Multi-view Tracking</span>
-          </div>
-        </div>
-        <div class="skill-cat"><div class="cat-label">Frameworks</div>
-          <div class="skills-list">
-            <span class="tag">PyTorch</span>
-            <span class="tag">TensorFlow</span>
-            <span class="tag">Keras</span>
-            <span class="tag">HuggingFace</span>
-            <span class="tag">Open3D</span>
-            <span class="tag">PyVista</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">Matplotlib</span>
-            <span class="tag">Rerun.io</span>
-            <span class="tag">Viser</span>
-          </div>
-        </div>
-        <div class="skill-cat"><div class="cat-label">Programming</div>
-          <div class="skills-list">
-            <span class="tag">Python</span>
-            <span class="tag">C++</span>
-            <span class="tag">Rust</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Matlab</span>
-            <span class="tag">Ruby</span>
-            <span class="tag">SQL</span>
-          </div>
-        </div>
-        <div class="skill-cat"><div class="cat-label">Cloud/MLOps</div>
-          <div class="skills-list">
-            <span class="tag">AWS</span>
-            <span class="tag">GCP</span>
-            <span class="tag">Azure</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Git</span>
-          </div>
-        </div>
-        <div class="skill-cat"><div class="cat-label">Vision/NLP</div>
-          <div class="skills-list">
-            <span class="tag">OpenCV</span>
-            <span class="tag">CNN</span>
-            <span class="tag">RNN</span>
-            <span class="tag">LLAMA-2</span>
-            <span class="tag">Alpaca</span>
-            <span class="tag">BERT</span>
-            <span class="tag">RoBERTa</span>
-            <span class="tag">Transformers</span>
-          </div>
-        </div>
-        <div class="skill-cat"><div class="cat-label">Other</div>
-          <div class="skills-list">
-            <span class="tag">Retriever Augmented Generation</span>
-            <span class="tag">3D Gaussian Splatting</span>
-            <span class="tag">NeRF</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Professional Experience -->
-  <section id="experience" class="section">
-    <div class="container">
-      <h2 class="section-title">Experience</h2>
-      <div class="exp-columns">
-        <!-- Each experience entry is a card, with good spacing and clear responsibility breakdown -->
-        <div class="exp-card">
-          <div class="exp-head-row">
-            <div>
-              <h3>Research Intern, AI4Arch</h3>
-              <div class="exp-metadata">
-                <span>June 2025 – August 2025 | College Station, TX</span>
-              </div>
+    <section id="publications" class="section">
+        <div class="container">
+            <h3 class="mono-heading">$ publications</h3>
+            <div class="publications-grid">
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <div class="publication-title">ATAC-Net: Zoomed view works better for Anomaly Detection</div>
+                        <div class="publication-authors">Shaurya Gupta, <strong>Neil Gautam</strong>, Anurag Malyala</div>
+                        <div class="publication-venue">ICIP 2024 <span class="badge">Spotlight, Top 5%</span></div>
+                        <div class="publication-links">
+                            <a href="https://ieeexplore.ieee.org/abstract/document/10647702" target="_blank" class="btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <div class="publication-title">Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</div>
+                        <div class="publication-authors"><strong>Neil Gautam</strong>, Dr. Dinesh Kumar Vishwakarma</div>
+                        <div class="publication-venue">IEEE Transactions on Computational Social Systems (TCDS)</div>
+                        <div class="publication-links">
+                            <a href="https://ieeexplore.ieee.org/abstract/document/9733936" target="_blank" class="btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="publication-card">
+                    <div class="publication-content">
+                        <div class="publication-title">Ensemble Learning Using Vision Transformer and Convolutional Network for Person ReID</div>
+                        <div class="publication-authors">Gupta, <strong>Neil Gautam</strong>, Dr. Vishwakarma</div>
+                        <div class="publication-venue">IEEE ICCMC</div>
+                        <div class="publication-links">
+                            <a href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" class="btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="exp-meta-details">
-              <div><b>Advisor:</b> Dr. Cheng Zhang &bull; Dr. Roxana Jafari</div>
-              <div><b>Technologies:</b> PyTorch, YOLOv11, ONNX, SMPL</div>
-            </div>
-          </div>
-          <ul class="exp-details">
-            <li>Developed multi-view detection (YOLOv11) & tracking algorithm based on generative feature template for real-time people tracking & re-identification in Intensive Healthcare Units.</li>
-            <li>Constructed the observed 3D Scene with objects using multi-view input for representing humans in 3D (SMPL) to flag harmful behaviour according to health codes.</li>
-          </ul>
         </div>
+    </section>
+    
+    <section id="experience" class="section">
+        <div class="container">
+            <h3 class="mono-heading">$ experience</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h4 class="exp-title">Research Intern, AI4Arch</h4>
+                                <div class="exp-date">Jun 2025 – Aug 2025</div>
+                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
+                            </div>
+                            <div class="exp-location">Advisors: <a href="https://czhang0528.github.io/" target="_blank">Dr. Cheng Zhang</a> & Dr. Roxana Jafari &bullet; College Station, TX</div>
+                            <div class="exp-body">
+                                <ul class="exp-details">
+                                    <li>Worked on improving safety in Crisis Stabilization Units for Safe Healthcare Facility Planning using Physical Mock-up Simulations.</li>
+                                    <li>Developed multi-view based 3D human detection, tracking and behaviour anomaly prediction in real time.</li>
+                                    <li>Reconstructed Physical Mock-up in 3D from Multi-View RGB Videos & extracted SMPL mesh to observe human behaviour in the simulated environment.</li>
+                                </ul>
+                                <div class="tech-stack">
+                                    <span>Pytorch</span><span>Viser</span><span>YOLO</span><span>ONNX</span><span>OpenPose</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h4 class="exp-title">Student Assistant, C2B Lab</h4>
+                                <div class="exp-date">Sep 2024 – Present</div>
+                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
+                            </div>
+                            <div class="exp-location">Advisor: <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank">Dr. Reza Avazmohammadi</a> &bullet; College Station, TX</div>
+                            <div class="exp-body">
+                                <ul class="exp-details">
+                                    <li>Designed an algorithm to generate realistic synthetic echocardiogram images from 3D cardiac point clouds using advanced scatterer modeling and anisotropic filtering.</li>
+                                    <li>Devised a Semi-Supervised Diffusion-based Image Registration Network for 2D & 3D motion tracking of a Rat’s Heart, verifying the network on baseline, 2-week, 3-month & 6-month data.</li>
+                                    <li>Developed a Geometry-aware (2D parallel slice & hierarchical sampling) Diffusion Model for precise 3D Mesh reconstruction of a Rat’s Heart.</li>
+                                </ul>
+                                <div class="tech-stack">
+                                    <span>PyTorch</span><span>Matlab</span><span>Python</span><span>Viser</span><span>PyVista</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h4 class="exp-title">Machine Learning Engineer-2</h4>
+                                <div class="exp-date">Nov 2023 – Jul 2024</div>
+                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
+                            </div>
+                            <div class="exp-location">AfterShoot (Manager: <a href="https://www.linkedin.com/in/nikhil-bartwal-b07b501a3/" target="_blank">Nikhil Bartwal</a>) &bullet; Delhi, India</div>
+                            <div class="exp-body">
+                                <ul class="exp-details">
+                                    <li>Spearheaded development of AI portrait enhancement and retouching, delivering features such as teeth correction, whitening, and skin retouching leveraging GANs & Diffusion Models, reducing photoshop workload from hours to minutes.</li>
+                                    <li>Engineered and deployed a U-Net based generative model that allowed generative teeth correction capabilities in portrait photos.</li>
+                                    <li>Accelerated photo editing workflow by 40% by designing RegNet backbone-based ONNX compressed lightweight models for consistent image exposure, hue, saturation, and luminance control.</li>
+                                </ul>
+                                <div class="tech-stack">
+                                    <span>Python</span><span>C++</span><span>Rust</span><span>RunPod</span><span>GCP</span><span>Azure</span><span>PyTorch</span><span>TensorFlow</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h4 class="exp-title">Machine Learning Engineer</h4>
+                                <div class="exp-date">Jan 2023 – Oct 2023</div>
+                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
+                            </div>
+                            <div class="exp-location">Savart (Manager: <a href="https://www.linkedin.com/in/suhruth-eedara-93858412b/" target="_blank">Suhruth Eedara</a>) &bullet; Hyderabad, India</div>
+                            <div class="exp-body">
+                                 <ul class="exp-details">
+                                    <li>Fine-tuned LLAMA-2 and Alpaca models on financial annual reports that boosted qualitative company profiling capabilities, boosting equity market research efficiency from weeks to days.</li>
+                                    <li>Engineered a dynamic OCR pipeline & automated information extraction, processing more than 50K documents for corpus creation.</li>
+                                    <li>Enhanced QA accuracy by 35% through strategic optimization of reader models (RoBERTa, BART, XLM) on a novel dataset.</li>
+                                </ul>
+                                 <div class="tech-stack">
+                                    <span>Python</span><span>C++</span><span>AWS</span><span>GCP</span><span>Azure</span><span>PyTorch</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h4 class="exp-title">Deep Learning Intern</h4>
+                                <div class="exp-date">Jul 2022 – Dec 2022</div>
+                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
+                            </div>
+                            <div class="exp-location">HyperVerge Ltd (Supervisor: <a href="https://www.linkedin.com/in/hariprasad-p-s-162b0778/" target="_blank">Hariprasad P S</a>) &bullet; Bangalore, India</div>
+                            <div class="exp-body">
+                                <ul class="exp-details">
+                                    <li>Spearheaded R&D for an industry-leading ID tampering detection system that processes 15 million monthly requests across global markets, serving over 100 clients.</li>
+                                    <li>Developed a tampering detection system that achieved an unprecedented 98% catch rate with less than a 1% false positive rate.</li>
+                                    <li>Proposed a novel anomaly detection approach (ATAC-Net W) using a memory-based semi-supervised architecture, which was selected among the best 5% for a spotlight presentation at ICIP 2024.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <div class="exp-card">
-          <div class="exp-head-row">
-            <div>
-              <h3>Student Assistant, C2B Lab</h3>
-              <div class="exp-metadata">
-                <span>Sep 2024 – Present | College Station, TX</span>
-              </div>
+    <section id="projects" class="section">
+        <div class="container">
+            <h3 class="mono-heading">$ projects</h3>
+            <div class="publications-grid">
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <div class="publication-title">Egocentric view driven Fine-Grained Object Interaction Trajectory & Affordance Prediction</div>
+                        <div class="publication-authors">Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a> &bullet; May 2025 - Present</div>
+                        <p class="project-desc">Developing an egocentric view driven end-to-end framework for predicting temporal future location in 3D voxel representations along with precise, fine-grained affordance trajectories to interact with objects.</p>
+                    </div>
+                </div>
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <div class="publication-title">HG-SCRUB: Human-Gaussian Scene Representation with Unified Baking</div>
+                        <div class="publication-authors">Advisor: Prof. Wenping Wang &bullet; Jan 2025 - May 2025</div>
+                        <p class="project-desc">Developed a framework for human and scene decomposition into separate representations from sparse video frames, learning material and physical components for relighting.</p>
+                        <div class="publication-links">
+                             <a href="https://hg-scrub.github.io/HG-SCRUB/" target="_blank" class="btn"><i class="bi bi-display"></i> Project Page</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <div class="publication-title">Free-Generation: Training-Free Trajectory Control in Video Diffusion Models</div>
+                        <div class="publication-authors">Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a> &bullet; Aug 2024 - Dec 2024</div>
+                        <p class="project-desc">Conducted empirical research on Training-Free Trajectory Control Methods, identified critical domain shifts in Attention Block Statistics, and formulated novel normalization approaches.</p>
+                         <div class="publication-links">
+                             <a href="https://drive.google.com/file/d/1NRk8QdZimCRbG5Muhsr0HFvoEMv-Hkx1/view" target="_blank" class="btn"><i class="bi bi-filetype-pdf"></i> View PDF</a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="publication-card">
+                    <div class="publication-content">
+                        <div class="publication-title">Multimodal Late Fusion Attention Model for Calorie Prediction</div>
+                         <p class="project-desc">Engineered a tri-modal late-fusion attention architecture integrating Conv1D, Conv2D, and MLPs to improve calorie prediction accuracy by 15% over single-modality baselines. Designed a multi-head attention mechanism and composite loss function to reduce validation loss from 0.8211 to 0.3465.</p>
+                         <div class="publication-links">
+                             <a href="https://drive.google.com/file/d/1_QW5Qesw3dvbCpgTKBvUeyqbgGz0Vppb/view?usp=sharing" target="_blank" class="btn"><i class="bi bi-filetype-pdf"></i> View PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="publication-card">
+                    <div class="publication-content">
+                        <div class="publication-title">EventNXT - FashioNXT LLC</div>
+                        <div class="publication-authors">Ruby on Rails, Docker, AWS &bullet; Sep 2024 - Dec 2024</div>
+                        <p class="project-desc">Built a referral-reward engine that boosted ticket sales by 25%. Deployed Rails, Docker, and AWS microservices for real-time synchronization of ticketing and seat inventory systems.</p>
+                        <div class="publication-links">
+                             <a href="https://github.com/FashioNXT/EventNXT-Fall2024" target="_blank" class="btn"><i class="bi bi-github"></i> View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="exp-meta-details">
-              <div><b>Advisor:</b> Dr. Reza Avazmohammadi</div>
-              <div><b>Technologies:</b> PyTorch, Matlab, Python, Viser</div>
-            </div>
-          </div>
-          <ul class="exp-details">
-            <li>Currently working on 4D motion tracking of heart by mapping 2D-based motion to 3D using motion interpolation.</li>
-            <li>Devised novel semi-supervised diffusion based image registration approach for achieving 2D motion tracking of Rat’s Heart.</li>
-            <li>Developed geometry-aware (2D slice prior) diffusion based 3D reconstruction model for precise mesh generation of Rat’s Heart.</li>
-          </ul>
         </div>
+    </section>
 
-        <div class="exp-card">
-          <div class="exp-head-row">
-            <div>
-              <h3>Machine Learning Engineer-2, AfterShoot</h3>
-              <div class="exp-metadata">
-                <span>Nov 2023 – Jul 2024 | Delhi, India</span>
-              </div>
+    <section id="skills" class="section">
+        <div class="container">
+            <h3 class="mono-heading">$ technical_skills</h3>
+            <div class="skill-category">
+                <h4>ML & Vision</h4>
+                <div class="skill-pills">
+                    <span>PyTorch</span><span>TensorFlow</span><span>Keras</span><span>Hugging Face</span><span>Transformers</span><span>scikit-learn</span><span>Open3D</span><span>PyVista</span><span>OpenCV</span><span>Vision Transformers</span><span>Diffusion Models</span><span>NeRF</span><span>3D Gaussian Splatting</span><span>RAG</span><span>LLAMA-2</span><span>BERT</span>
+                </div>
             </div>
-            <div class="exp-meta-details">
-              <div><b>Technologies:</b> Python, C++, Rust, RunPod, GCP, Azure, PyTorch, TensorFlow</div>
+             <div class="skill-category">
+                <h4>Data & Visualization</h4>
+                <div class="skill-pills">
+                    <span>Pandas</span><span>Matplotlib</span><span>Viser</span><span>Rerun.io</span>
+                </div>
             </div>
-          </div>
-          <ul class="exp-details">
-            <li>Spearheaded development of AI portrait enhancement and retouching, delivering features (teeth correction, whitening, skin retouching). Product reduced Photoshop time from 10s of hours to &lt;2-3 hours for ~1000 photos.</li>
-            <li>Engineered/deployed U-Net based generative model allowing generative teeth correction in portraits.</li>
-            <li>Accelerated photo editing workflow by 40% by designing lightweight models automating HSL filters in Lightroom Classic.</li>
-          </ul>
+            <div class="skill-category">
+                <h4>Programming Languages</h4>
+                <div class="skill-pills">
+                    <span>Python</span><span>C++</span><span>Rust</span><span>Matlab</span><span>JavaScript</span><span>Ruby</span><span>SQL</span>
+                </div>
+            </div>
+             <div class="skill-category">
+                <h4>Cloud & MLOps</h4>
+                <div class="skill-pills">
+                    <span>AWS</span><span>GCP</span><span>Azure</span><span>Docker</span><span>Git</span>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="exp-card">
-          <div class="exp-head-row">
-            <div>
-              <h3>Machine Learning Engineer, Savart</h3>
-              <div class="exp-metadata">
-                <span>Jan 2023 – Oct 2023 | Hyderabad, India</span>
-              </div>
-            </div>
-            <div class="exp-meta-details">
-              <div><b>Technologies:</b> Python, C++, AWS, GCP, Azure, PyTorch</div>
-            </div>
-          </div>
-          <ul class="exp-details">
-            <li>Fine-tuned LLAMA-2 and Alpaca models on financial annual reports that boosted qualitative company profiling used in equity market analysis; boosted the efficiency of equity market research from weeks to days.</li>
-            <li>Engineered dynamic OCR pipeline & automated information extraction; processed 50K+ documents for corpus creation.</li>
-            <li>Enhanced QA accuracy by 35% through strategic optimization of reader models (RoBERTa, BART, XLM) on new datasets.</li>
-          </ul>
-        </div>
-
-        <div class="exp-card">
-          <div class="exp-head-row">
-            <div>
-              <h3>Deep Learning Intern, HyperVerge Ltd</h3>
-              <div class="exp-metadata">
-                <span>Jul 2022 – Dec 2022 | Bangalore, India</span>
-              </div>
-            </div>
-            <div class="exp-meta-details">
-              <div><b>Supervisor:</b> <a href="https://www.linkedin.com/in/hariprasad-p-s-162b0778/" target="_blank">Hariprasad P S</a></div>
-            </div>
-          </div>
-          <ul class="exp-details">
-            <li>Spearheaded R&D for industry-leading ID tampering detection system that processes 15M+ monthly requests worldwide, serving 100+ clients.</li>
-            <li>Developed tampering detection system achieving unprecedented 98% catch rate with &lt;1% false positive rate.</li>
-            <li>Proposed and demonstrated the ATAC-Net anomaly detection architecture, leveraging memory-based semi-supervised learning (MemSeg, DeviationNet, WS-DAN); selected as best 5% and spotlight at ICIP 2024.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Research Projects -->
-  <section id="research" class="section alt-bg">
-    <div class="container">
-      <h2 class="section-title">Research</h2>
-      <div class="vertical-list">
-        <div class="proj-entry">
-          <div class="proj-title">Egocentric view driven Fine-Grained Object Interaction Trajectory &amp; Affordance Prediction
-            <span class="proj-links">
-              <a href="https://drive.google.com/file/d/1NRk8QdZimCRbG5Muhsr0HFvoEMv-Hkx1/view" target="_blank" class="proj-link-btn">View Project</a>
-            </span>
-          </div>
-          <div class="meta">May 2025 – Present | Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a></div>
-          <div class="desc">Developing egocentric view driven end-to-end framework for predicting temporal future location prediction in 3D voxel scene representation along with precise & fine-grained affordance trajectory to interact with the object.</div>
-        </div>
-        <div class="proj-entry">
-          <div class="proj-title">HG-SCRUB (Human-Gaussian Scene Representation with Unified Baking)
-            <span class="proj-links">
-              <a href="https://hg-scrub.github.io/HG-SCRUB/" target="_blank" class="proj-link-btn">Website</a>
-            </span>
-          </div>
-          <div class="meta">Jan 2025 – May 2025</div>
-          <div class="desc">Developed framework for human and scene decomposition in separate representations given sparse image frames from video; learned material and physical components (Normals, Albedo, Roughness & Metallic) and explicit normal learning with depth derivation and baking for relightable human gaussians.</div>
-        </div>
-        <div class="proj-entry">
-          <div class="proj-title">Free-Generation (Training-Free Video Diffusion Control)
-            <span class="proj-links">
-              <a href="https://drive.google.com/file/d/1NRk8QdZimCRbG5Muhsr0HFvoEMv-Hkx1/view" target="_blank" class="proj-link-btn">Project PDF</a>
-            </span>
-          </div>
-          <div class="meta">Aug 2024 – Dec 2024 | Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a></div>
-          <div class="desc">Conducted empirical research on Training-Free Trajectory Control Methods in Video Diffusion Models, including domain-shift identification in attention block statistics and formulation of statistical post-mask normalization for enhanced trajectory control.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Publications -->
-  <section id="publications" class="section">
-    <div class="container">
-      <h2 class="section-title">Publications</h2>
-      <div class="vertical-list">
-        <div class="pub-entry">
-          <div class="pub-title"><b>ATAC-Net: Zoomed view works better for Anomaly Detection</b>
-            <a href="https://ieeexplore.ieee.org/abstract/document/10647702" class="pub-link" target="_blank">Paper</a>
-            <a href="#" class="pub-link" target="_blank">Code</a>
-          </div>
-          <div class="meta">ICIP 2024 | Shaurya Gupta, <b>Neil Gautam</b>, Anurag Malyala</div>
-          <div class="desc">Memory-based semi-supervised architecture (ATAC-Net) achieving 98% catch rate &lt;1% false positive. ICIP 2024 spotlight (top 5%).</div>
-        </div>
-        <div class="pub-entry">
-          <div class="pub-title"><b>Obscenity Detection in Videos through Sequential ConvNet Pipeline Classifier</b>
-            <a href="https://ieeexplore.ieee.org/abstract/document/9733936" class="pub-link" target="_blank">Paper</a>
-          </div>
-          <div class="meta">IEEE TCDS | <b>Neil Gautam</b>, Dr. Dinesh Kumar Vishwakarma</div>
-          <div class="desc">ConvNet pipeline for video content moderation using spatial-temporal features for real-time analysis.</div>
-        </div>
-        <div class="pub-entry">
-          <div class="pub-title"><b>Ensemble Learning Using Vision Transformer and CNN for Person ReID</b>
-            <a href="https://ieeexplore.ieee.org/abstract/document/9753761" class="pub-link" target="_blank">Paper</a>
-          </div>
-          <div class="meta">IEEE ICCMC | Gupta, <b>Neil Gautam</b>, Dr. Vishwakarma</div>
-          <div class="desc">Ensemble with Vision Transformer &amp; CNNs for improved person re-ID across challenging datasets.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact & Links -->
-  <section id="contact" class="section alt-bg">
-    <div class="container">
-      <h2 class="section-title">Contact</h2>
-      <div class="contact-grid">
-        <div>
-          <span class="c-label">Email:</span>
-          <a href="mailto:neilgautam.24@tamu.edu"><i class="bi bi-envelope-at"></i> neilgautam.24@tamu.edu</a>
-        </div>
-        <div>
-          <span class="c-label">Phone:</span>
-          <a href="tel:+19797213148"><i class="bi bi-telephone"></i> +1 (979) 721-3148</a>
-        </div>
-        <div>
-          <span class="c-label">Location:</span> College Station, TX
-        </div>
-        <div>
-          <span class="c-label">LinkedIn:</span>
-          <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank"><i class="bi bi-linkedin"></i></a>
-          <span class="c-label">GitHub:</span>
-          <a href="https://github.com/neilgautam24-tamu" target="_blank"><i class="bi bi-github"></i></a>
-          <span class="c-label">Google Scholar:</span>
-          <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank"><i class="bi bi-google"></i></a>
-        </div>
-      </div>
-      <div class="contact-grid mentors">
-        <div><span class="c-label">Mentors / Collaborators:</span>
-          <a href="https://czhang0528.github.io/" target="_blank">Cheng Zhang</a> |
-          <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank">Reza Avazmohammadi</a> |
-          <a href="https://www.linkedin.com/in/hariprasad-p-s-162b0778/" target="_blank">Hariprasad P S</a> |
-          <a href="https://www.linkedin.com/in/nikhil-bartwal-b07b501a3/" target="_blank">Nikhil Bartwal</a> |
-          <a href="https://www.linkedin.com/in/suhruth-eedara-93858412b/" target="_blank">Suhruth Eedara</a>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
+
+<footer class="site-footer">
+    <div class="container">
+        &copy; 2025 Neil Gautam. Built with care in College Station, TX.
+    </div>
+</footer>
+
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('.nav-link, .nav-brand').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetElement = document.querySelector(this.getAttribute('href'));
+            if(targetElement) {
+                 targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
