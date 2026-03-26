@@ -9,8 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-</head>
+  </head>
 <body>
 
 <!-- ░ AMBIENT BACKGROUND ░ -->
@@ -442,44 +441,91 @@
       <h2 class="sec-title">Skills</h2>
     </div>
 
-    <div class="skill-wrap fade-up">
-      <div class="skill-legend-top" id="skill-legend-top"></div>
-      <div id="skill-viz"></div>
-      <p class="skill-caption">
-        Sized by depth of experience, grouped by how I use them together in research and production.
-      </p>
+    <!-- Depth legend -->
+    <div class="sk-depth-legend fade-up">
+      <span class="sdl-label">Chip size = depth of experience:</span>
+      <span class="sk-tag sk-tag-xl sk-demo-violet">Expert</span>
+      <span class="sk-tag sk-tag-lg sk-demo-violet">Proficient</span>
+      <span class="sk-tag sk-tag-md sk-demo-violet">Intermediate</span>
+      <span class="sk-tag sk-tag-sm sk-demo-violet">Familiar</span>
     </div>
 
-    <!-- Mobile fallback -->
-    <div class="skill-fallback">
-      <div class="sfg">
-        <h4>ML &amp; Generative</h4>
-        <div class="spills">
-          <span>PyTorch</span><span>TensorFlow</span><span>JAX</span><span>Diffusion Models</span>
-          <span>3D Gaussian Splatting</span><span>NeRF</span><span>GAN</span><span>SEA-RAFT</span><span>Hugging Face</span>
+    <div class="skills-grid fade-up">
+
+      <!-- ML & Generative -->
+      <div class="skill-card sk-violet">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><i class="bi bi-cpu-fill"></i></div>
+          <h3 class="skill-card-title">ML &amp; Generative</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="sk-tag sk-tag-xl">PyTorch</span>
+          <span class="sk-tag sk-tag-xl">Diffusion</span>
+          <span class="sk-tag sk-tag-lg">3D GS</span>
+          <span class="sk-tag sk-tag-lg">TensorFlow</span>
+          <span class="sk-tag sk-tag-lg">NeRF</span>
+          <span class="sk-tag sk-tag-lg">GAN</span>
+          <span class="sk-tag sk-tag-lg">HuggingFace</span>
+          <span class="sk-tag sk-tag-md">JAX</span>
+          <span class="sk-tag sk-tag-md">SEA-RAFT</span>
+          <span class="sk-tag sk-tag-sm">sklearn</span>
         </div>
       </div>
-      <div class="sfg">
-        <h4>Vision &amp; 3D</h4>
-        <div class="spills">
-          <span>OpenCV</span><span>Open3D</span><span>PyVista</span><span>Rerun</span>
-          <span>Project Aria</span><span>ViT</span><span>ONNX</span><span>TensorRT</span>
+
+      <!-- Vision & 3D -->
+      <div class="skill-card sk-cyan">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><i class="bi bi-eye-fill"></i></div>
+          <h3 class="skill-card-title">Vision &amp; 3D</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="sk-tag sk-tag-xl">OpenCV</span>
+          <span class="sk-tag sk-tag-lg">Open3D</span>
+          <span class="sk-tag sk-tag-lg">ViT</span>
+          <span class="sk-tag sk-tag-lg">ONNX</span>
+          <span class="sk-tag sk-tag-md">TensorRT</span>
+          <span class="sk-tag sk-tag-md">SMPL</span>
+          <span class="sk-tag sk-tag-sm">PyVista</span>
+          <span class="sk-tag sk-tag-sm">Rerun</span>
+          <span class="sk-tag sk-tag-sm">Aria Tools</span>
         </div>
       </div>
-      <div class="sfg">
-        <h4>Languages</h4>
-        <div class="spills">
-          <span>Python</span><span>C++</span><span>CUDA</span><span>Rust</span>
-          <span>JavaScript</span><span>MATLAB</span><span>SQL</span>
+
+      <!-- Languages -->
+      <div class="skill-card sk-rose">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><i class="bi bi-code-slash"></i></div>
+          <h3 class="skill-card-title">Languages</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="sk-tag sk-tag-xl">Python</span>
+          <span class="sk-tag sk-tag-lg">C++</span>
+          <span class="sk-tag sk-tag-lg">MATLAB</span>
+          <span class="sk-tag sk-tag-lg">CUDA</span>
+          <span class="sk-tag sk-tag-md">JavaScript</span>
+          <span class="sk-tag sk-tag-sm">Rust</span>
+          <span class="sk-tag sk-tag-sm">SQL</span>
         </div>
       </div>
-      <div class="sfg">
-        <h4>Cloud &amp; MLOps</h4>
-        <div class="spills">
-          <span>AWS</span><span>GCP</span><span>Azure</span><span>Docker</span><span>Git</span><span>W&amp;B</span>
+
+      <!-- Cloud & MLOps -->
+      <div class="skill-card sk-green">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><i class="bi bi-cloud-fill"></i></div>
+          <h3 class="skill-card-title">Cloud &amp; MLOps</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="sk-tag sk-tag-xl">AWS</span>
+          <span class="sk-tag sk-tag-xl">GCP</span>
+          <span class="sk-tag sk-tag-xl">Git</span>
+          <span class="sk-tag sk-tag-lg">Docker</span>
+          <span class="sk-tag sk-tag-lg">Azure</span>
+          <span class="sk-tag sk-tag-md">W&amp;B</span>
         </div>
       </div>
+
     </div>
+    <p class="skill-caption fade-up">Grouped by how I use them together in research and production.</p>
   </div>
 </section>
 
@@ -544,171 +590,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* ── D3 SKILL GRID (NEAT & ALIGNED) ── */
-(function () {
-  if (window.innerWidth < 768) return;
-
-  const container = document.getElementById('skill-viz');
-  const W = container.offsetWidth || 900;
-  const H = 440;
-
-  const cats = {
-    'ML & Generative': { fill: '#ede9fe', stroke: '#7c3aed', text: '#3b0764', label: '#5b21b6' },
-    'Vision & 3D':     { fill: '#cffafe', stroke: '#0891b2', text: '#083344', label: '#0e7490' },
-    'Languages':       { fill: '#fce7f3', stroke: '#db2777', text: '#500724', label: '#9d174d' },
-    'Cloud & MLOps':   { fill: '#d1fae5', stroke: '#059669', text: '#064e3b', label: '#047857' },
-  };
-  const catKeys = Object.keys(cats);
-  const catIdx  = {}; catKeys.forEach((c, i) => catIdx[c] = i);
-
-  const skills = [
-    { name:'PyTorch',      cat:'ML & Generative', v:10 },
-    { name:'Diffusion',    cat:'ML & Generative', v:9  },
-    { name:'3D GS',        cat:'ML & Generative', v:8  },
-    { name:'TensorFlow',   cat:'ML & Generative', v:7  },
-    { name:'JAX',          cat:'ML & Generative', v:6  },
-    { name:'NeRF',         cat:'ML & Generative', v:7  },
-    { name:'GAN',          cat:'ML & Generative', v:7  },
-    { name:'SEA-RAFT',     cat:'ML & Generative', v:6  },
-    { name:'HuggingFace',  cat:'ML & Generative', v:7  },
-    { name:'sklearn',      cat:'ML & Generative', v:5  },
-    { name:'OpenCV',       cat:'Vision & 3D',     v:8  },
-    { name:'Open3D',       cat:'Vision & 3D',     v:7  },
-    { name:'PyVista',      cat:'Vision & 3D',     v:6  },
-    { name:'Rerun',        cat:'Vision & 3D',     v:5  },
-    { name:'Aria Tools',   cat:'Vision & 3D',     v:5  },
-    { name:'ViT',          cat:'Vision & 3D',     v:7  },
-    { name:'ONNX',         cat:'Vision & 3D',     v:7  },
-    { name:'TensorRT',     cat:'Vision & 3D',     v:6  },
-    { name:'SMPL',         cat:'Vision & 3D',     v:6  },
-    { name:'Python',       cat:'Languages',       v:10 },
-    { name:'C++',          cat:'Languages',       v:8  },
-    { name:'CUDA',         cat:'Languages',       v:7  },
-    { name:'Rust',         cat:'Languages',       v:6  },
-    { name:'JavaScript',   cat:'Languages',       v:6  },
-    { name:'MATLAB',       cat:'Languages',       v:7  },
-    { name:'SQL',          cat:'Languages',       v:5  },
-    { name:'AWS',          cat:'Cloud & MLOps',   v:8  },
-    { name:'GCP',          cat:'Cloud & MLOps',   v:8  },
-    { name:'Azure',        cat:'Cloud & MLOps',   v:7  },
-    { name:'Docker',       cat:'Cloud & MLOps',   v:7  },
-    { name:'Git',          cat:'Cloud & MLOps',   v:8  },
-    { name:'W&B',          cat:'Cloud & MLOps',   v:6  },
-  ];
-
-  const PAD_X = 60, PAD_Y = 70;
-  const cx = [W * 0.26, W * 0.74, W * 0.26, W * 0.74];
-  const cy = [H * 0.26, H * 0.26, H * 0.74, H * 0.74];
-
-  const rScale = d3.scaleSqrt().domain([5, 10]).range([20, 34]);
-  const nodes = skills.map(s => ({
-    ...s,
-    r: rScale(s.v),
-    fill: cats[s.cat].fill,
-    stroke: cats[s.cat].stroke,
-    textCol: cats[s.cat].text
-  }));
-
-  function clampAll() {
-    nodes.forEach(d => {
-      d.x = Math.max(d.r + PAD_X, Math.min(W - d.r - PAD_X, d.x));
-      d.y = Math.max(d.r + PAD_Y, Math.min(H - d.r - PAD_Y, d.y));
-    });
-  }
-
-  const sim = d3.forceSimulation(nodes)
-    .force('x', d3.forceX(d => cx[catIdx[d.cat]]).strength(0.6))
-    .force('y', d3.forceY(d => cy[catIdx[d.cat]]).strength(0.6))
-    .force('collide', d3.forceCollide(d => d.r + 4).strength(1).iterations(8))
-    .force('charge', d3.forceManyBody().strength(-5))
-    .stop();
-
-  for (let i = 0; i < 500; i++) { sim.tick(); clampAll(); }
-  clampAll();
-
-  const svg = d3.select(container).append('svg')
-    .attr('width',  W)
-    .attr('height', H)
-    .style('display', 'block');
-
-  const qLabels = catKeys.map((c, i) => ({ cat: c, cx: cx[i], cy: cy[i] }));
-  qLabels.forEach(q => {
-    svg.append('text')
-      .attr('x', q.cx)
-      .attr('y', q.cy - (H * 0.19))
-      .attr('text-anchor', 'middle')
-      .attr('font-family', "'JetBrains Mono', monospace")
-      .attr('font-size', '11px')
-      .attr('font-weight', '600')
-      .attr('letter-spacing', '2px')
-      .attr('fill', cats[q.cat].label)
-      .attr('opacity', 0.75)
-      .text(q.cat.toUpperCase());
-  });
-
-  const defs = svg.append('defs');
-  catKeys.forEach((cat, i) => {
-    const f = defs.append('filter')
-      .attr('id', 'sh' + i)
-      .attr('x', '-20%').attr('y', '-20%')
-      .attr('width', '140%').attr('height', '140%');
-    f.append('feDropShadow')
-      .attr('dx', 0).attr('dy', 2)
-      .attr('stdDeviation', 4)
-      .attr('flood-color', cats[cat].stroke)
-      .attr('flood-opacity', 0.22);
-  });
-
-  const node = svg.selectAll('g.sk')
-    .data(nodes)
-    .enter()
-    .append('g')
-    .attr('class', 'sk')
-    .attr('transform', d => `translate(${d.x},${d.y})`);
-
-  node.append('circle')
-    .attr('r', d => d.r)
-    .attr('fill', d => d.fill)
-    .attr('stroke', d => d.stroke)
-    .attr('stroke-width', 1.6)
-    .attr('filter', d => 'url(#sh' + catIdx[d.cat] + ')')
-    .style('cursor', 'default')
-    .on('mouseover', function (ev, d) {
-      d3.select(this).transition().duration(160)
-        .attr('r', d.r * 1.12)
-        .attr('stroke-width', 2.4)
-        .attr('fill', d.stroke);
-      d3.select(this.nextSibling).transition().duration(160).attr('fill', '#ffffff');
-    })
-    .on('mouseout', function (ev, d) {
-      d3.select(this).transition().duration(160)
-        .attr('r', d.r)
-        .attr('stroke-width', 1.6)
-        .attr('fill', d.fill);
-      d3.select(this.nextSibling).transition().duration(160).attr('fill', d.textCol);
-    });
-
-  node.append('text')
-    .text(d => d.name)
-    .attr('text-anchor', 'middle')
-    .attr('dy', '0.35em')
-    .attr('fill', d => d.textCol)
-    .attr('font-family', "'Inter', sans-serif")
-    .attr('font-weight', '600')
-    .attr('font-size', d => Math.max(9, d.r * 0.42) + 'px')
-    .style('pointer-events', 'none')
-    .style('user-select', 'none');
-
-  const leg = document.getElementById('skill-legend-top');
-  catKeys.forEach(cat => {
-    const item = document.createElement('div');
-    item.className = 'leg-item';
-    item.innerHTML = `
-      <span class="leg-dot" style="background:${cats[cat].stroke}"></span>
-      <span class="leg-label" style="color:${cats[cat].label}">${cat}</span>`;
-    leg.appendChild(item);
-  });
-})();
 </script>
 </body>
 </html>
