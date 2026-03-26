@@ -379,61 +379,119 @@ body { padding-top:64px }
 .proj-links  { display:flex; gap:.5rem }
 
 /* SKILLS */
-.skill-wrap {
-  background:var(--card);
-  border:1.5px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:var(--shadow-sm);
-  padding:.75rem .9rem .75rem;
+/* ── SKILLS CARDS ── */
+.sk-depth-legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: 1.6rem;
 }
-.skill-legend-top {
-  display:flex;
-  flex-wrap:wrap;
-  gap:1.1rem;
-  padding:.3rem .4rem .6rem;
-}
-.leg-item {
-  display:flex;
-  align-items:center;
-  gap:.45rem;
-  font-size:.8rem;
-}
-.leg-dot {
-  width:10px;
-  height:10px;
-  border-radius:999px;
-}
-.leg-label {
-  font-weight:600;
-  letter-spacing:.3px;
-}
-#skill-viz { width:100%; }
-#skill-viz svg { display:block; }
-.skill-caption {
-  margin:.35rem .25rem .2rem;
-  font-size:.78rem;
-  color:var(--t3);
+.sdl-label {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--t3);
+  letter-spacing: .3px;
+  margin-right: .3rem;
 }
 
-/* Mobile fallback */
-.skill-fallback { display:none; }
-.sfg { margin-bottom:1.5rem; }
-.sfg h4 {
-  font-size:.85rem;
-  font-weight:600;
-  color:var(--t2);
-  margin-bottom:.75rem;
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
 }
-.spills { display:flex; flex-wrap:wrap; gap:.5rem; }
-.spills span {
-  font-size:.78rem;
-  font-weight:500;
-  background:var(--card);
-  border:1.5px solid var(--border);
-  color:var(--t2);
-  padding:.28rem .72rem;
-  border-radius:7px;
+.skill-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.skill-card-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1rem 1.35rem .85rem;
+  border-bottom: 1.5px solid var(--border);
+}
+.skill-card-icon {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem;
+  flex-shrink: 0;
+}
+.skill-card-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .875rem;
+  font-weight: 700;
+  letter-spacing: .4px;
+  margin: 0;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: 1rem 1.35rem 1.1rem;
+}
+
+/* Chip sizes = depth */
+.sk-tag {
+  display: inline-flex; align-items: center;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: .15px;
+  line-height: 1;
+  transition: transform .18s ease, background .18s ease, color .18s ease;
+  cursor: default;
+  white-space: nowrap;
+}
+.sk-tag:hover            { transform: translateY(-2px); }
+.sk-tag-xl               { font-size: 1rem;    padding: .42rem .96rem; }
+.sk-tag-lg               { font-size: .87rem;  padding: .36rem .82rem; }
+.sk-tag-md               { font-size: .78rem;  padding: .3rem  .7rem;  }
+.sk-tag-sm               { font-size: .7rem;   padding: .25rem .58rem; opacity: .85; }
+
+/* ── Violet — ML & Generative ── */
+.sk-violet .skill-card-header { background: rgba(124,58,237,.07); }
+.sk-violet .skill-card-icon   { background: rgba(124,58,237,.14); color: #7c3aed; }
+.sk-violet .skill-card-title  { color: #5b21b6; }
+.sk-violet .sk-tag            { background: #ede9fe; color: #3b0764; border: 1.5px solid rgba(124,58,237,.28); }
+.sk-violet .sk-tag:hover      { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+.sk-demo-violet               { background: #ede9fe; color: #3b0764; border: 1.5px solid rgba(124,58,237,.28); }
+
+/* ── Cyan — Vision & 3D ── */
+.sk-cyan .skill-card-header   { background: rgba(8,145,178,.07); }
+.sk-cyan .skill-card-icon     { background: rgba(8,145,178,.14); color: #0891b2; }
+.sk-cyan .skill-card-title    { color: #0e7490; }
+.sk-cyan .sk-tag              { background: #cffafe; color: #083344; border: 1.5px solid rgba(8,145,178,.28); }
+.sk-cyan .sk-tag:hover        { background: #0891b2; color: #fff; border-color: #0891b2; }
+
+/* ── Rose — Languages ── */
+.sk-rose .skill-card-header   { background: rgba(219,39,119,.07); }
+.sk-rose .skill-card-icon     { background: rgba(219,39,119,.14); color: #db2777; }
+.sk-rose .skill-card-title    { color: #9d174d; }
+.sk-rose .sk-tag              { background: #fce7f3; color: #500724; border: 1.5px solid rgba(219,39,119,.28); }
+.sk-rose .sk-tag:hover        { background: #db2777; color: #fff; border-color: #db2777; }
+
+/* ── Green — Cloud & MLOps ── */
+.sk-green .skill-card-header  { background: rgba(5,150,105,.07); }
+.sk-green .skill-card-icon    { background: rgba(5,150,105,.14); color: #059669; }
+.sk-green .skill-card-title   { color: #047857; }
+.sk-green .sk-tag             { background: #d1fae5; color: #064e3b; border: 1.5px solid rgba(5,150,105,.28); }
+.sk-green .sk-tag:hover       { background: #059669; color: #fff; border-color: #059669; }
+
+.skill-caption {
+  margin: 1.2rem 0 0;
+  font-size: .78rem;
+  color: var(--t3);
+  text-align: center;
+  letter-spacing: .2px;
 }
 
 /* FOOTER */
@@ -459,10 +517,8 @@ footer { border-top:1.5px solid var(--border); padding:2.2rem 0; background:var(
   .exp-head   { flex-direction:column; gap:.5rem }
   .exp-meta   { text-align:left }
   .exp-date, .exp-loc { justify-content:flex-start }
-  #skill-viz,
-  .skill-legend-top,
-  .skill-wrap { display:none }
-  .skill-fallback { display:block }
+  .skills-grid { grid-template-columns: 1fr; }
+  .sk-depth-legend { gap: .45rem; }
 }
 @media(max-width:480px){
   .stats-grid { grid-template-columns:1fr }
