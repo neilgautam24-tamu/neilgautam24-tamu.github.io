@@ -441,16 +441,44 @@
       <span class="sec-label">technical toolkit</span>
       <h2 class="sec-title">Skills</h2>
     </div>
+
     <div class="skill-wrap fade-up">
       <div class="skill-legend-top" id="skill-legend-top"></div>
       <div id="skill-viz"></div>
+      <p class="skill-caption">
+        Sized by depth of experience, grouped by how I use them together in research and production.
+      </p>
     </div>
+
     <!-- Mobile fallback -->
     <div class="skill-fallback">
-      <div class="sfg"><h4>ML &amp; Generative</h4><div class="spills"><span>PyTorch</span><span>TensorFlow</span><span>JAX</span><span>Diffusion Models</span><span>3D Gaussian Splatting</span><span>NeRF</span><span>GAN</span><span>SEA-RAFT</span><span>Hugging Face</span></div></div>
-      <div class="sfg"><h4>Vision &amp; 3D</h4><div class="spills"><span>OpenCV</span><span>Open3D</span><span>PyVista</span><span>Rerun</span><span>Project Aria</span><span>ViT</span><span>ONNX</span><span>TensorRT</span></div></div>
-      <div class="sfg"><h4>Languages</h4><div class="spills"><span>Python</span><span>C++</span><span>CUDA</span><span>Rust</span><span>JavaScript</span><span>MATLAB</span><span>SQL</span></div></div>
-      <div class="sfg"><h4>Cloud &amp; MLOps</h4><div class="spills"><span>AWS</span><span>GCP</span><span>Azure</span><span>Docker</span><span>Git</span><span>W&amp;B</span></div></div>
+      <div class="sfg">
+        <h4>ML &amp; Generative</h4>
+        <div class="spills">
+          <span>PyTorch</span><span>TensorFlow</span><span>JAX</span><span>Diffusion Models</span>
+          <span>3D Gaussian Splatting</span><span>NeRF</span><span>GAN</span><span>SEA-RAFT</span><span>Hugging Face</span>
+        </div>
+      </div>
+      <div class="sfg">
+        <h4>Vision &amp; 3D</h4>
+        <div class="spills">
+          <span>OpenCV</span><span>Open3D</span><span>PyVista</span><span>Rerun</span>
+          <span>Project Aria</span><span>ViT</span><span>ONNX</span><span>TensorRT</span>
+        </div>
+      </div>
+      <div class="sfg">
+        <h4>Languages</h4>
+        <div class="spills">
+          <span>Python</span><span>C++</span><span>CUDA</span><span>Rust</span>
+          <span>JavaScript</span><span>MATLAB</span><span>SQL</span>
+        </div>
+      </div>
+      <div class="sfg">
+        <h4>Cloud &amp; MLOps</h4>
+        <div class="spills">
+          <span>AWS</span><span>GCP</span><span>Azure</span><span>Docker</span><span>Git</span><span>W&amp;B</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -516,13 +544,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* ── D3 SKILL BUBBLES (FIXED) ── */
+/* ── D3 SKILL GRID (NEAT & ALIGNED) ── */
 (function () {
   if (window.innerWidth < 768) return;
 
   const container = document.getElementById('skill-viz');
   const W = container.offsetWidth || 900;
-  const H = 500;
+  const H = 440;
 
   const cats = {
     'ML & Generative': { fill: '#ede9fe', stroke: '#7c3aed', text: '#3b0764', label: '#5b21b6' },
@@ -531,8 +559,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     'Cloud & MLOps':   { fill: '#d1fae5', stroke: '#059669', text: '#064e3b', label: '#047857' },
   };
   const catKeys = Object.keys(cats);
-  const catIdx  = {};
-  catKeys.forEach((c, i) => catIdx[c] = i);
+  const catIdx  = {}; catKeys.forEach((c, i) => catIdx[c] = i);
 
   const skills = [
     { name:'PyTorch',      cat:'ML & Generative', v:10 },
@@ -569,33 +596,35 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     { name:'W&B',          cat:'Cloud & MLOps',   v:6  },
   ];
 
-  const PAD = 50;
-  const cx = [W * 0.25, W * 0.75, W * 0.25, W * 0.75];
-  const cy = [H * 0.27, H * 0.27, H * 0.73, H * 0.73];
+  const PAD_X = 60, PAD_Y = 70;
+  const cx = [W * 0.26, W * 0.74, W * 0.26, W * 0.74];
+  const cy = [H * 0.26, H * 0.26, H * 0.74, H * 0.74];
 
-  const rScale = d3.scaleSqrt().domain([5, 10]).range([20, 36]);
-
+  const rScale = d3.scaleSqrt().domain([5, 10]).range([20, 34]);
   const nodes = skills.map(s => ({
-    ...s, r: rScale(s.v),
-    fill: cats[s.cat].fill, stroke: cats[s.cat].stroke, textCol: cats[s.cat].text
+    ...s,
+    r: rScale(s.v),
+    fill: cats[s.cat].fill,
+    stroke: cats[s.cat].stroke,
+    textCol: cats[s.cat].text
   }));
 
-  function applyBounds() {
+  function clampAll() {
     nodes.forEach(d => {
-      d.x = Math.max(d.r + PAD, Math.min(W - d.r - PAD, d.x));
-      d.y = Math.max(d.r + PAD, Math.min(H - d.r - PAD, d.y));
+      d.x = Math.max(d.r + PAD_X, Math.min(W - d.r - PAD_X, d.x));
+      d.y = Math.max(d.r + PAD_Y, Math.min(H - d.r - PAD_Y, d.y));
     });
   }
 
   const sim = d3.forceSimulation(nodes)
-    .force('x',       d3.forceX(d => cx[catIdx[d.cat]]).strength(0.4))
-    .force('y',       d3.forceY(d => cy[catIdx[d.cat]]).strength(0.4))
-    .force('collide', d3.forceCollide(d => d.r + 3).strength(1).iterations(6))
-    .force('charge',  d3.forceManyBody().strength(-10))
+    .force('x', d3.forceX(d => cx[catIdx[d.cat]]).strength(0.6))
+    .force('y', d3.forceY(d => cy[catIdx[d.cat]]).strength(0.6))
+    .force('collide', d3.forceCollide(d => d.r + 4).strength(1).iterations(8))
+    .force('charge', d3.forceManyBody().strength(-5))
     .stop();
 
-  for (let i = 0; i < 400; i++) { sim.tick(); applyBounds(); }
-  applyBounds();
+  for (let i = 0; i < 500; i++) { sim.tick(); clampAll(); }
+  clampAll();
 
   const svg = d3.select(container).append('svg')
     .attr('width',  W)
@@ -605,56 +634,78 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const qLabels = catKeys.map((c, i) => ({ cat: c, cx: cx[i], cy: cy[i] }));
   qLabels.forEach(q => {
     svg.append('text')
-      .attr('x', q.cx).attr('y', q.cy - H * 0.185)
+      .attr('x', q.cx)
+      .attr('y', q.cy - (H * 0.19))
       .attr('text-anchor', 'middle')
       .attr('font-family', "'JetBrains Mono', monospace")
-      .attr('font-size', '11px').attr('font-weight', '600')
-      .attr('letter-spacing', '1.5px')
-      .attr('fill', cats[q.cat].label).attr('opacity', 0.7)
+      .attr('font-size', '11px')
+      .attr('font-weight', '600')
+      .attr('letter-spacing', '2px')
+      .attr('fill', cats[q.cat].label)
+      .attr('opacity', 0.75)
       .text(q.cat.toUpperCase());
   });
 
   const defs = svg.append('defs');
   catKeys.forEach((cat, i) => {
-    const f = defs.append('filter').attr('id', 'sh' + i).attr('x', '-20%').attr('y', '-20%').attr('width', '140%').attr('height', '140%');
-    f.append('feDropShadow').attr('dx', 0).attr('dy', 2).attr('stdDeviation', 4).attr('flood-color', cats[cat].stroke).attr('flood-opacity', 0.22);
+    const f = defs.append('filter')
+      .attr('id', 'sh' + i)
+      .attr('x', '-20%').attr('y', '-20%')
+      .attr('width', '140%').attr('height', '140%');
+    f.append('feDropShadow')
+      .attr('dx', 0).attr('dy', 2)
+      .attr('stdDeviation', 4)
+      .attr('flood-color', cats[cat].stroke)
+      .attr('flood-opacity', 0.22);
   });
 
-  const node = svg.selectAll('g.sk').data(nodes).enter().append('g').attr('class', 'sk')
+  const node = svg.selectAll('g.sk')
+    .data(nodes)
+    .enter()
+    .append('g')
+    .attr('class', 'sk')
     .attr('transform', d => `translate(${d.x},${d.y})`);
 
   node.append('circle')
     .attr('r', d => d.r)
-    .attr('fill',         d => d.fill)
-    .attr('stroke',       d => d.stroke)
-    .attr('stroke-width', 1.5)
-    .style('cursor', 'default')
+    .attr('fill', d => d.fill)
+    .attr('stroke', d => d.stroke)
+    .attr('stroke-width', 1.6)
     .attr('filter', d => 'url(#sh' + catIdx[d.cat] + ')')
+    .style('cursor', 'default')
     .on('mouseover', function (ev, d) {
-      d3.select(this).transition().duration(180)
-        .attr('r', d.r * 1.14).attr('stroke-width', 2.5).attr('fill', d.stroke);
-      d3.select(this.nextSibling).transition().duration(180).attr('fill', '#fff');
+      d3.select(this).transition().duration(160)
+        .attr('r', d.r * 1.12)
+        .attr('stroke-width', 2.4)
+        .attr('fill', d.stroke);
+      d3.select(this.nextSibling).transition().duration(160).attr('fill', '#ffffff');
     })
     .on('mouseout', function (ev, d) {
-      d3.select(this).transition().duration(180)
-        .attr('r', d.r).attr('stroke-width', 1.5).attr('fill', d.fill);
-      d3.select(this.nextSibling).transition().duration(180).attr('fill', d.textCol);
+      d3.select(this).transition().duration(160)
+        .attr('r', d.r)
+        .attr('stroke-width', 1.6)
+        .attr('fill', d.fill);
+      d3.select(this.nextSibling).transition().duration(160).attr('fill', d.textCol);
     });
 
   node.append('text')
     .text(d => d.name)
-    .attr('text-anchor', 'middle').attr('dy', '0.35em')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
     .attr('fill', d => d.textCol)
     .attr('font-family', "'Inter', sans-serif")
-    .attr('font-size', d => Math.max(8.5, d.r * 0.42) + 'px')
     .attr('font-weight', '600')
-    .style('pointer-events', 'none').style('user-select', 'none');
+    .attr('font-size', d => Math.max(9, d.r * 0.42) + 'px')
+    .style('pointer-events', 'none')
+    .style('user-select', 'none');
 
   const leg = document.getElementById('skill-legend-top');
   catKeys.forEach(cat => {
     const item = document.createElement('div');
     item.className = 'leg-item';
-    item.innerHTML = `<span class="leg-dot" style="background:${cats[cat].stroke}"></span><span style="color:${cats[cat].label};font-weight:600">${cat}</span>`;
+    item.innerHTML = `
+      <span class="leg-dot" style="background:${cats[cat].stroke}"></span>
+      <span class="leg-label" style="color:${cats[cat].label}">${cat}</span>`;
     leg.appendChild(item);
   });
 })();
