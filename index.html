@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Neil Gautam | AI Researcher & Machine Learning Engineer</title>
+    <title>Neil Gautam — AI Researcher & ML Engineer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="top-nav">
+<!-- Ambient background orbs -->
+<div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<header class="top-nav" id="top-nav">
     <div class="nav-container">
-        <a href="#profile" class="nav-brand">NEIL GAUTAM</a>
+        <a href="#profile" class="nav-brand">
+            <span class="brand-bracket">[</span>NG<span class="brand-bracket">]</span>
+        </a>
         <nav class="nav-items">
             <a href="#education" class="nav-link">Education</a>
             <a href="#publications" class="nav-link">Publications</a>
@@ -22,218 +31,336 @@
             <a href="#projects" class="nav-link">Projects</a>
             <a href="#skills" class="nav-link">Skills</a>
         </nav>
+        <a href="https://drive.google.com/file/d/1QFU0I7sAdPhYXPIQPxvXqwLlMdpaIhPL/view?usp=sharing" target="_blank" class="nav-resume-btn">
+            <i class="bi bi-download"></i> Resume
+        </a>
     </div>
 </header>
 
 <main>
-    <section id="profile" class="section">
+    <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+    <section id="profile" class="section hero-section">
         <div class="container hero-grid">
-            <div class="hero-left">
+            <div class="hero-left reveal">
                 <div class="profile-image-container">
-                    <img src="https://raw.githubusercontent.com/neilgautam24-tamu/neilgautam24-tamu.github.io/main/profile.jpg" alt="A professional headshot of Neil Gautam">
+                    <div class="profile-ring"></div>
+                    <img src="https://raw.githubusercontent.com/neilgautam24-tamu/neilgautam24-tamu.github.io/main/profile.jpg" alt="Neil Gautam">
                 </div>
-                <h1 class="hero-name">Neil Gautam</h1>
-                <h2 class="hero-subtitle">MS in CS @ Texas A&M University</h2>
                 <div class="social-links">
-                    <a href="mailto:neilgautam.24@tamu.edu" title="Email"><i class="bi bi-envelope-at-fill"></i></a>
-                    <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="bi bi-mortarboard-fill"></i></a>
-                    <a href="https://github.com/neilgautam24-tamu" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
-                    <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="mailto:neilgautam.24@tamu.edu" title="Email" class="social-link"><i class="bi bi-envelope-fill"></i></a>
+                    <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ&hl=en" target="_blank" title="Google Scholar" class="social-link"><i class="bi bi-mortarboard-fill"></i></a>
+                    <a href="https://github.com/neilgautam24-tamu" target="_blank" title="GitHub" class="social-link"><i class="bi bi-github"></i></a>
+                    <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" title="LinkedIn" class="social-link"><i class="bi bi-linkedin"></i></a>
                 </div>
-                <a href="https://drive.google.com/file/d/1QFU0I7sAdPhYXPIQPxvXqwLlMdpaIhPL/view?usp=sharing" target="_blank" class="btn btn-primary"><i class="bi bi-download"></i> Download Resume</a>
+                <div class="hero-meta">
+                    <div class="meta-item"><i class="bi bi-geo-alt-fill"></i> College Station, TX</div>
+                    <div class="meta-item"><i class="bi bi-star-fill"></i> GPA 4.0 / 4.0</div>
+                </div>
             </div>
-            <div class="hero-right">
-                <h3 class="mono-heading">$ introduction</h3>
-                <div class="bio-text">
-                    <p>I am a Master's student in Computer Science at Texas A&M University, specializing in advanced areas of Deep Learning under the guidance of <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a>. My research expertise and interests are uniquely positioned at the intersection of <strong>Embodied AI</strong>, <strong>Generative Models</strong>, and <strong>Human-Centric Computer Vision</strong>. My academic and industrial experience is dedicated to translating cutting-edge techniques, such as <strong>3D Gaussian Splatting</strong> and <strong>Vision Transformers</strong>, into high-impact, generalized AI solutions across diverse domains, from autonomous systems to clinical diagnostics.</p>
-                    <p>My core research vision is twofold, focusing first on creating truly intelligent and capable agents. My primary work centers on developing generalized AI models for <strong>Egocentric driven scene understanding</strong>. This involves creating end-to-end frameworks that utilize first-person views to predict <strong>fine-grained affordance</strong>—what actions an agent can take with an object—and establish effective scene navigation strategies. This foundational work aims to empower intelligent agents to successfully execute complex, <strong>long-horizon tasks</strong> in real-world environments.</p>
-                    <p>Complementing my work in Embodied AI, I am deeply passionate about applying advanced <strong>Diffusion-based Generative models</strong> to critical problems in <strong>Biomedical Analysis</strong>. Specifically, my focus is on leveraging these powerful models for <strong>cardiac motion analysis</strong> from echocardiogram images. My contributions in this area, including the development of algorithms for synthetic data generation and precise 3D heart mesh reconstruction, are driven by the goal of developing accurate, non-invasive solutions for disease prediction and functional assessment, directly benefiting clinical diagnostics.</p>
+
+            <div class="hero-right reveal reveal-delay-1">
+                <div class="hero-tag">MS in Computer Science · Texas A&M University</div>
+                <h1 class="hero-name">Neil <span class="gradient-text">Gautam</span></h1>
+                <p class="hero-bio">
+                    I build AI that bridges the gap between perception and action — from <strong>egocentric scene understanding</strong> for embodied agents, to <strong>physics-informed generative models</strong> for clinical cardiac diagnostics. Currently pursuing my M.S. thesis under <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a> at TAMU, with concurrent research at the <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank">C2B Lab</a>.
+                </p>
+                <div class="interest-tags">
+                    <span class="itag itag-indigo"><i class="bi bi-cpu-fill"></i> Embodied AI</span>
+                    <span class="itag itag-cyan"><i class="bi bi-layers-fill"></i> Diffusion Models</span>
+                    <span class="itag itag-purple"><i class="bi bi-eye-fill"></i> Egocentric Vision</span>
+                    <span class="itag itag-teal"><i class="bi bi-box-fill"></i> 3D Gaussian Splatting</span>
+                    <span class="itag itag-pink"><i class="bi bi-heart-pulse-fill"></i> Biomedical Imaging</span>
+                    <span class="itag itag-amber"><i class="bi bi-lightning-charge-fill"></i> Physics-Informed ML</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ═══════════════════════════ EDUCATION ═══════════════════════════ -->
     <section id="education" class="section">
         <div class="container">
-            <h3 class="mono-heading">$ education</h3>
+            <div class="section-header reveal">
+                <span class="section-label">academic background</span>
+                <h2 class="section-title">Education</h2>
+            </div>
             <div class="grid-2-col">
-                <div class="edu-card">
-                    <div class="edu-header">
-                        <i class="bi bi-mortarboard-fill"></i>
-                        <h4 class="edu-degree">Master of Science in Computer Science</h4>
-                    </div>
+                <div class="edu-card reveal">
+                    <div class="edu-card-accent"></div>
+                    <div class="edu-icon-wrap"><i class="bi bi-mortarboard-fill"></i></div>
+                    <h4 class="edu-degree">M.S. in Computer Science</h4>
                     <p class="edu-university">Texas A&M University</p>
-                    <p class="edu-meta">Aug 2024 – Jun 2026 (Tentative) &bullet; GPA: 4.0/4.0</p>
-                    <p class="edu-courses-title">Relevant Courses:</p>
+                    <div class="edu-meta-row">
+                        <span class="edu-meta-pill"><i class="bi bi-calendar3"></i> Aug 2024 – May 2026</span>
+                        <span class="edu-meta-pill gpa-pill"><i class="bi bi-trophy-fill"></i> 4.0 / 4.0</span>
+                    </div>
+                    <div class="edu-divider"></div>
+                    <p class="edu-courses-label">Relevant Coursework</p>
                     <div class="edu-course-pills">
                         <span>Vision Foundation Models</span>
                         <span>ML for 3D Viz & Graphics</span>
                         <span>Generative AI</span>
+                        <span>Deep Reinforcement Learning</span>
+                        <span>Data Mining</span>
+                        <span>Distributed Systems</span>
                     </div>
                 </div>
-                <div class="edu-card">
-                     <div class="edu-header">
-                        <i class="bi bi-mortarboard"></i>
-                        <h4 class="edu-degree">Bachelor of Technology in Information Technology</h4>
-                    </div>
+                <div class="edu-card reveal reveal-delay-1">
+                    <div class="edu-card-accent edu-card-accent-2"></div>
+                    <div class="edu-icon-wrap edu-icon-wrap-2"><i class="bi bi-mortarboard"></i></div>
+                    <h4 class="edu-degree">B.Tech. in Information Technology</h4>
                     <p class="edu-university">Delhi Technological University</p>
-                    <p class="edu-meta">Aug 2018 – May 2022 &bullet; GPA: 8.6/10.0</p>
+                    <div class="edu-meta-row">
+                        <span class="edu-meta-pill"><i class="bi bi-calendar3"></i> Aug 2018 – May 2022</span>
+                        <span class="edu-meta-pill"><i class="bi bi-award-fill"></i> 8.6 / 10.0</span>
+                    </div>
+                    <div class="edu-divider"></div>
+                    <p class="edu-courses-label">Thesis & Research</p>
+                    <div class="edu-course-pills">
+                        <span>Video Understanding</span>
+                        <span>Computer Vision</span>
+                        <span>Person Re-ID</span>
+                        <span>Anomaly Detection</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ═══════════════════════════ PUBLICATIONS ═══════════════════════════ -->
     <section id="publications" class="section">
         <div class="container">
-            <h3 class="mono-heading">$ publications</h3>
-            <div class="publications-grid">
-                <div class="publication-card">
-                    <div class="publication-content">
-                        <div class="publication-title">ATAC-Net: Zoomed view works better for Anomaly Detection</div>
-                        <div class="publication-authors">Shaurya Gupta, <strong>Neil Gautam</strong>, Anurag Malyala</div>
-                        <div class="publication-venue">ICIP 2024 <span class="badge">Spotlight, Top 5%</span></div>
-                        <div class="publication-links">
-                            <a href="https://ieeexplore.ieee.org/abstract/document/10647702" target="_blank" class="btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
+            <div class="section-header reveal">
+                <span class="section-label">research output</span>
+                <h2 class="section-title">Publications</h2>
+            </div>
+
+            <p class="pub-group-label reveal">Under Review / Submitted</p>
+            <div class="publications-list">
+                <div class="pub-card reveal">
+                    <div class="pub-status-bar status-review"></div>
+                    <div class="pub-body">
+                        <div class="pub-title">EchoNet: Learning Cardiac Motion via Synthetic Ultrasound and Optical Flow from FE Simulations</div>
+                        <div class="pub-authors">T. Mukherjee, <strong>N. Gautam</strong>, et al.</div>
+                        <div class="pub-venue-row">
+                            <span class="pub-venue"><i class="bi bi-journal-medical"></i> Under Review</span>
+                            <span class="badge badge-review">Under Review</span>
                         </div>
                     </div>
                 </div>
-                <div class="publication-card">
-                    <div class="publication-content">
-                        <div class="publication-title">Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</div>
-                        <div class="publication-authors"><strong>Neil Gautam</strong>, Dr. Dinesh Kumar Vishwakarma</div>
-                        <div class="publication-venue">IEEE Transactions on Computational Social Systems (TCDS)</div>
-                        <div class="publication-links">
-                            <a href="https://ieeexplore.ieee.org/abstract/document/9733936" target="_blank" class="btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
+                <div class="pub-card reveal">
+                    <div class="pub-status-bar status-review"></div>
+                    <div class="pub-body">
+                        <div class="pub-title">NeuralMRI: AI-Enabled Cardiac Shape Reconstruction from Multi-Plane MRI</div>
+                        <div class="pub-authors">T. Mukherjee, <strong>N. Gautam</strong>, et al.</div>
+                        <div class="pub-venue-row">
+                            <span class="pub-venue"><i class="bi bi-journal-medical"></i> IEEE Transactions on Medical Imaging</span>
+                            <span class="badge badge-review">Under Review</span>
                         </div>
                     </div>
                 </div>
-                 <div class="publication-card">
-                    <div class="publication-content">
-                        <div class="publication-title">Ensemble Learning Using Vision Transformer and Convolutional Network for Person ReID</div>
-                        <div class="publication-authors">Gupta, <strong>Neil Gautam</strong>, Dr. Vishwakarma</div>
-                        <div class="publication-venue">IEEE ICCMC</div>
-                        <div class="publication-links">
-                            <a href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" class="btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
+                <div class="pub-card reveal">
+                    <div class="pub-status-bar status-review"></div>
+                    <div class="pub-body">
+                        <div class="pub-title">Rethinking the Design of Adolescent Crisis Stabilization Units: A Mixed-Methods Study Using Physical Mock-Up Simulations and AI</div>
+                        <div class="pub-authors">H. Amir, <strong>N. Gautam</strong>, et al.</div>
+                        <div class="pub-venue-row">
+                            <span class="pub-venue"><i class="bi bi-journal-medical"></i> Int. Journal for Quality in Health Care</span>
+                            <span class="badge badge-submitted">Submitted 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="pub-group-label reveal" style="margin-top: 2.5rem;">Published</p>
+            <div class="publications-list">
+                <div class="pub-card reveal">
+                    <div class="pub-status-bar status-published"></div>
+                    <div class="pub-body">
+                        <div class="pub-title">ATAC-Net: Zoomed View Works Better for Anomaly Detection</div>
+                        <div class="pub-authors">S. Gupta, <strong>N. Gautam</strong>, A. Malyala</div>
+                        <div class="pub-venue-row">
+                            <span class="pub-venue"><i class="bi bi-geo-alt-fill"></i> IEEE ICIP 2024, Abu Dhabi</span>
+                            <span class="badge badge-spotlight">★ Spotlight · Top 5%</span>
+                        </div>
+                        <div class="pub-links">
+                            <a href="https://ieeexplore.ieee.org/abstract/document/10647702" target="_blank" class="pub-btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pub-card reveal">
+                    <div class="pub-status-bar status-published"></div>
+                    <div class="pub-body">
+                        <div class="pub-title">Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</div>
+                        <div class="pub-authors"><strong>N. Gautam</strong>, Dr. D. K. Vishwakarma</div>
+                        <div class="pub-venue-row">
+                            <span class="pub-venue"><i class="bi bi-journal-code"></i> IEEE Transactions on Cognitive and Developmental Systems · Mar 2023</span>
+                        </div>
+                        <div class="pub-links">
+                            <a href="https://ieeexplore.ieee.org/abstract/document/9733936" target="_blank" class="pub-btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pub-card reveal">
+                    <div class="pub-status-bar status-published"></div>
+                    <div class="pub-body">
+                        <div class="pub-title">Ensemble Learning Using Vision Transformer and Convolutional Network for Person Re-ID</div>
+                        <div class="pub-authors">S. Gupta, <strong>N. Gautam</strong>, Dr. D. K. Vishwakarma</div>
+                        <div class="pub-venue-row">
+                            <span class="pub-venue"><i class="bi bi-journal-code"></i> IEEE ICCMC 2022</span>
+                        </div>
+                        <div class="pub-links">
+                            <a href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" class="pub-btn"><i class="bi bi-file-earmark-text"></i> Paper</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
+    <!-- ═══════════════════════════ EXPERIENCE ═══════════════════════════ -->
     <section id="experience" class="section">
         <div class="container">
-            <h3 class="mono-heading">$ experience</h3>
+            <div class="section-header reveal">
+                <span class="section-label">where i've worked</span>
+                <h2 class="section-title">Experience</h2>
+            </div>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="exp-card">
-                            <div class="exp-header">
-                                <h4 class="exp-title">Research Intern, AI4Arch</h4>
-                                <div class="exp-date">Jun 2025 – Aug 2025</div>
-                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
+                <!-- C2BL -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker timeline-marker-active">
+                        <div class="marker-pulse"></div>
+                    </div>
+                    <div class="exp-card">
+                        <div class="exp-card-header">
+                            <div class="exp-left">
+                                <div class="exp-org">C2B Lab · Texas A&M University</div>
+                                <h4 class="exp-title">Graduate Research Assistant</h4>
+                                <div class="exp-sub">Advisor: <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank">Dr. Reza Avazmohammadi</a></div>
                             </div>
-                            <div class="exp-location">Advisors: <a href="https://czhang0528.github.io/" target="_blank">Dr. Cheng Zhang</a> & Dr. Roxana Jafari &bullet; College Station, TX</div>
-                            <div class="exp-body">
-                                <ul class="exp-details">
-                                    <li>Worked on improving safety in Crisis Stabilization Units for Safe Healthcare Facility Planning using Physical Mock-up Simulations.</li>
-                                    <li>Developed multi-view based 3D human detection, tracking and behaviour anomaly prediction in real time.</li>
-                                    <li>Reconstructed Physical Mock-up in 3D from Multi-View RGB Videos & extracted SMPL mesh to observe human behaviour in the simulated environment.</li>
-                                </ul>
-                                <div class="tech-stack">
-                                    <span>Pytorch</span><span>Viser</span><span>YOLO</span><span>ONNX</span><span>OpenPose</span>
+                            <div class="exp-right">
+                                <div class="exp-date"><i class="bi bi-calendar3"></i> Sep 2024 – Present</div>
+                                <div class="exp-location"><i class="bi bi-geo-alt"></i> College Station, TX</div>
+                                <span class="exp-badge exp-badge-current">Current</span>
+                            </div>
+                        </div>
+                        <div class="exp-projects">
+                            <div class="exp-project-item">
+                                <div class="exp-project-name"><i class="bi bi-activity"></i> EchoNet — Cardiac Motion Tracking</div>
+                                <p>Built a physics-based synthetic echocardiogram pipeline from 3D electromechanical cardiac phantoms, enabling the first fully supervised training of SEA-RAFT for cardiac optical flow.</p>
+                                <div class="exp-metrics">
+                                    <span class="metric">2D EPE: 0.121 px</span>
+                                    <span class="metric">3D EPE: 0.084 mm</span>
+                                    <span class="metric">Strain MAE: 3.9×10⁻³</span>
+                                </div>
+                            </div>
+                            <div class="exp-project-item">
+                                <div class="exp-project-name"><i class="bi bi-bezier2"></i> NeuralMRI — 3D Cardiac Shape Reconstruction</div>
+                                <p>Developed a neural-field framework (hierarchical MLP + occupancy loss) to reconstruct patient-specific 3D cardiac meshes from sparse multi-planar MRI contours, enabling digital twins for subject-specific biomechanical simulation.</p>
+                                <div class="exp-metrics">
+                                    <span class="metric">Chamfer: 0.057 mm</span>
+                                    <span class="metric">Hausdorff 90th: &lt;0.1 mm</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="exp-card">
-                            <div class="exp-header">
-                                <h4 class="exp-title">Student Assistant, C2B Lab</h4>
-                                <div class="exp-date">Sep 2024 – Present</div>
-                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
-                            </div>
-                            <div class="exp-location">Advisor: <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank">Dr. Reza Avazmohammadi</a> &bullet; College Station, TX</div>
-                            <div class="exp-body">
-                                <ul class="exp-details">
-                                    <li>Designed an algorithm to generate realistic synthetic echocardiogram images from 3D cardiac point clouds using advanced scatterer modeling and anisotropic filtering.</li>
-                                    <li>Devised a Semi-Supervised Diffusion-based Image Registration Network for 2D & 3D motion tracking of a Rat’s Heart, verifying the network on baseline, 2-week, 3-month & 6-month data.</li>
-                                    <li>Developed a Geometry-aware (2D parallel slice & hierarchical sampling) Diffusion Model for precise 3D Mesh reconstruction of a Rat’s Heart.</li>
-                                </ul>
-                                <div class="tech-stack">
-                                    <span>PyTorch</span><span>Matlab</span><span>Python</span><span>Viser</span><span>PyVista</span>
-                                </div>
-                            </div>
+                        <div class="tech-stack">
+                            <span>PyTorch</span><span>Matlab</span><span>PyVista</span><span>SEA-RAFT</span><span>JAX</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="exp-card">
-                            <div class="exp-header">
-                                <h4 class="exp-title">Machine Learning Engineer-2</h4>
-                                <div class="exp-date">Nov 2023 – Jul 2024</div>
-                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
+
+                <!-- Arch4Health -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker"></div>
+                    <div class="exp-card">
+                        <div class="exp-card-header">
+                            <div class="exp-left">
+                                <div class="exp-org">Arch4Health Lab · Texas A&M University</div>
+                                <h4 class="exp-title">Research Intern</h4>
+                                <div class="exp-sub">Advisors: <a href="https://czhang0528.github.io/" target="_blank">Dr. Cheng Zhang</a> & Dr. Roxana Jafari</div>
                             </div>
-                            <div class="exp-location">AfterShoot (Manager: <a href="https://www.linkedin.com/in/nikhil-bartwal-b07b501a3/" target="_blank">Nikhil Bartwal</a>) &bullet; Delhi, India</div>
-                            <div class="exp-body">
-                                <ul class="exp-details">
-                                    <li>Spearheaded development of AI portrait enhancement and retouching, delivering features such as teeth correction, whitening, and skin retouching leveraging GANs & Diffusion Models, reducing photoshop workload from hours to minutes.</li>
-                                    <li>Engineered and deployed a U-Net based generative model that allowed generative teeth correction capabilities in portrait photos.</li>
-                                    <li>Accelerated photo editing workflow by 40% by designing RegNet backbone-based ONNX compressed lightweight models for consistent image exposure, hue, saturation, and luminance control.</li>
-                                </ul>
-                                <div class="tech-stack">
-                                    <span>Python</span><span>C++</span><span>Rust</span><span>RunPod</span><span>GCP</span><span>Azure</span><span>PyTorch</span><span>TensorFlow</span>
-                                </div>
+                            <div class="exp-right">
+                                <div class="exp-date"><i class="bi bi-calendar3"></i> Jun 2025 – Aug 2025</div>
+                                <div class="exp-location"><i class="bi bi-geo-alt"></i> College Station, TX</div>
                             </div>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Engineered a multi-view 3D human detection, tracking, and real-time anomaly prediction pipeline for patient safety in Crisis Stabilization Units (CSUs); achieved <strong>86–99% per-person detection accuracy</strong> (~91% avg.) under severe occlusion.</li>
+                            <li>Built a 3D digital-twin reconstruction system using YOLOv11, DeepSORT, and PromptHMR (CVPR 2025); integrated Gemini Pro 2.5 for adverse activity recognition — contributing to a study submitted to <em>Int. Journal for Quality in Health Care</em> (2025).</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span>PyTorch</span><span>YOLOv11</span><span>DeepSORT</span><span>PromptHMR</span><span>Gemini Pro 2.5</span><span>Viser</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="exp-card">
-                            <div class="exp-header">
+
+                <!-- AfterShoot -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker"></div>
+                    <div class="exp-card">
+                        <div class="exp-card-header">
+                            <div class="exp-left">
+                                <div class="exp-org">AfterShoot</div>
+                                <h4 class="exp-title">Machine Learning Engineer II</h4>
+                            </div>
+                            <div class="exp-right">
+                                <div class="exp-date"><i class="bi bi-calendar3"></i> Nov 2023 – Jul 2024</div>
+                                <div class="exp-location"><i class="bi bi-geo-alt"></i> Delhi, India</div>
+                            </div>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Led end-to-end production deployment of AI portrait-enhancement (teeth correction, skin retouching) using U-Net, GANs, and Diffusion Models for <strong>50,000+ professional photographers</strong> worldwide, cutting editing time from hours to under 5 minutes.</li>
+                            <li>Designed RegNet-backbone ONNX models with <strong>INT8 quantization</strong> for real-time image-parameter control on edge devices; delivered a validated <strong>40% workflow acceleration</strong> with zero perceptual quality regression.</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span>Python</span><span>C++</span><span>Rust</span><span>ONNX</span><span>TensorRT</span><span>GCP</span><span>Azure</span><span>PyTorch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Savart -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker"></div>
+                    <div class="exp-card">
+                        <div class="exp-card-header">
+                            <div class="exp-left">
+                                <div class="exp-org">Savart</div>
                                 <h4 class="exp-title">Machine Learning Engineer</h4>
-                                <div class="exp-date">Jan 2023 – Oct 2023</div>
-                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
                             </div>
-                            <div class="exp-location">Savart (Manager: <a href="https://www.linkedin.com/in/suhruth-eedara-93858412b/" target="_blank">Suhruth Eedara</a>) &bullet; Hyderabad, India</div>
-                            <div class="exp-body">
-                                 <ul class="exp-details">
-                                    <li>Fine-tuned LLAMA-2 and Alpaca models on financial annual reports that boosted qualitative company profiling capabilities, boosting equity market research efficiency from weeks to days.</li>
-                                    <li>Engineered a dynamic OCR pipeline & automated information extraction, processing more than 50K documents for corpus creation.</li>
-                                    <li>Enhanced QA accuracy by 35% through strategic optimization of reader models (RoBERTa, BART, XLM) on a novel dataset.</li>
-                                </ul>
-                                 <div class="tech-stack">
-                                    <span>Python</span><span>C++</span><span>AWS</span><span>GCP</span><span>Azure</span><span>PyTorch</span>
-                                </div>
+                            <div class="exp-right">
+                                <div class="exp-date"><i class="bi bi-calendar3"></i> Jan 2023 – Oct 2023</div>
+                                <div class="exp-location"><i class="bi bi-geo-alt"></i> Hyderabad, India</div>
                             </div>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Fine-tuned LLaMA-2 and Alpaca on proprietary financial annual reports for automated equity company profiling, cutting research turnaround from <strong>weeks to days</strong>.</li>
+                            <li>Boosted QA accuracy by <strong>35%</strong> via reader-model optimization (RoBERTa, BART, XLM-R); engineered OCR pipeline processing <strong>50,000+ documents</strong> for downstream corpus creation.</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span>Python</span><span>C++</span><span>LLaMA-2</span><span>RoBERTa</span><span>AWS</span><span>GCP</span>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="exp-card">
-                            <div class="exp-header">
+
+                <!-- HyperVerge -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker"></div>
+                    <div class="exp-card">
+                        <div class="exp-card-header">
+                            <div class="exp-left">
+                                <div class="exp-org">HyperVerge Ltd.</div>
                                 <h4 class="exp-title">Deep Learning Intern</h4>
-                                <div class="exp-date">Jul 2022 – Dec 2022</div>
-                                <div class="exp-toggle-icon"><i class="bi bi-chevron-down"></i></div>
                             </div>
-                            <div class="exp-location">HyperVerge Ltd (Supervisor: <a href="https://www.linkedin.com/in/hariprasad-p-s-162b0778/" target="_blank">Hariprasad P S</a>) &bullet; Bangalore, India</div>
-                            <div class="exp-body">
-                                <ul class="exp-details">
-                                    <li>Spearheaded R&D for an industry-leading ID tampering detection system that processes 15 million monthly requests across global markets, serving over 100 clients.</li>
-                                    <li>Developed a tampering detection system that achieved an unprecedented 98% catch rate with less than a 1% false positive rate.</li>
-                                    <li>Proposed a novel anomaly detection approach (ATAC-Net W) using a memory-based semi-supervised architecture, which was selected among the best 5% for a spotlight presentation at ICIP 2024.</li>
-                                </ul>
+                            <div class="exp-right">
+                                <div class="exp-date"><i class="bi bi-calendar3"></i> Jul 2022 – Dec 2022</div>
+                                <div class="exp-location"><i class="bi bi-geo-alt"></i> Bangalore, India</div>
                             </div>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Built a production-scale ID-tampering detection system handling <strong>15M+ monthly requests</strong> for 100+ global clients, achieving a <strong>98% catch rate</strong> at &lt;1% FPR.</li>
+                            <li>Proposed ATAC-Net, a weakly supervised attention-guided anomaly detection framework — <strong>Spotlight, Top 5% at IEEE ICIP 2024</strong>, Abu Dhabi.</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span>PyTorch</span><span>OpenCV</span><span>ONNX</span>
                         </div>
                     </div>
                 </div>
@@ -241,112 +368,181 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════ PROJECTS ═══════════════════════════ -->
     <section id="projects" class="section">
         <div class="container">
-            <h3 class="mono-heading">$ projects</h3>
-            <div class="publications-grid">
-                <div class="publication-card">
-                    <div class="publication-content">
-                        <div class="publication-title">Egocentric view driven Fine-Grained Object Interaction Trajectory & Affordance Prediction</div>
-                        <div class="publication-authors">Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a> &bullet; May 2025 - Present</div>
-                        <p class="project-desc">Developing an egocentric view driven end-to-end framework for predicting temporal future location in 3D voxel representations along with precise, fine-grained affordance trajectories to interact with objects.</p>
+            <div class="section-header reveal">
+                <span class="section-label">things i'm building</span>
+                <h2 class="section-title">Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <!-- Thesis -->
+                <div class="project-card project-card-featured reveal">
+                    <div class="project-card-glow"></div>
+                    <div class="project-top">
+                        <span class="project-badge project-badge-thesis"><i class="bi bi-award-fill"></i> M.S. Thesis</span>
+                        <div class="project-date">May 2025 – Present</div>
+                    </div>
+                    <h3 class="project-title">Moving by Dreaming: Egocentric Guided Generative Human Motion Generation</h3>
+                    <p class="project-desc">Building a guided diffusion framework for full-body human motion synthesis in 3D scenes from an egocentric view. Uses target interaction/navigation coordinates as driving signals to generate scene-aware, physically plausible body motion with fine-grained spatial control.</p>
+                    <div class="project-advisor"><i class="bi bi-person-fill"></i> Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a></div>
+                    <div class="tech-stack">
+                        <span>PyTorch</span><span>Diffusion Models</span><span>3D Scene Understanding</span><span>Egocentric Vision</span>
                     </div>
                 </div>
-                <div class="publication-card">
-                    <div class="publication-content">
-                        <div class="publication-title">HG-SCRUB: Human-Gaussian Scene Representation with Unified Baking</div>
-                        <div class="publication-authors">Advisor: Prof. Wenping Wang &bullet; Jan 2025 - May 2025</div>
-                        <p class="project-desc">Developed a framework for human and scene decomposition into separate representations from sparse video frames, learning material and physical components for relighting.</p>
-                        <div class="publication-links">
-                             <a href="https://hg-scrub.github.io/HG-SCRUB/" target="_blank" class="btn"><i class="bi bi-display"></i> Project Page</a>
-                        </div>
+
+                <!-- HG-SCRUB -->
+                <div class="project-card reveal reveal-delay-1">
+                    <div class="project-top">
+                        <div class="project-date">Jan 2025 – May 2025</div>
+                    </div>
+                    <h3 class="project-title">HG-SCRUB: Human Gaussian Splatting with Scene Relighting & Unbaking</h3>
+                    <p class="project-desc">Novel 3DGS framework for joint human–scene decomposition, explicitly learning physically-based material properties (Normals, Albedo, Roughness, Metallic) with depth-derivation-based normal gradients and Gaussian baking for indirect illumination.</p>
+                    <div class="project-advisor"><i class="bi bi-person-fill"></i> Advisor: Prof. Wenping Wang</div>
+                    <div class="project-links">
+                        <a href="https://hg-scrub.github.io/HG-SCRUB/" target="_blank" class="pub-btn"><i class="bi bi-display"></i> Project Page</a>
+                    </div>
+                    <div class="tech-stack">
+                        <span>3D Gaussian Splatting</span><span>PBR</span><span>PyTorch</span>
                     </div>
                 </div>
-                <div class="publication-card">
-                    <div class="publication-content">
-                        <div class="publication-title">Free-Generation: Training-Free Trajectory Control in Video Diffusion Models</div>
-                        <div class="publication-authors">Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a> &bullet; Aug 2024 - Dec 2024</div>
-                        <p class="project-desc">Conducted empirical research on Training-Free Trajectory Control Methods, identified critical domain shifts in Attention Block Statistics, and formulated novel normalization approaches.</p>
-                         <div class="publication-links">
-                             <a href="https://drive.google.com/file/d/1NRk8QdZimCRbG5Muhsr0HFvoEMv-Hkx1/view" target="_blank" class="btn"><i class="bi bi-filetype-pdf"></i> View PDF</a>
-                        </div>
+
+                <!-- Free-Generation -->
+                <div class="project-card reveal">
+                    <div class="project-top">
+                        <div class="project-date">Aug 2024 – Dec 2024</div>
+                    </div>
+                    <h3 class="project-title">Free-Generation: Training-Free Trajectory Control in Video Diffusion Models</h3>
+                    <p class="project-desc">Identified domain shifts in attention-block activation statistics from spatial masking in video LDMs (ZeroScope-v2 / Peekaboo). Proposed MaskNorm — a zero-parameter, training-free normalization layer restoring statistical consistency, achieving correct spatio-temporal trajectory control on DAVIS-16.</p>
+                    <div class="project-advisor"><i class="bi bi-person-fill"></i> Advisor: <a href="https://czhang0528.github.io/" target="_blank">Prof. Cheng Zhang</a></div>
+                    <div class="project-links">
+                        <a href="https://drive.google.com/file/d/1NRk8QdZimCRbG5Muhsr0HFvoEMv-Hkx1/view" target="_blank" class="pub-btn"><i class="bi bi-filetype-pdf"></i> Report</a>
+                    </div>
+                    <div class="tech-stack">
+                        <span>Latent Diffusion</span><span>Attention Analysis</span><span>PyTorch</span>
                     </div>
                 </div>
-                 <div class="publication-card">
-                    <div class="publication-content">
-                        <div class="publication-title">Multimodal Late Fusion Attention Model for Calorie Prediction</div>
-                         <p class="project-desc">Engineered a tri-modal late-fusion attention architecture integrating Conv1D, Conv2D, and MLPs to improve calorie prediction accuracy by 15% over single-modality baselines. Designed a multi-head attention mechanism and composite loss function to reduce validation loss from 0.8211 to 0.3465.</p>
-                         <div class="publication-links">
-                             <a href="https://drive.google.com/file/d/1_QW5Qesw3dvbCpgTKBvUeyqbgGz0Vppb/view?usp=sharing" target="_blank" class="btn"><i class="bi bi-filetype-pdf"></i> View PDF</a>
-                        </div>
+
+                <!-- Calorie -->
+                <div class="project-card reveal reveal-delay-1">
+                    <div class="project-top">
+                        <div class="project-date">Jan 2024 – May 2024</div>
                     </div>
-                </div>
-                <div class="publication-card">
-                    <div class="publication-content">
-                        <div class="publication-title">EventNXT - FashioNXT LLC</div>
-                        <div class="publication-authors">Ruby on Rails, Docker, AWS &bullet; Sep 2024 - Dec 2024</div>
-                        <p class="project-desc">Built a referral-reward engine that boosted ticket sales by 25%. Deployed Rails, Docker, and AWS microservices for real-time synchronization of ticketing and seat inventory systems.</p>
-                        <div class="publication-links">
-                             <a href="https://github.com/FashioNXT/EventNXT-Fall2024" target="_blank" class="btn"><i class="bi bi-github"></i> View on GitHub</a>
-                        </div>
+                    <h3 class="project-title">Multimodal Late-Fusion Attention Model for Calorie Prediction</h3>
+                    <p class="project-desc">Tri-modal late-fusion attention architecture integrating Conv1D (CGM), Conv2D (food images), and MLPs (demographics). Reduced validation loss from 0.8211 to 0.3465 — a 15% accuracy improvement over single-modality baselines on a 40-participant dataset.</p>
+                    <div class="project-links">
+                        <a href="https://drive.google.com/file/d/1_QW5Qesw3dvbCpgTKBvUeyqbgGz0Vppb/view?usp=sharing" target="_blank" class="pub-btn"><i class="bi bi-filetype-pdf"></i> Report</a>
+                    </div>
+                    <div class="tech-stack">
+                        <span>Multimodal</span><span>PyTorch</span><span>Attention</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ═══════════════════════════ SKILLS ═══════════════════════════ -->
     <section id="skills" class="section">
         <div class="container">
-            <h3 class="mono-heading">$ technical_skills</h3>
-            <div class="skill-category">
-                <h4>ML & Vision</h4>
-                <div class="skill-pills">
-                    <span>PyTorch</span><span>TensorFlow</span><span>Keras</span><span>Hugging Face</span><span>Transformers</span><span>scikit-learn</span><span>Open3D</span><span>PyVista</span><span>OpenCV</span><span>Vision Transformers</span><span>Diffusion Models</span><span>NeRF</span><span>3D Gaussian Splatting</span><span>RAG</span><span>LLAMA-2</span><span>BERT</span>
-                </div>
+            <div class="section-header reveal">
+                <span class="section-label">technical toolkit</span>
+                <h2 class="section-title">Skills</h2>
             </div>
-             <div class="skill-category">
-                <h4>Data & Visualization</h4>
-                <div class="skill-pills">
-                    <span>Pandas</span><span>Matplotlib</span><span>Viser</span><span>Rerun.io</span>
+            <div class="skills-grid">
+                <div class="skill-group reveal">
+                    <div class="skill-group-header">
+                        <i class="bi bi-cpu-fill"></i>
+                        <h4>ML & Generative</h4>
+                    </div>
+                    <div class="skill-pills skill-pills-indigo">
+                        <span>PyTorch</span><span>TensorFlow</span><span>JAX</span><span>Diffusion Models (DDPM/DDIM/Flow)</span><span>3D Gaussian Splatting</span><span>NeRF</span><span>GAN</span><span>SEA-RAFT</span><span>Hugging Face</span><span>scikit-learn</span>
+                    </div>
                 </div>
-            </div>
-            <div class="skill-category">
-                <h4>Programming Languages</h4>
-                <div class="skill-pills">
-                    <span>Python</span><span>C++</span><span>Rust</span><span>Matlab</span><span>JavaScript</span><span>Ruby</span><span>SQL</span>
+                <div class="skill-group reveal reveal-delay-1">
+                    <div class="skill-group-header">
+                        <i class="bi bi-eye-fill"></i>
+                        <h4>Vision & 3D</h4>
+                    </div>
+                    <div class="skill-pills skill-pills-cyan">
+                        <span>OpenCV</span><span>Open3D</span><span>PyVista</span><span>Rerun</span><span>Project Aria Tools</span><span>Vision Transformers</span><span>SMPL</span><span>YOLO</span><span>ONNX Runtime</span><span>TensorRT</span>
+                    </div>
                 </div>
-            </div>
-             <div class="skill-category">
-                <h4>Cloud & MLOps</h4>
-                <div class="skill-pills">
-                    <span>AWS</span><span>GCP</span><span>Azure</span><span>Docker</span><span>Git</span>
+                <div class="skill-group reveal">
+                    <div class="skill-group-header">
+                        <i class="bi bi-code-slash"></i>
+                        <h4>Languages</h4>
+                    </div>
+                    <div class="skill-pills skill-pills-purple">
+                        <span>Python</span><span>C++</span><span>CUDA</span><span>Rust</span><span>JavaScript</span><span>MATLAB</span><span>SQL</span><span>Ruby</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal reveal-delay-1">
+                    <div class="skill-group-header">
+                        <i class="bi bi-cloud-fill"></i>
+                        <h4>Cloud & MLOps</h4>
+                    </div>
+                    <div class="skill-pills skill-pills-teal">
+                        <span>AWS</span><span>GCP</span><span>Azure</span><span>Docker</span><span>Git</span><span>W&B</span><span>INT8/FP16 Quantization</span><span>Edge Optimization</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
 </main>
 
 <footer class="site-footer">
     <div class="container">
-        &copy; 2025 Neil Gautam. Built with care in College Station, TX.
+        <div class="footer-inner">
+            <span class="footer-brand">Neil Gautam</span>
+            <span class="footer-sep">·</span>
+            <span>Built in College Station, TX</span>
+            <span class="footer-sep">·</span>
+            <a href="mailto:neilgautam.24@tamu.edu">neilgautam.24@tamu.edu</a>
+        </div>
     </div>
 </footer>
 
 <script>
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('.nav-link, .nav-brand').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetElement = document.querySelector(this.getAttribute('href'));
-            if(targetElement) {
-                 targetElement.scrollIntoView({
-                    behavior: 'smooth'
+    // Scroll spy for active nav links
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
                 });
             }
         });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => observer.observe(s));
+
+    // Scroll-reveal animation
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // Nav background on scroll
+    const nav = document.getElementById('top-nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
     });
 </script>
-
 </body>
 </html>
