@@ -1,6 +1,4 @@
-/* ════════════════════════════════════════════
-   DESIGN TOKENS  —  Warm Cream Light Theme
-════════════════════════════════════════════ */
+/* DESIGN TOKENS — Warm Cream Light Theme */
 :root {
   --bg:        #fdf9f3;
   --bg-alt:    #f5f0e8;
@@ -48,7 +46,7 @@ em { font-style: italic; color: var(--t2) }
 .section    { padding: 5.5rem 0 }
 .sec-alt    { background: var(--bg-alt) }
 
-/* AMBIENT ORBS */
+/* Ambient Orbs */
 .bg-ambient { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden }
 .orb { position:absolute; border-radius:50%; filter:blur(110px) }
 .orb-1 { width:650px; height:650px; background:rgba(91,33,182,.06);  top:-220px; right:-120px; animation:drift 22s ease-in-out infinite alternate }
@@ -264,8 +262,6 @@ body { padding-top:64px }
 .pub-meta { display:flex; align-items:center; flex-wrap:wrap; gap:.5rem; margin-bottom:.65rem }
 .pub-venue { font-size:.82rem; color:var(--t2); font-style:italic; display:flex; align-items:center; gap:.3rem }
 .pub-links { display:flex; gap:.5rem }
-
-/* Badges */
 .badge {
   display:inline-flex; align-items:center; gap:.25rem;
   font-size:.68rem; font-weight:700; padding:.18rem .6rem; border-radius:20px;
@@ -283,7 +279,7 @@ body { padding-top:64px }
 }
 .btn-sm:hover { border-color:var(--violet); color:var(--violet); background:#ede9fe }
 
-/* EXPERIENCE TIMELINE */
+/* EXPERIENCE */
 .timeline { position:relative; padding-left:2rem }
 .timeline::before {
   content:''; position:absolute; left:0; top:12px; height:calc(100% - 12px); width:2px;
@@ -384,23 +380,60 @@ body { padding-top:64px }
 
 /* SKILLS */
 .skill-wrap {
-  background:var(--card); border:1.5px solid var(--border);
-  border-radius:16px; overflow:hidden;
-  box-shadow:var(--shadow-sm); padding:.5rem .5rem 0;
+  background:var(--card);
+  border:1.5px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  padding:.75rem .9rem .75rem;
 }
-.skill-legend-top { display:flex; flex-wrap:wrap; gap:1rem; padding:.75rem 1rem .5rem }
-.leg-item { display:flex; align-items:center; gap:.4rem; font-size:.78rem; font-weight:600 }
-.leg-dot  { width:10px; height:10px; border-radius:50%; display:inline-block }
-#skill-viz { width:100% }
-#skill-viz svg { display:block }
-.skill-fallback { display:none }
-.sfg { margin-bottom:1.5rem }
-.sfg h4 { font-size:.85rem; font-weight:600; color:var(--t2); margin-bottom:.75rem }
-.spills { display:flex; flex-wrap:wrap; gap:.5rem }
+.skill-legend-top {
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.1rem;
+  padding:.3rem .4rem .6rem;
+}
+.leg-item {
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:.8rem;
+}
+.leg-dot {
+  width:10px;
+  height:10px;
+  border-radius:999px;
+}
+.leg-label {
+  font-weight:600;
+  letter-spacing:.3px;
+}
+#skill-viz { width:100%; }
+#skill-viz svg { display:block; }
+.skill-caption {
+  margin:.35rem .25rem .2rem;
+  font-size:.78rem;
+  color:var(--t3);
+}
+
+/* Mobile fallback */
+.skill-fallback { display:none; }
+.sfg { margin-bottom:1.5rem; }
+.sfg h4 {
+  font-size:.85rem;
+  font-weight:600;
+  color:var(--t2);
+  margin-bottom:.75rem;
+}
+.spills { display:flex; flex-wrap:wrap; gap:.5rem; }
 .spills span {
-  font-size:.78rem; font-weight:500; background:var(--card);
-  border:1.5px solid var(--border); color:var(--t2);
-  padding:.28rem .72rem; border-radius:7px;
+  font-size:.78rem;
+  font-weight:500;
+  background:var(--card);
+  border:1.5px solid var(--border);
+  color:var(--t2);
+  padding:.28rem .72rem;
+  border-radius:7px;
 }
 
 /* FOOTER */
@@ -426,7 +459,9 @@ footer { border-top:1.5px solid var(--border); padding:2.2rem 0; background:var(
   .exp-head   { flex-direction:column; gap:.5rem }
   .exp-meta   { text-align:left }
   .exp-date, .exp-loc { justify-content:flex-start }
-  #skill-viz, .skill-legend-top, .skill-wrap { display:none }
+  #skill-viz,
+  .skill-legend-top,
+  .skill-wrap { display:none }
   .skill-fallback { display:block }
 }
 @media(max-width:480px){
