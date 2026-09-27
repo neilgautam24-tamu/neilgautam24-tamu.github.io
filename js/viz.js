@@ -637,4 +637,19 @@
   document.querySelectorAll('canvas[data-viz]').forEach(mount);
   darkMQ.addEventListener('change', () => { readColors(); mounted.forEach(m => m.draw()); });
   reduceMQ.addEventListener('change', () => mounted.forEach(m => m.update()));
+
+  // Upgrade the thesis illustration to the 3D scene (js/foresight3d.js) once it nears the
+  // viewport. three.js comes from the CDN; on any failure the 2D canvas above stays.
+  const fs = document.querySelector('canvas[data-viz="foresight"]');
+  const webgl = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch (e) { return false; } })();
+  if (fs && webgl && window.mountForesight3D) {
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js')
+        .then(THREE => window.mountForesight3D(fs.closest('.viz'), THREE, fs))
+        .catch(err => console.warn('3D illustration unavailable, keeping 2D version.', err));
+    }, { rootMargin: '600px' });
+    io.observe(fs);
+  }
 })();
