@@ -137,6 +137,41 @@ h1 { font-size: clamp(2.6rem, 6vw, 3.8rem); font-weight: 700; letter-spacing: -.
 .hero-viz .viz-toggle { bottom: auto; right: auto; top: 10px; left: 10px }
 @media (prefers-reduced-motion: reduce) { .viz-toggle { display: none } }
 
+/* 3D thesis scene overlay */
+.f3d-canvas { display: block; width: 100% }
+.f3d-ui { position: absolute; inset: 0; pointer-events: none; font-size: .78rem; color: var(--ink-2) }
+.f3d-ego {
+  position: absolute; top: 12px; left: 12px; border-radius: 10px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgb(0 0 0 / .12);
+  display: flex; align-items: flex-end; padding: 6px 8px; box-sizing: border-box;
+  font: 600 .72rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: #fff;
+  text-shadow: 0 1px 2px rgb(0 0 0 / .6);
+}
+.f3d-rec { width: 7px; height: 7px; border-radius: 50%; background: #e5484d; margin: 0 6px 1px 0; animation: f3d-blink 1.6s infinite }
+@keyframes f3d-blink { 50% { opacity: .25 } }
+.f3d-story { position: absolute; bottom: 9px; right: 50px; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 5px; text-align: right; max-width: 55% }
+.f3d-steps { list-style: none; display: inline-flex; gap: 4px; padding: 3px; margin: 0; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); counter-reset: step }
+.f3d-steps li { counter-increment: step; padding: 3px 10px; border-radius: 999px; color: var(--ink-3); font-weight: 500; transition: background .3s, color .3s }
+.f3d-steps li::before { content: counter(step) ". " }
+.f3d-steps li.on { background: var(--accent); color: var(--surface) }
+.f3d-caption { margin: 0; color: var(--ink-2); font-weight: 500; background: color-mix(in srgb, var(--bg-alt) 80%, transparent); padding: 1px 6px; border-radius: 6px }
+.f3d-goal {
+  position: absolute; transform: translate(-50%, -100%); white-space: nowrap;
+  background: var(--accent); color: var(--surface); font-weight: 600;
+  padding: 3px 9px; border-radius: 999px; transition: opacity .3s;
+}
+.f3d-legend { position: absolute; left: 110px; bottom: 13px; display: flex; gap: 14px; color: var(--ink-3) }
+.f3d-legend span::before { content: ""; display: inline-block; width: 16px; height: 0; margin-right: 6px; vertical-align: middle; border-top: 2px solid var(--ink-3) }
+.f3d-legend .lg-pred::before { border-top: 2px dashed var(--accent) }
+.f3d-legend .lg-samp::before { border-top: 1px solid var(--accent); opacity: .6 }
+@media (max-width: 720px) {
+  .f3d-story { max-width: 70% }
+  .f3d-caption, .f3d-legend { display: none }
+  .f3d-ui { font-size: .7rem }
+  .f3d-steps li { padding: 2px 7px }
+}
+@media (prefers-reduced-motion: reduce) { .f3d-rec { animation: none } }
+
 .highlights {
   list-style: none; margin-top: 56px;
   display: grid; grid-template-columns: repeat(3, 1fr);
