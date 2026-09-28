@@ -146,6 +146,50 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
 .hero-viz .viz-toggle { bottom: auto; right: auto; top: 10px; left: 10px }
 @media (prefers-reduced-motion: reduce) { .viz-toggle { display: none } }
 
+/* 3D cardiac scene (C2BL) */
+.c3d {
+  display: none; grid-template-columns: minmax(0, 1fr) 290px; margin: 26px 0 6px;
+  border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface);
+}
+.c3d.is-ready { display: grid }
+.c3d-stage {
+  position: relative; min-height: 400px;
+  background: radial-gradient(circle, var(--line) 1px, transparent 1.3px) 0 0 / 16px 16px, var(--bg);
+}
+.c3d-canvas { display: block }
+.c3d-panel { padding: 24px 22px; border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; counter-reset: c3d }
+.c3d-proj { font: 500 .7rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3); margin-bottom: 6px }
+.c3d-steps { list-style: none; display: grid; gap: 2px }
+.c3d .c3d-steps li {
+  counter-increment: c3d; margin: 0; position: relative; padding: 7px 10px 9px 38px; border-radius: 8px;
+  font-size: .9rem; font-weight: 500; color: var(--ink-3); transition: background .3s, color .3s;
+}
+.c3d-steps li::before { content: counter(c3d, decimal-leading-zero); position: absolute; left: 11px; top: 9px; font: 500 .7rem/1.4 var(--mono) }
+.c3d .c3d-steps li.on { background: var(--accent-bg); color: var(--ink) }
+.c3d-steps li.on::before { color: var(--accent) }
+.c3d-steps li.on::after {
+  content: ""; position: absolute; left: 38px; right: 12px; bottom: 5px; height: 2px; border-radius: 2px;
+  background: var(--accent); transform: scaleX(var(--p, 0)); transform-origin: left;
+}
+.c3d-caption { font-size: .86rem; line-height: 1.6; color: var(--ink-2); min-height: 6.4em }
+.c3d-metric { font-family: var(--serif); font-size: 1.7rem; line-height: 1; color: var(--ink); margin-top: auto }
+.c3d-bar { display: flex; align-items: center; gap: 8px; font: 400 .68rem/1 var(--mono); color: var(--ink-3) }
+.c3d-bar i { flex: 1; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #fcf3dd, #fdb47a, #e8595f, #9c2c7f, #3b0f70); border: 1px solid var(--line) }
+.c3d [hidden] { display: none }
+@media (max-width: 720px) {
+  .c3d.is-ready { grid-template-columns: 1fr }
+  .c3d-stage { min-height: 0; height: 320px }
+  .c3d-panel { border-left: 0; border-top: 1px solid var(--line); padding: 18px }
+  .c3d-caption { min-height: 0 }
+  .c3d-panel { gap: 12px }
+  .c3d-panel > div { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px }
+  .c3d-proj { margin: 0; min-width: 5.6rem }
+  .c3d-steps { display: flex; flex-wrap: wrap; gap: 4px }
+  .c3d .c3d-steps li { padding: 5px 10px 7px 30px; font-size: .8rem }
+  .c3d-steps li::before { left: 9px; top: 7px }
+  .c3d-steps li.on::after { left: 30px; right: 10px; bottom: 3px }
+}
+
 /* 3D thesis scene overlay */
 .f3d-canvas { display: block; width: 100% }
 .f3d-ui { position: absolute; inset: 0; pointer-events: none; font-size: .78rem; color: var(--ink-2) }
@@ -233,27 +277,89 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
 .role li::marker { color: var(--ink-3) }
 .stack { margin-top: 18px; font: 400 .75rem/1.6 var(--mono); letter-spacing: -.01em; color: var(--ink-3) }
 
+/* Collapsible roles: headers only; details open on hover (desktop) or tap/Enter */
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 44px }
+.section-head .section-title { margin-bottom: 0 }
+.expand-all {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  font: 500 .74rem/1 var(--mono); letter-spacing: .02em; color: var(--ink-3);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px;
+  transition: color .2s, border-color .2s;
+}
+.expand-all:hover { color: var(--ink); border-color: var(--ink-3) }
+html:not(.js) .expand-all, html:not(.js) .role-chev { display: none }
+
+.role-head { position: relative; align-items: flex-start }
+.role-head > div:first-child { flex: 1; min-width: 0 }
+.role-toggle { all: unset; cursor: pointer; font: inherit; color: inherit; transition: color .2s }
+.role-toggle::after { content: ""; position: absolute; inset: -12px 0 }
+.role-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px }
+.role-head a { position: relative; z-index: 1 }
+.role:hover .role-toggle, .role.open .role-toggle { color: var(--accent) }
+.role-chev {
+  flex-shrink: 0; width: 30px; height: 30px; margin-top: 1px; border-radius: 50%;
+  display: grid; place-items: center; font-size: .72rem; color: var(--ink-3);
+  border: 1px solid var(--line); transition: transform .35s ease, color .2s, border-color .2s;
+}
+.role:hover .role-chev { color: var(--ink); border-color: var(--ink-3) }
+.role.open .role-chev { transform: rotate(180deg); color: var(--accent); border-color: var(--accent) }
+
+.js .role { padding: 26px 0 }
+.js .role:first-of-type { padding-top: 0 }
+.js .role-head { margin-bottom: 0 }
+.js .role-body {
+  display: grid; grid-template-rows: 0fr; opacity: 0;
+  transition: grid-template-rows .42s cubic-bezier(.2, .7, .2, 1), opacity .3s ease;
+}
+.js .role.open .role-body { grid-template-rows: 1fr; opacity: 1 }
+.role-body-inner { min-height: 0; overflow: hidden }
+.role .role-body-inner > ul {
+  list-style: none; padding: 0; max-width: none;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px;
+}
+.role .role-body-inner > ul > li {
+  margin: 0; padding: 14px 0 0; border-top: 1px solid var(--line);
+  font-size: .95rem; line-height: 1.68; color: var(--ink-2);
+}
+.pt-label {
+  display: block; margin-bottom: 6px;
+  font: 500 .7rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--accent);
+}
+.role .stack::before { content: "Stack"; margin-right: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); opacity: .75 }
+.js .role-body-inner > :first-child { margin-top: 18px }
+.js .role-body-inner > .stack:last-child { margin-bottom: 4px }
+
 /* ── Research ───────────────────────────────────────── */
 .feature, .card {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   overflow: hidden;
 }
 .feature { margin-bottom: 20px }
-.feature-body { padding: 36px 40px 40px }
-.feature h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.75rem, 3vw, 2.3rem); letter-spacing: -.015em; line-height: 1.12; margin-bottom: 16px; max-width: 26ch }
-.feature-body > p { color: var(--ink-2); font-size: 1.02rem; line-height: 1.75; max-width: 70ch; margin-bottom: 24px }
-.feature-body > .kicker { margin-bottom: 6px }
-.feature-body > .meta-line { margin-bottom: 0 }
-
-.pipeline { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 20px }
-.pipeline li {
-  font: 400 .74rem/1.4 var(--mono); letter-spacing: -.01em; color: var(--ink-2);
-  background: var(--bg-alt); border: 1px solid var(--line);
-  padding: 7px 12px; border-radius: 8px;
+.feature-body {
+  padding: 40px; display: grid; grid-template-columns: minmax(0, 1fr) 272px; gap: 0 52px; align-items: start;
 }
-.pipeline li { position: relative; margin-right: 18px }
-.pipeline li:not(:last-child)::after { content: "→"; position: absolute; right: -19px; top: 50%; transform: translateY(-52%); color: var(--ink-3) }
-.pipeline li:last-child { margin-right: 0; background: var(--accent-bg); border-color: transparent; color: var(--accent) }
+.feature h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.75rem, 3vw, 2.3rem); letter-spacing: -.015em; line-height: 1.12; margin-bottom: 18px; max-width: 30ch }
+.feature-main > p:not(.kicker) { color: var(--ink-2); font-size: 1.02rem; line-height: 1.72; max-width: 64ch }
+.feature-main > p:not(.kicker) + p { margin-top: 10px }
+.feature-facts { display: flex; flex-wrap: wrap; gap: 14px 44px; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line) }
+.feature-facts dt, .flow-label { font: 500 .7rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); margin-bottom: 4px }
+.feature-facts dd { font-size: .95rem; color: var(--ink) }
+
+.feature-aside { padding: 22px 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-alt) }
+.flow-label { margin-bottom: 14px }
+.flow { list-style: none; counter-reset: flow; position: relative }
+.flow::before { content: ""; position: absolute; left: 11px; top: 12px; bottom: 12px; width: 1px; background: var(--line) }
+.flow li {
+  counter-increment: flow; position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 7px 0; font: 400 .8rem/1.35 var(--mono); letter-spacing: -.01em; color: var(--ink-2);
+}
+.flow li::before {
+  content: counter(flow); flex-shrink: 0; position: relative; width: 23px; height: 23px; border-radius: 50%;
+  display: grid; place-items: center; font-size: .66rem; color: var(--ink-3);
+  background: var(--surface); border: 1px solid var(--line);
+}
+.flow li:last-child { color: var(--accent); font-weight: 500 }
+.flow li:last-child::before { background: var(--accent); border-color: var(--accent); color: var(--surface) }
 
 .media { margin: 0; background: #000 }
 .media img, .media video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover }
@@ -268,17 +374,37 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
 .card .links { margin-top: auto; padding-top: 4px }
 
 /* ── Publications ───────────────────────────────────── */
-.pubs { list-style: none; margin-bottom: 44px }
+.group-title .count {
+  display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 8px; padding: 0 6px;
+  border-radius: 999px; background: var(--bg-alt); border: 1px solid var(--line); color: var(--ink-2); letter-spacing: 0;
+}
+.pubs { list-style: none; margin-bottom: 52px; border-top: 1px solid var(--line) }
 .pubs:last-child { margin-bottom: 0 }
-.pubs li { padding: 22px 0; border-top: 1px solid var(--line) }
-.pubs li:last-child { border-bottom: 1px solid var(--line) }
-.pub-title { font-size: 1.03rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.45; margin-bottom: 4px }
-.pub-authors { font-size: .92rem; color: var(--ink-2) }
-.pub-authors b { text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; text-decoration-thickness: 2px }
-.pub-venue { font-size: .92rem; color: var(--ink-3) }
-.pub-venue span:not(.pill) { font-style: italic; color: var(--ink-2) }
-.pub-venue .pill { margin-left: 8px }
-.pubs .links { margin-top: 4px }
+.pubs li {
+  display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 4px 28px; align-items: start;
+  padding: 22px 16px; margin: 0 -16px; border-bottom: 1px solid var(--line);
+  transition: background .2s;
+}
+.pubs li:hover { background: color-mix(in srgb, var(--bg-alt) 70%, transparent) }
+.pub-meta { display: flex; flex-direction: column; gap: 2px; padding-top: 3px }
+.pub-code { font: 500 .8rem/1.3 var(--mono); color: var(--ink); letter-spacing: -.01em }
+.pub-when { font: 400 .72rem/1.3 var(--mono); color: var(--ink-3) }
+.pub-title { font-size: 1.04rem; font-weight: 600; letter-spacing: -.014em; line-height: 1.42; margin-bottom: 5px; max-width: 70ch }
+.pub-authors { font-size: .9rem; color: var(--ink-2) }
+.pub-authors b { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1.5px }
+.pub-venue { font-size: .9rem; color: var(--ink-3) }
+.pub-venue span { font-style: italic; color: var(--ink-2) }
+.pub-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px }
+.pill-quiet { background: var(--bg-alt); color: var(--ink-2); border: 1px solid var(--line) }
+.pub-side { padding-top: 2px }
+.pub-link {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-size: .82rem; font-weight: 600; color: var(--ink-2);
+  padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+  transition: color .2s, border-color .2s;
+}
+.pub-link:hover { color: var(--accent); border-color: var(--accent); text-decoration: none }
+.pub-link i { font-size: .72em }
 
 /* ── Background ─────────────────────────────────────── */
 .bg-grid { display: grid; grid-template-columns: 1fr 1.35fr; gap: 56px }
@@ -328,8 +454,11 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
   .section { padding: 72px 0 }
   .section-title { margin-bottom: 32px }
   .role { padding: 28px 0 }
-  .feature-body { padding: 24px }
+  .feature-body { padding: 24px; grid-template-columns: 1fr; gap: 24px }
   .role-head { flex-direction: column; gap: 4px }
+  .role-head { padding-right: 42px }
+  .role-chev { position: absolute; top: 0; right: 0 }
+  .section-head { margin-bottom: 30px }
   .when { text-align: left; white-space: normal }
   .when br { display: none }
   .when span::before { content: " · " }
@@ -338,6 +467,10 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
   .card { padding: 22px }
   .card .media, .card .viz-media { margin: -22px -22px 6px }
   .skills { grid-template-columns: 1fr; gap: 2px }
+  .role .role-body-inner > ul { grid-template-columns: 1fr; gap: 18px }
+  .pubs li { grid-template-columns: 1fr; gap: 6px; padding: 18px 12px; margin: 0 -12px }
+  .pub-meta { flex-direction: row; gap: 8px; padding-top: 0 }
+  .pub-side { padding-top: 4px }
   .skills dt { line-height: 1.6 }
   .skills dd { margin-bottom: 12px }
   .footer-inner { flex-direction: column }
@@ -349,7 +482,8 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
 }
 
 @media print {
-  .site-header, .actions, .skip { display: none }
+  .site-header, .actions, .skip, .expand-all, .role-chev, .viz-toggle { display: none }
+  .js .role-body { grid-template-rows: 1fr; opacity: 1 }
   .section, .hero { padding: 24px 0 }
   .section-alt { background: none }
   a { color: inherit }
