@@ -8,7 +8,7 @@
 
   const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
   const darkMQ = matchMedia('(prefers-color-scheme: dark)');
-  const MONO = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+  const MONO = '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
   const TAU = Math.PI * 2;
   const C = {};
 
@@ -636,6 +636,8 @@
   readColors();
   document.querySelectorAll('canvas[data-viz]').forEach(mount);
   darkMQ.addEventListener('change', () => { readColors(); mounted.forEach(m => m.draw()); });
+  // Canvas text needs the web font; redraw still frames once it has loaded.
+  if (document.fonts) document.fonts.ready.then(() => mounted.forEach(m => m.draw()));
   reduceMQ.addEventListener('change', () => mounted.forEach(m => m.update()));
 
   // Upgrade the thesis illustration to the 3D scene (js/foresight3d.js) once it nears the
