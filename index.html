@@ -21,7 +21,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
 
@@ -139,26 +139,26 @@
         <p class="when">Jul 2026 – Dec 2026<br><span>Bedford, MA</span></p>
       </div>
       <ul>
-        <li>Stood up SUMI (Spectrum Universal Manipulation Interface) data-collection cells end to end: UMI teleoperation handle, OptiTrack motion capture, NVIDIA Jetson edge compute and multi-ZED camera streaming. Operators now use them to collect the demonstrations that train Robot Foundation Model policies on ABB industrial arms.</li>
-        <li>Calibrated OptiTrack marker constellations on the handle and across the workspace to recover exact 6-DoF handle pose, the ground-truth trajectory for every imitation-learning episode.</li>
-        <li>Derived gripper-to-camera extrinsics with ChArUco/ArUco, putting RGB observations and motion-capture trajectories in one coordinate frame for policy learning.</li>
-        <li>Built a real-time multi-pick detector that rejects multi-item grasps, and contributed to picking-policy training for thin cylindrical SKUs (cables, fasteners, pencils).</li>
+        <li>Built production-ready <strong>SUMI (Spectrum Universal Manipulation Interface) data-collection cells</strong> end to end, integrating the UMI teleoperation handle, OptiTrack/Motive motion capture, NVIDIA Jetson edge compute and multi-ZED camera streaming over Superlogics industrial hosts. Operators now use the cells to collect the demonstrations that train <strong>Robot Foundation Model (RFM)</strong> policies for ABB industrial arms.</li>
+        <li>Calibrated OptiTrack marker constellations on the SUMI handle and across the workspace to recover exact <strong>6-DoF handle pose</strong>, the ground-truth trajectory signal behind every recorded imitation-learning episode.</li>
+        <li>Derived <strong>extrinsic calibration</strong> between the tracked UMI gripper and the bottom-left/right ZED cameras (ChArUco/ArUco), resolving the OptiTrack-to-camera frame transform so RGB observations and mocap trajectories align in a single coordinate frame for policy learning.</li>
+        <li>Developed a generalized <strong>real-time multi-pick detector</strong> that rejects multi-item grasps, enforcing single-pick compliance across the production picking pipeline; contributed to picking-policy training for thin cylindrical SKUs (cables, fasteners, pencils), pushing toward <strong>100% SKU-category coverage</strong> in unstructured bins.</li>
       </ul>
-      <p class="stack">Imitation learning · OptiTrack · ZED · Jetson · ChArUco · ABB</p>
+      <p class="stack">Imitation learning · RFM · OptiTrack/Motive · ZED · Jetson · ChArUco · ABB</p>
     </article>
 
     <article class="role">
       <div class="role-head">
         <div>
           <h3>Graduate Research Assistant</h3>
-          <p class="org">Computational Cardiovascular Bioengineering Lab · Texas A&amp;M</p>
+          <p class="org">Computational Cardiovascular Bioengineering Lab (C2BL) · Texas A&amp;M</p>
           <p class="advisor">Advisor: <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank" rel="noopener">Dr. Reza Avazmohammadi</a></p>
         </div>
         <p class="when">Sep 2024 – Jul 2026<br><span>College Station, TX</span></p>
       </div>
       <ul>
-        <li><strong>EchoNet:</strong> built a physics-based synthetic ultrasound pipeline that yields pixel-exact dense optical-flow ground truth from 3D FE mesh simulations; trained SEA-RAFT on tri-planar frames and recovered full 3D volumetric motion by inverse multi-planar projection.</li>
-        <li><strong>NeuralMRI:</strong> trained a neural implicit field that reconstructs continuous 3D cardiac surfaces from sparse 2D MRI slices via coarse-to-fine sampling, producing subject-specific digital-twin meshes for physics simulation.</li>
+        <li><strong>EchoNet:</strong> built a fully supervised 2D-to-3D cardiac motion-tracking framework. An ultrasound-physics simulator renders synthetic echocardiography with <strong>pixel-exact optical-flow ground truth</strong> from FE-mesh Lagrangian correspondence, sidestepping the unannotatable-GT problem of real video. Trained SEA-RAFT on tri-planar 2D slices, a first for supervised training, and recovered full 3D volumetric displacement via inverse multi-planar projection: <strong>2D EPE 0.121 px, 3D EPE 0.084 mm</strong>.</li>
+        <li><strong>NeuralMRI:</strong> neural implicit 3D surface reconstruction (MLP + occupancy loss) from sparse 2D MRI cross-sections with coarse-to-fine hierarchical sampling, reaching <strong>Chamfer 0.057 mm and 90th-percentile Hausdorff &lt; 0.1 mm</strong>. Outperforms spline and statistical-shape-model baselines and yields subject-specific digital-twin meshes for physics simulation.</li>
       </ul>
       <p class="stack">PyTorch · JAX · SEA-RAFT · PyVista · MATLAB</p>
     </article>
@@ -173,8 +173,8 @@
         <p class="when">Jun 2025 – Aug 2025<br><span>College Station, TX</span></p>
       </div>
       <ul>
-        <li>Engineered a real-time multi-view 3D human detection, tracking and behavior-prediction pipeline for human-aware safety monitoring, reaching <strong>~91% average per-person accuracy</strong> under severe occlusion.</li>
-        <li>Built a 3D digital twin with YOLOv11, DeepSORT and PromptHMR that lifts multi-view RGB into full-body SMPL meshes, enabling collision-aware spatial reasoning and activity recognition with Gemini 2.5 Pro.</li>
+        <li>Engineered a real-time <strong>multi-view 3D human detection, tracking and behavior-prediction</strong> pipeline for patient safety in Crisis Stabilization Units, reaching <strong>86–99% per-person accuracy (avg. ~91%)</strong> under severe occlusion; the same stack carries directly to human–robot coexistence in unstructured environments.</li>
+        <li>Built a <strong>3D digital twin</strong> with YOLOv11, DeepSORT and PromptHMR (CVPR 2025) that lifts multi-view RGB into full-body SMPL meshes, enabling collision-aware spatial reasoning and adverse-activity recognition with Gemini 2.5 Pro (submitted to Int. J. Qual. Health Care).</li>
       </ul>
       <p class="stack">YOLOv11 · DeepSORT · PromptHMR · SMPL · Gemini 2.5 Pro</p>
     </article>
@@ -188,10 +188,10 @@
         <p class="when">Nov 2023 – Jul 2024<br><span>Delhi, India</span></p>
       </div>
       <ul>
-        <li>Led production deployment of AI portrait enhancement (GANs, diffusion) used by <strong>100K+ professional photographers</strong>.</li>
-        <li>Designed RegNet-backbone ONNX models with INT8 quantization for real-time image-parameter control on edge devices, delivering a validated <strong>40% faster editing workflow</strong>.</li>
+        <li>Led production deployment of AI portrait enhancement (teeth correction, skin retouching) built on GANs and diffusion models for <strong>100K+ professional photographers</strong> worldwide, cutting editing from hours to <strong>under 5 minutes per session</strong>.</li>
+        <li>Designed <strong>RegNet-backbone ONNX models with INT8 quantization</strong> for real-time image-parameter control (exposure, hue, saturation, luminance) on edge devices, delivering a validated <strong>40% workflow acceleration</strong>.</li>
       </ul>
-      <p class="stack">PyTorch · ONNX · TensorRT · INT8 · GCP</p>
+      <p class="stack">PyTorch · GANs · Diffusion · ONNX · TensorRT · INT8 · GCP</p>
     </article>
 
     <article class="role">
@@ -203,10 +203,10 @@
         <p class="when">Jan 2023 – Oct 2023<br><span>Hyderabad, India</span></p>
       </div>
       <ul>
-        <li>Built a scalable OCR and structured-extraction pipeline over <strong>50K+ financial documents</strong>.</li>
-        <li>Fine-tuned LLaMA-2 for automated equity profiling, improving QA accuracy by <strong>35%</strong>.</li>
+        <li>Fine-tuned <strong>LLaMA-2 and Alpaca</strong> on proprietary annual reports for automated equity profiling, cutting turnaround <strong>from weeks to days</strong>; raised QA accuracy by <strong>35%</strong> by optimizing RoBERTa, BART and XLM-R.</li>
+        <li>Engineered a scalable dynamic OCR and structured-extraction pipeline over <strong>50K+ financial documents</strong>, powering downstream market analysis and automated portfolio decisions.</li>
       </ul>
-      <p class="stack">LLaMA-2 · OCR · Python · AWS</p>
+      <p class="stack">LLaMA-2 · Alpaca · RoBERTa · BART · XLM-R · OCR · AWS</p>
     </article>
 
     <article class="role">
@@ -218,8 +218,8 @@
         <p class="when">Jul 2022 – Dec 2022<br><span>Bangalore, India</span></p>
       </div>
       <ul>
-        <li>Built an ID-tampering detection system serving <strong>15M+ monthly requests</strong> for 100+ clients, with a <strong>98% catch rate at &lt;1% FPR</strong>.</li>
-        <li>Proposed ATAC-Net, later a Spotlight paper (top 5%) at IEEE ICIP 2024.</li>
+        <li>Built a production-scale <strong>ID-tampering detection</strong> system serving <strong>15M monthly requests</strong> for 100+ global enterprise clients at a <strong>98% catch rate and &lt;1% FPR</strong>, securing digital onboarding at scale.</li>
+        <li>Proposed <strong>ATAC-Net</strong> for weakly supervised anomaly detection: <strong>97.3% AUROC</strong> on MVTec-AD, 98.5% on Head-CT and 97.9% on Brain-MRI, with <strong>29 ms</strong> inference (10× faster than Patch-SVDD). Spotlight, top 5% at IEEE ICIP 2024.</li>
       </ul>
       <p class="stack">PyTorch · OpenCV · ONNX</p>
     </article>
