@@ -532,4 +532,3 @@ window.mountForesight3D = function (fig, THREE, fallback) {
     });
   }
 };
-
