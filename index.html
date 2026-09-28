@@ -24,6 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
+  <script>document.documentElement.classList.add('js')</script>
 
   <script type="application/ld+json">
   {
@@ -128,100 +129,152 @@
 <!-- ── EXPERIENCE ───────────────────────────────────── -->
 <section id="experience" class="section">
   <div class="wrap">
-    <h2 class="section-title">Experience</h2>
+    <div class="section-head">
+      <h2 class="section-title">Experience</h2>
+      <button class="expand-all" type="button" aria-pressed="false">Expand all <i class="bi bi-arrows-expand" aria-hidden="true"></i></button>
+    </div>
 
     <article class="role">
       <div class="role-head">
         <div>
-          <h3>Robot Learning Intern <span class="pill pill-live">Current</span></h3>
+          <h3><button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-1-body">Robot Learning Intern</button> <span class="pill pill-live">Current</span></h3>
           <p class="org">Berkshire Grey · Research &amp; Advanced Development</p>
         </div>
-        <p class="when">Jul 2026 – Dec 2026<br><span>Bedford, MA</span></p>
+        <p class="when">Jul 2026 – Dec 2026<br><span>Boston, MA</span></p>
+        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
       </div>
-      <ul>
-        <li>Built production-ready <strong>SUMI (Spectrum Universal Manipulation Interface) data-collection cells</strong> end to end, integrating the UMI teleoperation handle, OptiTrack/Motive motion capture, NVIDIA Jetson edge compute and multi-ZED camera streaming over Superlogics industrial hosts. Operators now use the cells to collect the demonstrations that train <strong>Robot Foundation Model (RFM)</strong> policies for ABB industrial arms.</li>
-        <li>Calibrated OptiTrack marker constellations on the SUMI handle and across the workspace to recover exact <strong>6-DoF handle pose</strong>, the ground-truth trajectory signal behind every recorded imitation-learning episode.</li>
-        <li>Derived <strong>extrinsic calibration</strong> between the tracked UMI gripper and the bottom-left/right ZED cameras (ChArUco/ArUco), resolving the OptiTrack-to-camera frame transform so RGB observations and mocap trajectories align in a single coordinate frame for policy learning.</li>
-        <li>Developed a generalized <strong>real-time multi-pick detector</strong> that rejects multi-item grasps, enforcing single-pick compliance across the production picking pipeline; contributed to picking-policy training for thin cylindrical SKUs (cables, fasteners, pencils), pushing toward <strong>100% SKU-category coverage</strong> in unstructured bins.</li>
-      </ul>
-      <p class="stack">Imitation learning · RFM · OptiTrack/Motive · ZED · Jetson · ChArUco · ABB</p>
+      <div class="role-body" id="role-1-body">
+        <div class="role-body-inner">
+          <ul>
+            <li><span class="pt-label">Data-collection cells</span>Built production-ready <strong>SUMI (Spectrum Universal Manipulation Interface) data-collection cells</strong> end to end, integrating the UMI teleoperation handle, OptiTrack/Motive motion capture, NVIDIA Jetson edge compute and multi-ZED camera streaming over Superlogics industrial hosts. Operators now use the cells to collect the demonstrations that train <strong>Robot Foundation Model (RFM)</strong> policies for ABB industrial arms.</li>
+            <li><span class="pt-label">Mocap calibration</span>Calibrated OptiTrack marker constellations on the SUMI handle and across the workspace to recover exact <strong>6-DoF handle pose</strong>, the ground-truth trajectory signal behind every recorded imitation-learning episode.</li>
+            <li><span class="pt-label">Camera extrinsics</span>Derived <strong>extrinsic calibration</strong> between the tracked UMI gripper and the bottom-left/right ZED cameras (ChArUco/ArUco), resolving the OptiTrack-to-camera frame transform so RGB observations and mocap trajectories align in a single coordinate frame for policy learning.</li>
+            <li><span class="pt-label">Picking perception &amp; policy</span>Developed a generalized <strong>real-time multi-pick detector</strong> that rejects multi-item grasps, enforcing single-pick compliance across the production picking pipeline; contributed to picking-policy training for thin cylindrical SKUs (cables, fasteners, pencils), pushing toward <strong>100% SKU-category coverage</strong> in unstructured bins.</li>
+          </ul>
+          <p class="stack">Imitation learning · RFM · OptiTrack/Motive · ZED · Jetson · ChArUco · ABB</p>
+        </div>
+      </div>
     </article>
 
     <article class="role">
       <div class="role-head">
         <div>
-          <h3>Graduate Research Assistant</h3>
+          <h3><button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-2-body">Graduate Research Assistant</button></h3>
           <p class="org">Computational Cardiovascular Bioengineering Lab (C2BL) · Texas A&amp;M</p>
           <p class="advisor">Advisor: <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank" rel="noopener">Dr. Reza Avazmohammadi</a></p>
         </div>
         <p class="when">Sep 2024 – Jul 2026<br><span>College Station, TX</span></p>
+        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
       </div>
-      <ul>
-        <li><strong>EchoNet:</strong> built a fully supervised 2D-to-3D cardiac motion-tracking framework. An ultrasound-physics simulator renders synthetic echocardiography with <strong>pixel-exact optical-flow ground truth</strong> from FE-mesh Lagrangian correspondence, sidestepping the unannotatable-GT problem of real video. Trained SEA-RAFT on tri-planar 2D slices, a first for supervised training, and recovered full 3D volumetric displacement via inverse multi-planar projection: <strong>2D EPE 0.121 px, 3D EPE 0.084 mm</strong>.</li>
-        <li><strong>NeuralMRI:</strong> neural implicit 3D surface reconstruction (MLP + occupancy loss) from sparse 2D MRI cross-sections with coarse-to-fine hierarchical sampling, reaching <strong>Chamfer 0.057 mm and 90th-percentile Hausdorff &lt; 0.1 mm</strong>. Outperforms spline and statistical-shape-model baselines and yields subject-specific digital-twin meshes for physics simulation.</li>
-      </ul>
-      <p class="stack">PyTorch · JAX · SEA-RAFT · PyVista · MATLAB</p>
+      <figure class="c3d">
+        <div class="c3d-stage">
+          <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
+          <span class="viz-tag">Illustration</span>
+        </div>
+        <figcaption class="c3d-panel">
+          <div>
+            <p class="c3d-proj">EchoNet</p>
+            <ol class="c3d-steps"><li>FE simulation</li><li>Tri-planar echo</li><li>3D motion</li></ol>
+          </div>
+          <div>
+            <p class="c3d-proj">NeuralMRI</p>
+            <ol class="c3d-steps"><li>Sparse MRI → surface</li></ol>
+          </div>
+          <p class="c3d-caption"></p>
+          <p class="c3d-metric" hidden></p>
+          <div class="c3d-bar" hidden><span>|u| low</span><i></i><span>high</span></div>
+        </figcaption>
+      </figure>
+      <div class="role-body" id="role-2-body">
+        <div class="role-body-inner">
+          <ul>
+            <li><span class="pt-label">EchoNet</span>Built a fully supervised 2D-to-3D cardiac motion-tracking framework. An ultrasound-physics simulator renders synthetic echocardiography with <strong>pixel-exact optical-flow ground truth</strong> from FE-mesh Lagrangian correspondence, sidestepping the unannotatable-GT problem of real video. Trained SEA-RAFT on tri-planar 2D slices, a first for supervised training, and recovered full 3D volumetric displacement via inverse multi-planar projection: <strong>2D EPE 0.121 px, 3D EPE 0.084 mm</strong>.</li>
+            <li><span class="pt-label">NeuralMRI</span>Neural implicit 3D surface reconstruction (MLP + occupancy loss) from sparse 2D MRI cross-sections with coarse-to-fine hierarchical sampling, reaching <strong>Chamfer 0.057 mm and 90th-percentile Hausdorff &lt; 0.1 mm</strong>. Outperforms spline and statistical-shape-model baselines and yields subject-specific digital-twin meshes for physics simulation.</li>
+          </ul>
+          <p class="stack">PyTorch · JAX · SEA-RAFT · PyVista · MATLAB</p>
+        </div>
+      </div>
     </article>
 
     <article class="role">
       <div class="role-head">
         <div>
-          <h3>Research Intern</h3>
+          <h3><button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-3-body">Research Intern</button></h3>
           <p class="org">Arch4Health Lab · Texas A&amp;M</p>
           <p class="advisor">Advisors: <a href="https://czhang0528.github.io/" target="_blank" rel="noopener">Dr. Cheng Zhang</a> &amp; Dr. Roxana Jafari</p>
         </div>
         <p class="when">Jun 2025 – Aug 2025<br><span>College Station, TX</span></p>
+        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
       </div>
-      <ul>
-        <li>Engineered a real-time <strong>multi-view 3D human detection, tracking and behavior-prediction</strong> pipeline for patient safety in Crisis Stabilization Units, reaching <strong>86–99% per-person accuracy (avg. ~91%)</strong> under severe occlusion; the same stack carries directly to human–robot coexistence in unstructured environments.</li>
-        <li>Built a <strong>3D digital twin</strong> with YOLOv11, DeepSORT and PromptHMR (CVPR 2025) that lifts multi-view RGB into full-body SMPL meshes, enabling collision-aware spatial reasoning and adverse-activity recognition with Gemini 2.5 Pro (submitted to Int. J. Qual. Health Care).</li>
-      </ul>
-      <p class="stack">YOLOv11 · DeepSORT · PromptHMR · SMPL · Gemini 2.5 Pro</p>
+      <div class="role-body" id="role-3-body">
+        <div class="role-body-inner">
+          <ul>
+            <li><span class="pt-label">Multi-view 3D tracking</span>Engineered a real-time <strong>multi-view 3D human detection, tracking and behavior-prediction</strong> pipeline for patient safety in Crisis Stabilization Units, reaching <strong>86–99% per-person accuracy (avg. ~91%)</strong> under severe occlusion; the same stack carries directly to human–robot coexistence in unstructured environments.</li>
+            <li><span class="pt-label">3D digital twin</span>Built a <strong>3D digital twin</strong> with YOLOv11, DeepSORT and PromptHMR (CVPR 2025) that lifts multi-view RGB into full-body SMPL meshes, enabling collision-aware spatial reasoning and adverse-activity recognition with Gemini 2.5 Pro (submitted to Int. J. Qual. Health Care).</li>
+          </ul>
+          <p class="stack">YOLOv11 · DeepSORT · PromptHMR · SMPL · Gemini 2.5 Pro</p>
+        </div>
+      </div>
     </article>
 
     <article class="role">
       <div class="role-head">
         <div>
-          <h3>Machine Learning Engineer II</h3>
+          <h3><button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-4-body">Machine Learning Engineer II</button></h3>
           <p class="org">AfterShoot</p>
         </div>
         <p class="when">Nov 2023 – Jul 2024<br><span>Delhi, India</span></p>
+        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
       </div>
-      <ul>
-        <li>Led production deployment of AI portrait enhancement (teeth correction, skin retouching) built on GANs and diffusion models for <strong>100K+ professional photographers</strong> worldwide, cutting editing from hours to <strong>under 5 minutes per session</strong>.</li>
-        <li>Designed <strong>RegNet-backbone ONNX models with INT8 quantization</strong> for real-time image-parameter control (exposure, hue, saturation, luminance) on edge devices, delivering a validated <strong>40% workflow acceleration</strong>.</li>
-      </ul>
-      <p class="stack">PyTorch · GANs · Diffusion · ONNX · TensorRT · INT8 · GCP</p>
+      <div class="role-body" id="role-4-body">
+        <div class="role-body-inner">
+          <ul>
+            <li><span class="pt-label">Generative enhancement</span>Led production deployment of AI portrait enhancement (teeth correction, skin retouching) built on GANs and diffusion models for <strong>100K+ professional photographers</strong> worldwide, cutting editing from hours to <strong>under 5 minutes per session</strong>.</li>
+            <li><span class="pt-label">Edge inference</span>Designed <strong>RegNet-backbone ONNX models with INT8 quantization</strong> for real-time image-parameter control (exposure, hue, saturation, luminance) on edge devices, delivering a validated <strong>40% workflow acceleration</strong>.</li>
+          </ul>
+          <p class="stack">PyTorch · GANs · Diffusion · ONNX · TensorRT · INT8 · GCP</p>
+        </div>
+      </div>
     </article>
 
     <article class="role">
       <div class="role-head">
         <div>
-          <h3>Machine Learning Engineer</h3>
+          <h3><button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-5-body">Machine Learning Engineer</button></h3>
           <p class="org">Savart</p>
         </div>
         <p class="when">Jan 2023 – Oct 2023<br><span>Hyderabad, India</span></p>
+        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
       </div>
-      <ul>
-        <li>Fine-tuned <strong>LLaMA-2 and Alpaca</strong> on proprietary annual reports for automated equity profiling, cutting turnaround <strong>from weeks to days</strong>; raised QA accuracy by <strong>35%</strong> by optimizing RoBERTa, BART and XLM-R.</li>
-        <li>Engineered a scalable dynamic OCR and structured-extraction pipeline over <strong>50K+ financial documents</strong>, powering downstream market analysis and automated portfolio decisions.</li>
-      </ul>
-      <p class="stack">LLaMA-2 · Alpaca · RoBERTa · BART · XLM-R · OCR · AWS</p>
+      <div class="role-body" id="role-5-body">
+        <div class="role-body-inner">
+          <ul>
+            <li><span class="pt-label">LLM fine-tuning</span>Fine-tuned <strong>LLaMA-2 and Alpaca</strong> on proprietary annual reports for automated equity profiling, cutting turnaround <strong>from weeks to days</strong>; raised QA accuracy by <strong>35%</strong> by optimizing RoBERTa, BART and XLM-R.</li>
+            <li><span class="pt-label">Document extraction</span>Engineered a scalable dynamic OCR and structured-extraction pipeline over <strong>50K+ financial documents</strong>, powering downstream market analysis and automated portfolio decisions.</li>
+          </ul>
+          <p class="stack">LLaMA-2 · Alpaca · RoBERTa · BART · XLM-R · OCR · AWS</p>
+        </div>
+      </div>
     </article>
 
     <article class="role">
       <div class="role-head">
         <div>
-          <h3>Deep Learning Intern</h3>
+          <h3><button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-6-body">Deep Learning Intern</button></h3>
           <p class="org">HyperVerge</p>
         </div>
         <p class="when">Jul 2022 – Dec 2022<br><span>Bangalore, India</span></p>
+        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
       </div>
-      <ul>
-        <li>Built a production-scale <strong>ID-tampering detection</strong> system serving <strong>15M monthly requests</strong> for 100+ global enterprise clients at a <strong>98% catch rate and &lt;1% FPR</strong>, securing digital onboarding at scale.</li>
-        <li>Proposed <strong>ATAC-Net</strong> for weakly supervised anomaly detection: <strong>97.3% AUROC</strong> on MVTec-AD, 98.5% on Head-CT and 97.9% on Brain-MRI, with <strong>29 ms</strong> inference (10× faster than Patch-SVDD). Spotlight, top 5% at IEEE ICIP 2024.</li>
-      </ul>
-      <p class="stack">PyTorch · OpenCV · ONNX</p>
+      <div class="role-body" id="role-6-body">
+        <div class="role-body-inner">
+          <ul>
+            <li><span class="pt-label">Fraud detection at scale</span>Built a production-scale <strong>ID-tampering detection</strong> system serving <strong>15M monthly requests</strong> for 100+ global enterprise clients at a <strong>98% catch rate and &lt;1% FPR</strong>, securing digital onboarding at scale.</li>
+            <li><span class="pt-label">ATAC-Net</span>Proposed <strong>ATAC-Net</strong> for weakly supervised anomaly detection: <strong>97.3% AUROC</strong> on MVTec-AD, 98.5% on Head-CT and 97.9% on Brain-MRI, with <strong>29 ms</strong> inference (10× faster than Patch-SVDD). Spotlight, top 5% at IEEE ICIP 2024.</li>
+          </ul>
+          <p class="stack">PyTorch · OpenCV · ONNX</p>
+        </div>
+      </div>
     </article>
   </div>
 </section>
@@ -248,26 +301,26 @@
         <span class="viz-tag">Illustration</span>
       </figure>
       <div class="feature-body">
-        <p class="kicker">M.S. Thesis · May 2025 – present</p>
-        <h3>Foresight to Motion: goal-conditioned autoregressive human motion prediction from egocentric video</h3>
-        <p>
-          Predicts full-body human trajectories from a single egocentric RGB frame, conditioned on a goal point
-          or on running video, with no depth, point clouds or camera extrinsics. Predicted SMPL sequences are
-          validated in NVIDIA ProtoMotions3 and published through a ROS 2 action
-          interface.
-        </p>
-        <ol class="pipeline" aria-label="Pipeline">
-          <li>Egocentric RGB</li>
-          <li>Goal point</li>
-          <li>Autoregressive diffusion</li>
-          <li>SMPL motion</li>
-          <li>ProtoMotions3 · ROS 2</li>
-        </ol>
-        <p class="meta-line">
-          Advisor: <a href="https://czhang0528.github.io/" target="_blank" rel="noopener">Prof. Cheng Zhang</a>
-          <span class="sep">·</span> Submitted to ICLR 2027
-        </p>
-      </div>
+        <div class="feature-main">
+          <p class="kicker">M.S. Thesis · May 2025 – present</p>
+          <h3>Foresight to Motion: goal-conditioned autoregressive human motion prediction from egocentric video</h3>
+          <p>Predicts full-body human trajectories from a single egocentric RGB frame, conditioned on a goal point or on running video, with no depth, point clouds or camera extrinsics.</p>
+          <p>Predicted SMPL sequences are validated in NVIDIA ProtoMotions3 and published through a ROS 2 action interface.</p>
+          <dl class="feature-facts">
+            <div><dt>Advisor</dt><dd><a href="https://czhang0528.github.io/" target="_blank" rel="noopener">Prof. Cheng Zhang</a></dd></div>
+            <div><dt>Status</dt><dd>Submitted to ICLR 2027</dd></div>
+          </dl>
+        </div>
+        <div class="feature-aside">
+          <p class="flow-label">Pipeline</p>
+          <ol class="flow" aria-label="Pipeline">
+            <li>Egocentric RGB</li>
+            <li>Goal point</li>
+            <li>Autoregressive diffusion</li>
+            <li>SMPL motion</li>
+            <li>ProtoMotions3 · ROS 2</li>
+          </ol>
+        </div>
     </article>
 
     <div class="cards">
@@ -307,49 +360,87 @@
   <div class="wrap">
     <h2 class="section-title">Publications</h2>
 
-    <h3 class="group-title">Peer-reviewed</h3>
+    <h3 class="group-title">Under review <span class="count">4</span></h3>
     <ol class="pubs">
       <li>
-        <p class="pub-title">ATAC-Net: Zoomed View Works Better for Anomaly Detection</p>
-        <p class="pub-authors">S. Gupta, <b>N. Gautam</b>, A. Malyala</p>
-        <p class="pub-venue"><span>IEEE ICIP 2024</span>, Abu Dhabi <span class="pill">Spotlight · top 5%</span></p>
-        <p class="links"><a href="https://ieeexplore.ieee.org/abstract/document/10647702" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></p>
+        <p class="pub-meta"><span class="pub-code">ICLR</span><span class="pub-when">2026</span></p>
+        <div class="pub-main">
+          <p class="pub-title">Foresight to Motion: Goal-Conditioned Autoregressive Human Motion Prediction from Egocentric Video</p>
+          <p class="pub-authors"><b>N. Gautam</b>, Y. Li, S. Li, J. Zhu, N. Gard, C. Zhang</p>
+          <p class="pub-venue">Submitted to <span>ICLR 2027</span></p>
+          <p class="pub-tags"><span class="pill pill-quiet">First author</span></p>
+        </div>
+        <div class="pub-side">
+        </div>
       </li>
       <li>
-        <p class="pub-title">Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</p>
-        <p class="pub-authors"><b>N. Gautam</b>, D. K. Vishwakarma</p>
-        <p class="pub-venue"><span>IEEE Transactions on Cognitive and Developmental Systems</span>, 2023</p>
-        <p class="links"><a href="https://ieeexplore.ieee.org/abstract/document/9733936" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></p>
+        <p class="pub-meta"><span class="pub-code">TMI</span><span class="pub-when">2026</span></p>
+        <div class="pub-main">
+          <p class="pub-title">AI-enabled Cardiac Shape Reconstruction from Routine Magnetic Resonance Imaging</p>
+          <p class="pub-authors">T. Mukherjee, <b>N. Gautam</b>, et al.</p>
+          <p class="pub-venue">Under review at <span>IEEE Transactions on Medical Imaging</span></p>
+        </div>
+        <div class="pub-side">
+        </div>
       </li>
       <li>
-        <p class="pub-title">Ensemble Learning Using Vision Transformer and Convolutional Network for Person Re-ID</p>
-        <p class="pub-authors">S. Gupta, <b>N. Gautam</b>, D. K. Vishwakarma</p>
-        <p class="pub-venue"><span>IEEE ICCMC</span>, 2022</p>
-        <p class="links"><a href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></p>
+        <p class="pub-meta"><span class="pub-code">TBA</span><span class="pub-when">2026</span></p>
+        <div class="pub-main">
+          <p class="pub-title">EchoNet: Learning Cardiac Motion via Synthetic Ultrasound and Optical Flow from FE Simulations</p>
+          <p class="pub-authors">T. Mukherjee, <b>N. Gautam</b>, et al.</p>
+          <p class="pub-venue">Under review</p>
+        </div>
+        <div class="pub-side">
+        </div>
+      </li>
+      <li>
+        <p class="pub-meta"><span class="pub-code">IJQHC</span><span class="pub-when">2025</span></p>
+        <div class="pub-main">
+          <p class="pub-title">Rethinking the Design of Adolescent CSUs: A Mixed-Methods Study Using Physical Mock-Up Simulations and AI</p>
+          <p class="pub-authors">H. Amir, <b>N. Gautam</b>, et al.</p>
+          <p class="pub-venue">Submitted to <span>International Journal for Quality in Health Care</span>, 2025</p>
+        </div>
+        <div class="pub-side">
+        </div>
       </li>
     </ol>
 
-    <h3 class="group-title">Under review</h3>
+    <h3 class="group-title">Peer-reviewed <span class="count">3</span></h3>
     <ol class="pubs">
       <li>
-        <p class="pub-title">Foresight to Motion: Goal-Conditioned Autoregressive Human Motion Prediction from Egocentric Video</p>
-        <p class="pub-authors"><b>N. Gautam</b>, Y. Li, S. Li, J. Zhu, N. Gard, C. Zhang</p>
-        <p class="pub-venue">Submitted to <span>ICLR 2027</span></p>
+        <p class="pub-meta"><span class="pub-code">ICIP</span><span class="pub-when">2024</span></p>
+        <div class="pub-main">
+          <p class="pub-title">ATAC-Net: Zoomed View Works Better for Anomaly Detection</p>
+          <p class="pub-authors">S. Gupta, <b>N. Gautam</b>, A. Malyala</p>
+          <p class="pub-venue"><span>IEEE ICIP 2024</span>, Abu Dhabi</p>
+          <p class="pub-tags"><span class="pill">Spotlight · top 5%</span></p>
+        </div>
+        <div class="pub-side">
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/10647702" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
       </li>
       <li>
-        <p class="pub-title">AI-enabled Cardiac Shape Reconstruction from Routine Magnetic Resonance Imaging</p>
-        <p class="pub-authors">T. Mukherjee, <b>N. Gautam</b>, et al.</p>
-        <p class="pub-venue">Under review at <span>IEEE Transactions on Medical Imaging</span></p>
+        <p class="pub-meta"><span class="pub-code">TCDS</span><span class="pub-when">2023</span></p>
+        <div class="pub-main">
+          <p class="pub-title">Obscenity Detection in Videos through a Sequential ConvNet Pipeline Classifier</p>
+          <p class="pub-authors"><b>N. Gautam</b>, D. K. Vishwakarma</p>
+          <p class="pub-venue"><span>IEEE Transactions on Cognitive and Developmental Systems</span>, 2023</p>
+          <p class="pub-tags"><span class="pill pill-quiet">First author</span></p>
+        </div>
+        <div class="pub-side">
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/9733936" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
       </li>
       <li>
-        <p class="pub-title">EchoNet: Learning Cardiac Motion via Synthetic Ultrasound and Optical Flow from FE Simulations</p>
-        <p class="pub-authors">T. Mukherjee, <b>N. Gautam</b>, et al.</p>
-        <p class="pub-venue">Under review</p>
-      </li>
-      <li>
-        <p class="pub-title">Rethinking the Design of Adolescent CSUs: A Mixed-Methods Study Using Physical Mock-Up Simulations and AI</p>
-        <p class="pub-authors">H. Amir, <b>N. Gautam</b>, et al.</p>
-        <p class="pub-venue">Submitted to <span>International Journal for Quality in Health Care</span>, 2025</p>
+        <p class="pub-meta"><span class="pub-code">ICCMC</span><span class="pub-when">2022</span></p>
+        <div class="pub-main">
+          <p class="pub-title">Ensemble Learning Using Vision Transformer and Convolutional Network for Person Re-ID</p>
+          <p class="pub-authors">S. Gupta, <b>N. Gautam</b>, D. K. Vishwakarma</p>
+          <p class="pub-venue"><span>IEEE ICCMC</span>, 2022</p>
+        </div>
+        <div class="pub-side">
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
       </li>
     </ol>
   </div>
@@ -417,6 +508,41 @@
   document.querySelectorAll('.site-nav a').forEach(a =>
     a.addEventListener('click', () => { header.classList.remove('open'); btn.setAttribute('aria-expanded', false); }));
 
+  // Experience: headers only. Details open on hover (with a short delay so sweeping the
+  // mouse across the list doesn't open everything); click/tap/Enter pins a role open.
+  const roles = [...document.querySelectorAll('.role')];
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)');
+  const setOpen = (r, open) => {
+    r.classList.toggle('open', open);
+    r.querySelector('.role-toggle').setAttribute('aria-expanded', open);
+  };
+  roles.forEach(r => {
+    let timer;
+    r.querySelector('.role-head').addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      r.pinned = !r.pinned;
+      setOpen(r, r.pinned);
+    });
+    r.addEventListener('mouseenter', () => {
+      if (!canHover.matches) return;
+      clearTimeout(timer);
+      timer = setTimeout(() => setOpen(r, true), 140);
+    });
+    r.addEventListener('mouseleave', () => {
+      clearTimeout(timer);
+      if (!r.pinned) timer = setTimeout(() => setOpen(r, false), 220);
+    });
+  });
+  const expandAll = document.querySelector('.expand-all');
+  expandAll.addEventListener('click', () => {
+    const on = expandAll.getAttribute('aria-pressed') !== 'true';
+    expandAll.setAttribute('aria-pressed', on);
+    expandAll.innerHTML = on
+      ? 'Collapse all <i class="bi bi-arrows-collapse" aria-hidden="true"></i>'
+      : 'Expand all <i class="bi bi-arrows-expand" aria-hidden="true"></i>';
+    roles.forEach(r => { r.pinned = on; setOpen(r, on); });
+  });
+
   // Highlight the section in view
   const links = [...document.querySelectorAll('.site-nav a[href^="#"]')];
   const spy = new IntersectionObserver(entries => entries.forEach(e => {
@@ -425,6 +551,7 @@
   document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
 </script>
 <script src="js/foresight3d.js" defer></script>
+<script src="js/cardiac3d.js" defer></script>
 <script src="js/viz.js" defer></script>
 </body>
 </html>
