@@ -640,18 +640,24 @@
   if (document.fonts) document.fonts.ready.then(() => mounted.forEach(m => m.draw()));
   reduceMQ.addEventListener('change', () => mounted.forEach(m => m.update()));
 
-  // Upgrade the thesis illustration to the 3D scene (js/foresight3d.js) once it nears the
-  // viewport. three.js comes from the CDN; on any failure the 2D canvas above stays.
-  const fs = document.querySelector('canvas[data-viz="foresight"]');
+  // 3D scenes (js/foresight3d.js, js/cardiac3d.js) load three.js from the CDN once, when
+  // their section nears the viewport. On any failure the thesis keeps its 2D canvas and
+  // the C2BL figure stays hidden.
   const webgl = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch (e) { return false; } })();
-  if (fs && webgl && window.mountForesight3D) {
+  let threeP;
+  const three = () => (threeP ||= import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js'));
+  function lazy3D(el, mountFn) {
+    if (!el || !webgl || !mountFn) return;
     const io = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting) return;
       io.disconnect();
-      import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js')
-        .then(THREE => window.mountForesight3D(fs.closest('.viz'), THREE, fs))
-        .catch(err => console.warn('3D illustration unavailable, keeping 2D version.', err));
+      three().then(mountFn).catch(err => console.warn('3D illustration unavailable.', err));
     }, { rootMargin: '600px' });
-    io.observe(fs);
+    io.observe(el);
   }
+  const fs = document.querySelector('canvas[data-viz="foresight"]');
+  lazy3D(fs, window.mountForesight3D && (THREE => window.mountForesight3D(fs.closest('.viz'), THREE, fs)));
+  const heartFig = document.querySelector('.c3d');
+  // The figure is display:none until mounted, so watch its role card instead.
+  lazy3D(heartFig && heartFig.closest('.role'), window.mountCardiac3D && (THREE => window.mountCardiac3D(heartFig, THREE)));
 })();
