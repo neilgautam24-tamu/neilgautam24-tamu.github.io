@@ -83,7 +83,13 @@ img, video { display: block; max-width: 100% }
 .menu-btn { display: none; background: none; border: 0; color: var(--ink); font-size: 1.6rem; cursor: pointer; line-height: 1 }
 
 /* ── Hero ───────────────────────────────────────────── */
-.hero { padding: 80px 0 8px }
+.hero { padding: 80px 0 8px; position: relative; isolation: isolate }
+.hero::before {
+  content: ""; position: absolute; z-index: -1; inset: -64px 0 auto 0; height: 720px; pointer-events: none;
+  background:
+    radial-gradient(600px 360px at 18% 30%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
+    radial-gradient(520px 340px at 82% 42%, color-mix(in srgb, var(--live) 6%, transparent), transparent 70%);
+}
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 56px; align-items: center }
 .hero-top { display: flex; align-items: center; gap: 14px; margin-bottom: 22px }
 .hero-top .status { margin-bottom: 0 }
@@ -213,7 +219,7 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
   background: var(--accent); color: var(--surface); font-weight: 600;
   padding: 3px 9px; border-radius: 999px; transition: opacity .3s;
 }
-.f3d-legend { position: absolute; left: 110px; bottom: 13px; display: flex; gap: 14px; color: var(--ink-3) }
+.f3d-legend { position: absolute; left: 132px; bottom: 13px; display: flex; gap: 14px; color: var(--ink-3) }
 .f3d-legend span::before { content: ""; display: inline-block; width: 16px; height: 0; margin-right: 6px; vertical-align: middle; border-top: 2px solid var(--ink-3) }
 .f3d-legend .lg-pred::before { border-top: 2px dashed var(--accent) }
 .f3d-legend .lg-samp::before { border-top: 1px solid var(--accent); opacity: .6 }
@@ -382,10 +388,10 @@ html:not(.js) .expand-all, html:not(.js) .role-chev { display: none }
 .pubs:last-child { margin-bottom: 0 }
 .pubs li {
   display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 4px 28px; align-items: start;
-  padding: 22px 16px; margin: 0 -16px; border-bottom: 1px solid var(--line);
+  padding: 22px 0; border-bottom: 1px solid var(--line);
   transition: background .2s;
 }
-.pubs li:hover { background: color-mix(in srgb, var(--bg-alt) 70%, transparent) }
+.pubs li:hover { --tint: color-mix(in srgb, var(--bg-alt) 70%, transparent); background: var(--tint); box-shadow: -16px 0 0 var(--tint), 16px 0 0 var(--tint) }
 .pub-meta { display: flex; flex-direction: column; gap: 2px; padding-top: 3px }
 .pub-code { font: 500 .8rem/1.3 var(--mono); color: var(--ink); letter-spacing: -.01em }
 .pub-when { font: 400 .72rem/1.3 var(--mono); color: var(--ink-3) }
@@ -417,11 +423,25 @@ html:not(.js) .expand-all, html:not(.js) .role-chev { display: none }
 .skills dt { font: 500 .74rem/2.1 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3) }
 .skills dd { color: var(--ink-2) }
 
+/* ── Contact ────────────────────────────────────────── */
+.contact { position: relative; isolation: isolate; overflow: hidden }
+.contact::before {
+  content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none;
+  background: radial-gradient(700px 380px at 15% 70%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%);
+}
+.contact-line {
+  font-family: var(--serif); font-size: clamp(2rem, 4.4vw, 3.3rem); line-height: 1.08; letter-spacing: -.015em;
+  color: var(--ink); max-width: 27ch; margin-bottom: 22px;
+}
+.contact-line em { font-style: italic; color: var(--accent) }
+.contact-note { display: flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: .98rem; margin-bottom: 30px }
+
 /* ── Footer ─────────────────────────────────────────── */
 .site-footer { padding: 40px 0 48px; font-size: .88rem; color: var(--ink-3); border-top: 1px solid var(--line) }
 .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px }
 .footer-links { display: flex; gap: 18px; flex-wrap: wrap }
 .footer-links a { color: var(--ink-2) }
+.footer-name { font-family: var(--serif); font-size: 1.15rem; color: var(--ink) }
 .updated { color: var(--ink-3) }
 
 /* ── Responsive ─────────────────────────────────────── */
@@ -468,7 +488,7 @@ html:not(.js) .expand-all, html:not(.js) .role-chev { display: none }
   .card .media, .card .viz-media { margin: -22px -22px 6px }
   .skills { grid-template-columns: 1fr; gap: 2px }
   .role .role-body-inner > ul { grid-template-columns: 1fr; gap: 18px }
-  .pubs li { grid-template-columns: 1fr; gap: 6px; padding: 18px 12px; margin: 0 -12px }
+  .pubs li { grid-template-columns: 1fr; gap: 6px; padding: 18px 0 }
   .pub-meta { flex-direction: row; gap: 8px; padding-top: 0 }
   .pub-side { padding-top: 4px }
   .skills dt { line-height: 1.6 }
