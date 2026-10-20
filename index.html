@@ -22,8 +22,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="styles.css?v=20261020" rel="stylesheet">
+  <!-- three.js addons import "three" by bare name; map it to the same CDN build the scenes use -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
   <script>document.documentElement.classList.add('js')</script>
 
   <script type="application/ld+json">
@@ -45,6 +54,8 @@
   </script>
 </head>
 <body>
+<!-- Icons: Bootstrap Icons (MIT), inlined so the page needs no icon font -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z"/></symbol><symbol id="i-arrows-collapse" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8m7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0m-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0z"/></symbol><symbol id="i-arrows-expand" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10"/></symbol><symbol id="i-briefcase" viewBox="0 0 16 16"><path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/></symbol><symbol id="i-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/></symbol><symbol id="i-envelope" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/></symbol><symbol id="i-file-earmark-text" viewBox="0 0 16 16"><path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/> <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></symbol><symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></symbol><symbol id="i-linkedin" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></symbol><symbol id="i-list" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/></symbol><symbol id="i-mortarboard" viewBox="0 0 16 16"><path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z"/> <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z"/></symbol><symbol id="i-pause-fill" viewBox="0 0 16 16"><path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/></symbol><symbol id="i-play-fill" viewBox="0 0 16 16"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/></symbol></svg>
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -52,7 +63,7 @@
   <div class="wrap header-inner">
     <a href="#top" class="brand">Neil Gautam</a>
     <button class="menu-btn" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      <i class="bi bi-list" aria-hidden="true"></i>
+      <svg class="ico" aria-hidden="true"><use href="#i-list"/></svg>
     </button>
     <nav id="site-nav" class="site-nav" aria-label="Primary">
       <a href="#experience">Experience</a>
@@ -60,7 +71,7 @@
       <a href="#publications">Publications</a>
       <a href="#background">Background</a>
       <a href="#contact">Contact</a>
-      <a href="https://drive.google.com/file/d/1bw-wIVsi66ehL6xRrNbJ0DKkmdKHvrmE/view?usp=sharing" target="_blank" rel="noopener" class="nav-cta">CV <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+      <a href="https://drive.google.com/file/d/1bw-wIVsi66ehL6xRrNbJ0DKkmdKHvrmE/view?usp=sharing" target="_blank" rel="noopener" class="nav-cta">CV <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
     </nav>
   </div>
 </header>
@@ -72,7 +83,7 @@
   <div class="wrap hero-grid">
     <div class="hero-text">
       <div class="hero-top">
-        <img class="avatar" src="profile-sm.jpg" width="56" height="56" alt="Neil Gautam">
+        <img class="avatar" src="profile-avatar.jpg" width="56" height="56" alt="Neil Gautam">
         <p class="status"><span class="status-dot" aria-hidden="true"></span> Robot Learning Intern at <strong>Berkshire Grey</strong></p>
       </div>
       <h1>Neil Gautam</h1>
@@ -88,23 +99,23 @@
         deployment, backed by two years shipping ML at AfterShoot, Savart and HyperVerge.
       </p>
       <p class="seeking">
-        <i class="bi bi-briefcase" aria-hidden="true"></i>
+        <svg class="ico" aria-hidden="true"><use href="#i-briefcase"/></svg>
         Graduating December 2026. Open to full-time robot learning and ML research roles.
       </p>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:neilgautam.24@tamu.edu"><i class="bi bi-envelope" aria-hidden="true"></i> Get in touch</a>
-        <a class="btn" href="https://drive.google.com/file/d/1YKBXi3FHnpQ3yl27GCf4ft6YPnT49Qt6/view?usp=sharing" target="_blank" rel="noopener"><i class="bi bi-file-earmark-text" aria-hidden="true"></i> CV</a>
+        <a class="btn btn-primary" href="mailto:neilgautam.24@tamu.edu"><svg class="ico" aria-hidden="true"><use href="#i-envelope"/></svg> Get in touch</a>
+        <a class="btn" href="https://drive.google.com/file/d/1bw-wIVsi66ehL6xRrNbJ0DKkmdKHvrmE/view?usp=sharing" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-file-earmark-text"/></svg> CV</a>
         <span class="icon-links">
-          <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar"><i class="bi bi-mortarboard" aria-hidden="true"></i></a>
-          <a href="https://github.com/neilgautam24-tamu" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
-          <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+          <a href="https://scholar.google.com/citations?user=CUISVw8AAAAJ" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar"><svg class="ico" aria-hidden="true"><use href="#i-mortarboard"/></svg></a>
+          <a href="https://github.com/neilgautam24-tamu" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg></a>
+          <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg class="ico" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
         </span>
       </div>
     </div>
     <figure class="viz hero-viz">
       <canvas data-viz="arm" style="aspect-ratio: 400 / 304" role="img"
         aria-label="Animated illustration: a camera detects cylindrical items in a bin, a robot arm picks each one and places it in a tote, and motion-capture markers on the wrist trace its trajectory."></canvas>
-      <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
+      <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-pause-fill"/></svg></button>
       <figcaption>Illustration · detect → grasp → mocap-tracked pick-and-place</figcaption>
     </figure>
   </div>
@@ -132,7 +143,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2 class="section-title">Experience</h2>
-      <button class="expand-all" type="button" aria-pressed="false">Expand all <i class="bi bi-arrows-expand" aria-hidden="true"></i></button>
+      <button class="expand-all" type="button" aria-pressed="false">Expand all <svg class="ico" aria-hidden="true"><use href="#i-arrows-expand"/></svg></button>
     </div>
 
     <article class="role">
@@ -142,7 +153,7 @@
           <p class="org">Berkshire Grey · Research &amp; Advanced Development</p>
         </div>
         <p class="when">Jul 2026 – Dec 2026<br><span>Boston, MA</span></p>
-        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
+        <span class="role-chev" aria-hidden="true"><svg class="ico"><use href="#i-chevron-down"/></svg></span>
       </div>
       <div class="role-body" id="role-1-body">
         <div class="role-body-inner">
@@ -165,11 +176,11 @@
           <p class="advisor">Advisor: <a href="https://engineering.tamu.edu/biomedical/profiles/avazmohammadi-reza.html" target="_blank" rel="noopener">Dr. Reza Avazmohammadi</a></p>
         </div>
         <p class="when">Sep 2024 – Jul 2026<br><span>College Station, TX</span></p>
-        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
+        <span class="role-chev" aria-hidden="true"><svg class="ico"><use href="#i-chevron-down"/></svg></span>
       </div>
       <figure class="c3d">
         <div class="c3d-stage">
-          <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
+          <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-pause-fill"/></svg></button>
           <span class="viz-tag">Illustration</span>
         </div>
         <figcaption class="c3d-panel">
@@ -205,7 +216,7 @@
           <p class="advisor">Advisors: <a href="https://czhang0528.github.io/" target="_blank" rel="noopener">Dr. Cheng Zhang</a> &amp; Dr. Roxana Jafari</p>
         </div>
         <p class="when">Jun 2025 – Aug 2025<br><span>College Station, TX</span></p>
-        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
+        <span class="role-chev" aria-hidden="true"><svg class="ico"><use href="#i-chevron-down"/></svg></span>
       </div>
       <div class="role-body" id="role-3-body">
         <div class="role-body-inner">
@@ -225,7 +236,7 @@
           <p class="org">AfterShoot</p>
         </div>
         <p class="when">Nov 2023 – Jul 2024<br><span>Delhi, India</span></p>
-        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
+        <span class="role-chev" aria-hidden="true"><svg class="ico"><use href="#i-chevron-down"/></svg></span>
       </div>
       <div class="role-body" id="role-4-body">
         <div class="role-body-inner">
@@ -245,7 +256,7 @@
           <p class="org">Savart</p>
         </div>
         <p class="when">Jan 2023 – Oct 2023<br><span>Hyderabad, India</span></p>
-        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
+        <span class="role-chev" aria-hidden="true"><svg class="ico"><use href="#i-chevron-down"/></svg></span>
       </div>
       <div class="role-body" id="role-5-body">
         <div class="role-body-inner">
@@ -265,7 +276,7 @@
           <p class="org">HyperVerge</p>
         </div>
         <p class="when">Jul 2022 – Dec 2022<br><span>Bangalore, India</span></p>
-        <span class="role-chev" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
+        <span class="role-chev" aria-hidden="true"><svg class="ico"><use href="#i-chevron-down"/></svg></span>
       </div>
       <div class="role-body" id="role-6-body">
         <div class="role-body-inner">
@@ -298,7 +309,7 @@
       <figure class="viz viz-media">
         <canvas data-viz="foresight" style="aspect-ratio: 640 / 290" role="img"
           aria-label="Animated illustration: a person walks toward a goal flag. Past poses are grey, predicted future poses and sampled trajectories are drawn ahead in blue, and an inset shows the egocentric camera view approaching the goal."></canvas>
-        <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
+        <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-pause-fill"/></svg></button>
         <span class="viz-tag">Illustration</span>
       </figure>
       <div class="feature-body">
@@ -329,28 +340,28 @@
         <figure class="viz viz-media">
           <canvas data-viz="splats" style="aspect-ratio: 400 / 225" role="img"
             aria-label="Animated illustration: a human and a scene made of Gaussian splats are relit by a moving light, alternating between the composite, the human alone and the scene alone."></canvas>
-          <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
+          <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-pause-fill"/></svg></button>
           <span class="viz-tag">Illustration</span>
         </figure>
         <p class="kicker">Jan 2025 – May 2025</p>
         <h3>HG-SCRUB: human Gaussian splatting with scene relighting &amp; unbaking</h3>
         <p>A 3DGS framework for joint human–scene decomposition that learns physically based materials, using depth-derived normal gradients and Gaussian baking for indirect illumination.</p>
         <p class="meta-line">Advisor: Prof. Wenping Wang</p>
-        <p class="links"><a href="https://hg-scrub.github.io/HG-SCRUB/" target="_blank" rel="noopener">Project page <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></p>
+        <p class="links"><a href="https://hg-scrub.github.io/HG-SCRUB/" target="_blank" rel="noopener">Project page <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a></p>
       </article>
 
       <article class="card">
         <figure class="viz viz-media">
           <canvas data-viz="diffusion" style="aspect-ratio: 400 / 225" role="img"
             aria-label="Animated illustration: a noisy latent grid denoises while a bright object follows a user-drawn dashed trajectory inside a mask box."></canvas>
-          <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
+          <button class="viz-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-pause-fill"/></svg></button>
           <span class="viz-tag">Illustration</span>
         </figure>
         <p class="kicker">Aug 2024 – Dec 2024</p>
         <h3>Free-Generation: training-free trajectory control in video diffusion</h3>
         <p>Found a domain shift in attention-block activation statistics of video LDMs and proposed MaskNorm, a zero-parameter normalization layer that gives correct spatio-temporal trajectory control on DAVIS-16 without training.</p>
         <p class="meta-line">Advisor: <a href="https://czhang0528.github.io/" target="_blank" rel="noopener">Prof. Cheng Zhang</a></p>
-        <p class="links"><a href="https://drive.google.com/file/d/1NRk8QdZimCRbG5Muhsr0HFvoEMv-Hkx1/view" target="_blank" rel="noopener">Report (PDF) <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></p>
+        <p class="links"><a href="https://drive.google.com/file/d/1NRk8QdZimCRbG5Muhsr0HFvoEMv-Hkx1/view" target="_blank" rel="noopener">Report (PDF) <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a></p>
       </article>
     </div>
   </div>
@@ -417,7 +428,7 @@
           <p class="pub-tags"><span class="pill">Spotlight · top 5%</span></p>
         </div>
         <div class="pub-side">
-          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/10647702" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/10647702" target="_blank" rel="noopener">Paper <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </li>
       <li>
@@ -429,7 +440,7 @@
           <p class="pub-tags"><span class="pill pill-quiet">First author</span></p>
         </div>
         <div class="pub-side">
-          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/9733936" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/9733936" target="_blank" rel="noopener">Paper <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </li>
       <li>
@@ -440,7 +451,7 @@
           <p class="pub-venue"><span>IEEE ICCMC</span>, 2022</p>
         </div>
         <div class="pub-side">
-          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" rel="noopener">Paper <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/9753761" target="_blank" rel="noopener">Paper <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         </div>
       </li>
     </ol>
@@ -490,10 +501,10 @@
     <p class="contact-line">Building robots that learn from people, or <em>anticipate what they'll do next</em>? I'd love to hear about it.</p>
     <p class="contact-note"><span class="status-dot" aria-hidden="true"></span> Open to full-time robot learning and ML research roles from January 2027.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="mailto:neilgautam.24@tamu.edu"><i class="bi bi-envelope" aria-hidden="true"></i> neilgautam.24@tamu.edu</a>
-      <a class="btn" href="https://drive.google.com/file/d/1YKBXi3FHnpQ3yl27GCf4ft6YPnT49Qt6/view?usp=sharing" target="_blank" rel="noopener"><i class="bi bi-file-earmark-text" aria-hidden="true"></i> CV</a>
-      <a class="btn" href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" rel="noopener"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
-      <a class="btn" href="https://scholar.google.com/citations?user=CUISVw8AAAAJ" target="_blank" rel="noopener"><i class="bi bi-mortarboard" aria-hidden="true"></i> Scholar</a>
+      <a class="btn btn-primary" href="mailto:neilgautam.24@tamu.edu"><svg class="ico" aria-hidden="true"><use href="#i-envelope"/></svg> neilgautam.24@tamu.edu</a>
+      <a class="btn" href="https://drive.google.com/file/d/1bw-wIVsi66ehL6xRrNbJ0DKkmdKHvrmE/view?usp=sharing" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-file-earmark-text"/></svg> CV</a>
+      <a class="btn" href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-linkedin"/></svg> LinkedIn</a>
+      <a class="btn" href="https://scholar.google.com/citations?user=CUISVw8AAAAJ" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-mortarboard"/></svg> Scholar</a>
     </div>
   </div>
 </section>
@@ -509,6 +520,7 @@
       <a href="https://www.linkedin.com/in/neil-gautam-a928971a5/" target="_blank" rel="noopener">LinkedIn</a>
       <span class="updated">Updated Sep 2026</span>
     </p>
+    <p class="credits">3D models: human body from <a href="https://github.com/naver/anny" target="_blank" rel="noopener">Anny</a> (NAVER LABS Europe, Apache-2.0) on the SMPL-X kinematic tree · <a href="https://github.com/google-deepmind/mujoco_menagerie/tree/main/unitree_g1" target="_blank" rel="noopener">Unitree G1</a> model © Unitree Robotics, BSD-3-Clause (<a href="models/LICENSE-unitree-g1.txt">license</a>)</p>
   </div>
 </footer>
 
@@ -554,8 +566,8 @@
     const on = expandAll.getAttribute('aria-pressed') !== 'true';
     expandAll.setAttribute('aria-pressed', on);
     expandAll.innerHTML = on
-      ? 'Collapse all <i class="bi bi-arrows-collapse" aria-hidden="true"></i>'
-      : 'Expand all <i class="bi bi-arrows-expand" aria-hidden="true"></i>';
+      ? 'Collapse all <svg class="ico" aria-hidden="true"><use href="#i-arrows-collapse"/></svg>'
+      : 'Expand all <svg class="ico" aria-hidden="true"><use href="#i-arrows-expand"/></svg>';
     roles.forEach(r => { r.pinned = on; setOpen(r, on); });
   });
 
@@ -566,8 +578,9 @@
   }), { rootMargin: '-45% 0px -50% 0px' });
   document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
 </script>
-<script src="js/foresight3d.js" defer></script>
-<script src="js/cardiac3d.js" defer></script>
-<script src="js/viz.js" defer></script>
+<script src="js/arm3d.js?v=20261020" defer></script>
+<script src="js/foresight3d.js?v=20261020" defer></script>
+<script src="js/cardiac3d.js?v=20261020" defer></script>
+<script src="js/viz.js?v=20261020" defer></script>
 </body>
 </html>

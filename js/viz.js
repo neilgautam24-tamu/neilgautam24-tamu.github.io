@@ -626,7 +626,7 @@
         st.paused = !st.paused;
         btn.setAttribute('aria-pressed', st.paused);
         btn.setAttribute('aria-label', st.paused ? 'Play animation' : 'Pause animation');
-        btn.innerHTML = `<i class="bi bi-${st.paused ? 'play' : 'pause'}-fill" aria-hidden="true"></i>`;
+        btn.innerHTML = `<svg class="ico" aria-hidden="true"><use href="#i-${st.paused ? 'play' : 'pause'}-fill"/></svg>`;
         update();
       });
     }
@@ -643,21 +643,93 @@
   // 3D scenes (js/foresight3d.js, js/cardiac3d.js) load three.js from the CDN once, when
   // their section nears the viewport. On any failure the thesis keeps its 2D canvas and
   // the C2BL figure stays hidden.
-  const webgl = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch (e) { return false; } })();
+  // feature check without creating a probe context (a probe would hold GPU memory until GC);
+  // if the real context can't be created, the scene's mount throws and the fallback stays.
+  const webgl = 'WebGL2RenderingContext' in window;
   let threeP;
-  const three = () => (threeP ||= import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js'));
+  const three = () => (threeP ||= import('three')); // resolved by the import map in index.html
+  // Adaptive resolution shared by the 3D scenes: start sharp, and if a device can't hold
+  // ~45 fps, step the pixel ratio down (never below 1). It never steps back up, so it can't oscillate.
+  window.vizGovernor = (maxDpr, apply) => {
+    const g = { dpr: Math.min(window.devicePixelRatio || 1, maxDpr) };
+    let acc = 0, n = 0, warm = 45;
+    g.tick = dt => {
+      if (warm-- > 0) return; // skip shader compilation and first-frame hitches
+      acc += dt; n++;
+      if (acc < 1.5) return;
+      const avg = acc / n; acc = 0; n = 0;
+      if (avg > 1 / 45 && g.dpr > 1) { g.dpr = Math.max(1, g.dpr - 0.25); apply(); }
+    };
+    return g;
+  };
+
+  // One WebGL context for every 3D scene. Each scene draws into a region of this offscreen
+  // canvas and copies the frame into its own lightweight 2D canvas on the page. Compared with
+  // one WebGL renderer per scene, this keeps a single antialiased drawing buffer, a single
+  // shader cache and a single reflection map, which cuts browser memory several-fold.
+  let shared = null;
+  window.vizShared = THREE => shared || (shared = (() => {
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(1); // sizes below are already in device pixels
+    renderer.setClearColor(0x000000, 0);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    let cw = 0, ch = 0, env = null;
+    return {
+      renderer,
+      // studio reflection map, built once and shared
+      env(RoomEnvironment) {
+        if (!env && RoomEnvironment) {
+          const pm = new THREE.PMREMGenerator(renderer), room = new RoomEnvironment();
+          env = pm.fromScene(room, 0.04).texture;
+          pm.dispose();
+          if (room.dispose) room.dispose();
+        }
+        return env;
+      },
+      // Render a w×h frame (device px) and copy it into `target`. pass(vp) issues the render
+      // calls; vp(x, y, w, h) selects a sub-rectangle measured from the frame's top-left.
+      frame(target, ctx, exposure, pass) {
+        const w = target.width, h = target.height;
+        if (w > cw || h > ch) { cw = Math.max(cw, w); ch = Math.max(ch, h); renderer.setSize(cw, ch, false); }
+        renderer.toneMappingExposure = exposure;
+        renderer.setScissorTest(true);
+        pass((x, y, ww, hh) => { renderer.setViewport(x, ch - y - hh, ww, hh); renderer.setScissor(x, ch - y - hh, ww, hh); });
+        renderer.setScissorTest(false);
+        ctx.globalCompositeOperation = 'copy';
+        ctx.drawImage(renderer.domElement, 0, 0, w, h, 0, 0, w, h);
+      },
+    };
+  })());
+  const idle = window.requestIdleCallback || (f => setTimeout(f, 200));
   function lazy3D(el, mountFn) {
     if (!el || !webgl || !mountFn) return;
     const io = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting) return;
       io.disconnect();
-      three().then(mountFn).catch(err => console.warn('3D illustration unavailable.', err));
+      // load once the page is idle, so the 3D never delays first paint (the 2D sketch shows meanwhile)
+      idle(() => three().then(mountFn).catch(err => console.warn('3D illustration unavailable.', err)), { timeout: 1500 });
     }, { rootMargin: '600px' });
     io.observe(el);
   }
   const fs = document.querySelector('canvas[data-viz="foresight"]');
-  lazy3D(fs, window.mountForesight3D && (THREE => window.mountForesight3D(fs.closest('.viz'), THREE, fs)));
+  lazy3D(fs, window.mountForesight3D && (THREE => Promise.all([
+    import('three/addons/environments/RoomEnvironment.js'),
+    import('three/addons/geometries/RoundedBoxGeometry.js'),
+    import('three/addons/utils/BufferGeometryUtils.js'),
+  ]).then(([env, rb, bgu]) => window.mountForesight3D(fs.closest('.viz'), THREE, fs,
+    { RoomEnvironment: env.RoomEnvironment, RoundedBoxGeometry: rb.RoundedBoxGeometry, toCreasedNormals: bgu.toCreasedNormals }))));
+  const armCanvas = document.querySelector('canvas[data-viz="arm"]');
+  lazy3D(armCanvas, window.mountArm3D && (THREE => Promise.all([
+    import('three/addons/environments/RoomEnvironment.js'),
+    import('three/addons/geometries/RoundedBoxGeometry.js'),
+    import('three/addons/controls/OrbitControls.js'),
+  ]).then(([env, rb, oc]) => window.mountArm3D(armCanvas.closest('.viz'), THREE,
+    { RoomEnvironment: env.RoomEnvironment, RoundedBoxGeometry: rb.RoundedBoxGeometry, OrbitControls: oc.OrbitControls }, armCanvas))));
   const heartFig = document.querySelector('.c3d');
   // The figure is display:none until mounted, so watch its role card instead.
-  lazy3D(heartFig && heartFig.closest('.role'), window.mountCardiac3D && (THREE => window.mountCardiac3D(heartFig, THREE)));
+  lazy3D(heartFig && heartFig.closest('.role'), window.mountCardiac3D && (THREE =>
+    import('three/addons/environments/RoomEnvironment.js').then(env => window.mountCardiac3D(heartFig, THREE, { RoomEnvironment: env.RoomEnvironment }))));
 })();

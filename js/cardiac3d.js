@@ -1,15 +1,20 @@
 /*
  * 3D illustration for the C2BL research (EchoNet + NeuralMRI).
- * Loaded lazily by viz.js, which passes in three.js from the CDN.
+ * Loaded lazily by viz.js, which passes in three.js (and RoomEnvironment) from the CDN.
+ *
+ * An anatomical left ventricle: D-shaped cross-section, tilted base, trabeculated
+ * endocardium with two papillary muscles, coronary vessels and epicardial fat, and a
+ * cutaway that exposes the wall with its helical fibre architecture.
  *
  * Four stages on a loop:
- *   1. FE simulation    beating left ventricle; Lagrangian material points trace their paths
+ *   1. FE simulation    beating ventricle; fibre streamlines, element edges, Lagrangian points
  *   2. Tri-planar echo  three apical planes show the wall contour and in-plane optical flow
  *   3. 3D motion        full 3D displacement, as a heatmap and vectors on the surface
  *   4. MRI → surface    sparse MRI slices → hierarchical occupancy samples → coarse-to-fine surface
  */
-window.mountCardiac3D = function (fig, THREE) {
+window.mountCardiac3D = function (fig, THREE, addons) {
   'use strict';
+  addons = addons || {};
 
   const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
   const darkMQ = matchMedia('(prefers-color-scheme: dark)');
@@ -18,6 +23,8 @@ window.mountCardiac3D = function (fig, THREE) {
   const lerp = (a, b, s) => a + (b - a) * s;
   const smooth = s => s * s * (3 - 2 * s);
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
+  const gauss = (x, w) => Math.exp(-(x * x) / (w * w));
+  const angDiff = (a, b) => Math.atan2(Math.sin(a - b), Math.cos(a - b));
 
   const STAGES = [
     { dur: 4.2, cap: 'A finite-element simulation drives the heart. Lagrangian material points give every tissue point an exact trajectory.', metric: '' },
@@ -31,9 +38,11 @@ window.mountCardiac3D = function (fig, THREE) {
   // Per-stage targets; values cross-fade over the first 0.7 s of each stage.
   const TGT = {
     heart:   [1, 1, 1, 0],
-    epi:     [0.34, 0.16, 0.97, 0],
+    epi:     [1, 0.22, 1, 0],
     heat:    [0, 0, 1, 0],
     markers: [1, 0, 0, 0],
+    fibres:  [1, 0, 0, 0],
+    vessels: [1, 0.2, 0, 0],
     planes:  [0, 1, 0, 0],
     arrows:  [0, 0, 1, 0],
     beat:    [1, 1, 1, 0],
@@ -42,53 +51,81 @@ window.mountCardiac3D = function (fig, THREE) {
 
   // ── Renderer ───────────────────────────────────────────
   const stage = fig.querySelector('.c3d-stage');
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
-  renderer.setClearColor(0x000000, 0);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  const canvas = renderer.domElement;
+  const shared = window.vizShared(THREE), renderer = shared.renderer; // one WebGL context for all scenes
+  const canvas = document.createElement('canvas');
+  const ctx2d = canvas.getContext('2d');
   canvas.className = 'c3d-canvas';
   canvas.setAttribute('role', 'img');
-  canvas.setAttribute('aria-label', 'Animated 3D illustration of a beating left ventricle: finite-element material points trace their motion, three echo planes show optical flow, the surface is colored by 3D displacement, and finally a surface is reconstructed coarse-to-fine from sparse MRI slices.');
+  canvas.setAttribute('aria-label', 'Animated 3D illustration of a beating left ventricle with a cutaway showing the wall, its muscle fibres and papillary muscles: finite-element material points trace their motion, three echo planes show optical flow, the surface is colored by 3D displacement, and finally a surface is reconstructed coarse-to-fine from sparse MRI slices.');
   stage.prepend(canvas);
 
   const scene = new THREE.Scene();
-  const cam = new THREE.PerspectiveCamera(32, 1.6, 0.1, 50);
+  if (addons.RoomEnvironment) {
+    scene.environment = shared.env(addons.RoomEnvironment);
+    scene.environmentIntensity = 0.55;
+  }
+  const cam = new THREE.PerspectiveCamera(30, 1.6, 0.1, 50);
   const root = new THREE.Group();
-  root.rotation.z = 0.32;
+  root.rotation.z = 0.3;
   scene.add(root);
 
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x9a8f86, 1.6));
-  const key = new THREE.DirectionalLight(0xffffff, 2.2);
-  key.position.set(3, 5, 4);
+  scene.add(new THREE.HemisphereLight(0xfff4ee, 0x5a4440, 0.9));
+  const key = new THREE.DirectionalLight(0xfff1e6, 2.6);
+  key.position.set(2.5, 4.5, 4);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xbcd0ff, 1.2);
-  rim.position.set(-4, 2, -3);
+  const fill = new THREE.DirectionalLight(0xffd9cf, 0.7);
+  fill.position.set(-4, 1, 2);
+  scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xc8d6ff, 1.6);
+  rim.position.set(-2, 3, -5);
   scene.add(rim);
 
   // ── Left-ventricle model ───────────────────────────────
-  // Truncated prolate spheroids for endocardium (layer 0) and epicardium (layer 1).
+  // (u, v): u ∈ [0, U_MAX] apex → base, v ∈ [0, 2π) around the long axis.
   // s ∈ [0, 1] is contraction: wall thickening, base descent and apex-to-base twist.
-  const U_MAX = 0.6 * Math.PI, NU = 36, NV = 64;
+  const U_MAX = 0.6 * Math.PI, NU = 72, NV = 176;
   const DIMS = [{ a: 0.62, c: 1.32, k: 0.3 }, { a: 0.95, c: 1.55, k: 0.08 }];
-  const Y_OFF = 0.53; // recentre the heart vertically
+  const Y_OFF = 0.53;                // recentre the heart vertically
+  const V_CUT = Math.PI / 2 - 0.6;   // cutaway centred on the side that faces the camera
+  const CUT_HALF = 0.62;
+  const V0 = V_CUT + CUT_HALF, V_SPAN = TAU - 2 * CUT_HALF;
+  const vWall = f => V0 + f * V_SPAN; // wall parameter (skips the cutaway wedge)
+  const inCut = v => Math.abs(angDiff(v, V_CUT)) < CUT_HALF;
+  const hOf = u => (1 - Math.cos(u)) / (1 - Math.cos(U_MAX));
+  const uOf = h => Math.acos(1 - h * (1 - Math.cos(U_MAX)));
+  const PAP = [V_CUT + 0.15, V_CUT + 2.35]; // papillary muscles (one visible through the cut)
+
   function lv(layer, u, v, s, out, twist = true) {
     const d = DIMS[layer];
-    const a = d.a * (1 - d.k * s);
-    const h = (1 - Math.cos(u)) / (1 - Math.cos(U_MAX));
+    const h = hOf(u);
+    // D-shaped section: flatter septum (v ≈ π + V_CUT), fuller free wall
+    let a = d.a * (1 - d.k * s) * (1 + 0.05 * Math.cos(v - V_CUT) - 0.035 * Math.cos(2 * (v - V_CUT)));
+    if (layer === 0) {
+      // trabeculae carneae: fine longitudinal ridges, strongest toward the apex
+      const ridge = Math.pow(0.5 + 0.5 * Math.cos(11 * v + 4 * h), 6) + 0.6 * Math.pow(0.5 + 0.5 * Math.cos(17 * v - 3 * h + 1), 8);
+      a *= 1 - 0.045 * ridge * (1 - h) ** 0.6 * (h > 0.04 ? 1 : h / 0.04);
+      // two papillary muscles bulging into the cavity between the apical third and mid-ventricle
+      const band = smooth(clamp((h - 0.12) / 0.12, 0, 1)) * (1 - smooth(clamp((h - 0.5) / 0.18, 0, 1)));
+      PAP.forEach(vp => { a *= 1 - 0.3 * band * gauss(angDiff(v, vp), 0.2) * (1 + 0.3 * s); });
+    } else {
+      a *= 1 + 0.01 * Math.sin(5 * v + 6 * h) * Math.sin(Math.PI * h);
+    }
     const vv = twist ? v + 0.24 * s * (h - 0.35) : v;
     const r = a * Math.sin(u);
     const y0 = -d.c * Math.cos(u);
-    const y = -d.c + (y0 + d.c) * (1 - 0.13 * s);
+    // tilted, non-planar base (the mitral–aortic annulus is not flat)
+    const tilt = Math.pow(h, 5) * (0.1 * Math.cos(v - V_CUT - 0.8) + 0.03 * Math.cos(2 * v));
+    const y = -d.c + (y0 + d.c) * (1 - 0.13 * s) + tilt;
     return out.set(r * Math.cos(vv), y + Y_OFF, r * Math.sin(vv));
   }
   const REST_BASE = lv(1, U_MAX, 0, 0, V(0, 0, 0)).y;
 
-  function gridGeo(nu, nv) {
+  function gridGeo(nu, nv, uv = false) {
     const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array((nu + 1) * (nv + 1) * 3), 3));
-    geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array((nu + 1) * (nv + 1) * 3), 3));
+    const n = (nu + 1) * (nv + 1);
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 3), 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(n * 3), 3));
+    if (uv) geo.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(n * 2), 2));
     const idx = [];
     for (let i = 0; i < nu; i++) for (let j = 0; j < nv; j++) {
       const a = i * (nv + 1) + j, b = a + nv + 1;
@@ -97,25 +134,56 @@ window.mountCardiac3D = function (fig, THREE) {
     geo.setIndex(idx);
     return geo;
   }
-  function fillGrid(geo, layer, nu, nv, s, colorFn) {
+  function fillGrid(geo, layer, nu, nv, s, colorFn, vmap = f => f * TAU) {
     const P = geo.attributes.position.array, Cc = geo.attributes.color.array, p = V(0, 0, 0);
-    let n = 0;
-    for (let i = 0; i <= nu; i++) for (let j = 0; j <= nv; j++, n += 3) {
-      lv(layer, (i / nu) * U_MAX, (j / nv) * TAU, s, p);
+    let n = 0, k = 0;
+    for (let i = 0; i <= nu; i++) for (let j = 0; j <= nv; j++, n += 3, k++) {
+      lv(layer, (i / nu) * U_MAX, vmap(j / nv), s, p);
       P[n] = p.x; P[n + 1] = p.y; P[n + 2] = p.z;
-      if (colorFn) colorFn(i / nu, j / nv, Cc, n);
+      if (colorFn) colorFn(i / nu, j / nv, Cc, n, k);
     }
     geo.attributes.position.needsUpdate = true;
     geo.attributes.color.needsUpdate = true;
     geo.computeVertexNormals();
   }
 
+  // striated myocardium texture for cut surfaces: fibre angle rotates through the wall
+  // (+60° at the endocardium → −60° at the epicardium), as in FE heart models
+  function fibreTexture() {
+    const S = 256, c = document.createElement('canvas');
+    c.width = c.height = S;
+    const g = c.getContext('2d'), img = g.createImageData(S, S);
+    let x = 7;
+    const rnd = () => ((x = (x * 16807) % 2147483647) / 2147483647);
+    for (let py = 0; py < S; py++) for (let px = 0; px < S; px++) {
+      const t = px / (S - 1);                        // 0 = endocardium, 1 = epicardium
+      const th = (60 - 120 * t) * Math.PI / 180;
+      const q = (px * Math.sin(th) + py * Math.cos(th)) * 0.55;
+      const stripe = 0.5 + 0.5 * Math.sin(q + 0.6 * Math.sin(py * 0.05));
+      const n = rnd();
+      const base = [148, 38, 46], hi = [196, 74, 78], endo = [214, 120, 122];
+      let col = base.map((b, i) => b + (hi[i] - b) * stripe * 0.55 + (n - 0.5) * 14);
+      const e = Math.max(0, 1 - t / 0.07);              // thin glistening endocardial layer
+      col = col.map((cc, i) => cc + (endo[i] - cc) * e * 0.7);
+      const i4 = (py * S + px) * 4;
+      img.data[i4] = col[0]; img.data[i4 + 1] = col[1]; img.data[i4 + 2] = col[2]; img.data[i4 + 3] = 255;
+    }
+    g.putImageData(img, 0, 0);
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = 4;
+    return tex;
+  }
+
   const M = {
-    endo: new THREE.MeshStandardMaterial({ roughness: 0.55, side: THREE.DoubleSide, transparent: true }),
-    epi: new THREE.MeshPhysicalMaterial({ roughness: 0.35, clearcoat: 0.4, vertexColors: true, transparent: true, side: THREE.DoubleSide }),
-    rim: new THREE.MeshStandardMaterial({ roughness: 0.6, transparent: true, side: THREE.DoubleSide }),
-    wire: new THREE.LineBasicMaterial({ transparent: true }),
-    marker: new THREE.MeshBasicMaterial({ transparent: true }),
+    endo: new THREE.MeshPhysicalMaterial({ color: 0xc6535b, roughness: 0.32, clearcoat: 0.9, clearcoatRoughness: 0.18, sheen: 0.4, sheenColor: 0xffb0a8, side: THREE.DoubleSide, transparent: true }),
+    epi: new THREE.MeshPhysicalMaterial({ vertexColors: true, roughness: 0.4, clearcoat: 0.75, clearcoatRoughness: 0.22, sheen: 0.5, sheenColor: 0xffb4a6, sheenRoughness: 0.5, transparent: true, side: THREE.DoubleSide }),
+    cut: new THREE.MeshStandardMaterial({ map: fibreTexture(), roughness: 0.55, side: THREE.DoubleSide, transparent: true }),
+    artery: new THREE.MeshPhysicalMaterial({ color: 0x8e1a22, roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.15, transparent: true }),
+    vein: new THREE.MeshPhysicalMaterial({ color: 0x4a2f5c, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.15, transparent: true }),
+    fibre: new THREE.LineBasicMaterial({ transparent: true, depthWrite: false }),
+    elem: new THREE.LineBasicMaterial({ transparent: true, depthWrite: false }),
+    marker: new THREE.MeshStandardMaterial({ roughness: 0.25, metalness: 0.1, transparent: true }),
     loop: new THREE.LineBasicMaterial({ transparent: true }),
     contour: new THREE.LineBasicMaterial({ transparent: true }),
     flow: new THREE.LineBasicMaterial({ vertexColors: true, transparent: true }),
@@ -125,39 +193,182 @@ window.mountCardiac3D = function (fig, THREE) {
     ring: new THREE.LineBasicMaterial({ transparent: true }),
     pts: new THREE.PointsMaterial({ size: 0.045, vertexColors: true, transparent: true, depthWrite: false }),
     recon: new THREE.MeshStandardMaterial({ roughness: 0.45, flatShading: true, transparent: true }),
-    reconSmooth: new THREE.MeshStandardMaterial({ roughness: 0.4, transparent: true }),
+    reconSmooth: new THREE.MeshPhysicalMaterial({ roughness: 0.35, clearcoat: 0.5, transparent: true }),
   };
 
+  const heart = new THREE.Group();
+  root.add(heart);
   const endoGeo = gridGeo(NU, NV), epiGeo = gridGeo(NU, NV);
   const endo = new THREE.Mesh(endoGeo, M.endo);
   const epi = new THREE.Mesh(epiGeo, M.epi);
   epi.renderOrder = 2;
-  // base rim joining the two walls
-  const rimGeo = new THREE.BufferGeometry();
-  rimGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array((NV + 1) * 2 * 3), 3));
-  { const idx = []; for (let j = 0; j < NV; j++) { const a = j * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); } rimGeo.setIndex(idx); }
-  const rimMesh = new THREE.Mesh(rimGeo, M.rim);
-  // FE mesh lines on the epicardium
-  const WU = 9, WV = 16;
-  const wireGeo = new THREE.BufferGeometry();
-  const wireCount = (WU * (NV) + WV * NU) * 2;
-  wireGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(wireCount * 3), 3));
-  const wire = new THREE.LineSegments(wireGeo, M.wire);
-  const heart = new THREE.Group();
-  heart.add(endo, rimMesh, epi, wire);
-  root.add(heart);
+  heart.add(endo, epi);
 
-  // Lagrangian material points and their periodic trajectories (in reference-free space)
+  // epicardial base colours: mottled muscle with fat along the coronary grooves (static)
+  const grooveV = h => V_CUT - 1.02 + 0.22 * (1 - h);             // anterior interventricular groove (LAD), on the visible wall
+  const PDA_V = V_CUT - 3.3;                                     // posterior groove
+  const AV_H = 0.93;                                             // atrioventricular groove (LCx)
+  const epiBase = new Float32Array((NU + 1) * (NV + 1) * 3);
+  {
+    const muscle = new THREE.Color(0x9c2f36), deep = new THREE.Color(0x7d2229), fat = new THREE.Color(0xe3c27f), c = new THREE.Color();
+    let k = 0;
+    for (let i = 0; i <= NU; i++) for (let j = 0; j <= NV; j++, k++) {
+      const h = hOf((i / NU) * U_MAX), v = vWall(j / NV);
+      const w = Math.max(
+        gauss(angDiff(v, grooveV(h)), 0.16) * (0.25 + 0.75 * h),
+        gauss(angDiff(v, PDA_V), 0.14) * (0.2 + 0.6 * h),
+        gauss(h - AV_H, 0.06) * 0.85,
+      );
+      const mott = 0.5 + 0.5 * Math.sin(13 * v + 9 * h) * Math.sin(7 * v - 11 * h + 2);
+      c.copy(muscle).lerp(deep, 0.35 * mott).lerp(fat, clamp(w * 1.1, 0, 0.85));
+      c.toArray(epiBase, k * 3);
+    }
+  }
+
+  // cut faces (two, at the edges of the wedge) and the base rim, both showing fibre texture
+  const NT = 8;
+  const cutGeos = [0, 1].map(() => gridGeo(NU, NT, true));
+  cutGeos.forEach(g => {
+    const UV = g.attributes.uv.array; let n = 0;
+    for (let i = 0; i <= NU; i++) for (let j = 0; j <= NT; j++) { UV[n++] = j / NT; UV[n++] = hOf((i / NU) * U_MAX); }
+  });
+  cutGeos.forEach(g => heart.add(new THREE.Mesh(g, M.cut)));
+  const rimGeo = gridGeo(1, NV, true);
+  { const UV = rimGeo.attributes.uv.array; let n = 0;
+    for (let i = 0; i <= 1; i++) for (let j = 0; j <= NV; j++) { UV[n++] = i; UV[n++] = (j / NV) * 6 % 1; } }
+  const rimMesh = new THREE.Mesh(rimGeo, M.cut);
+  heart.add(rimMesh);
+
+  // FE element edges on the cut faces (hexahedral layers through the wall)
+  const EU = 12, ET = 4;
+  const elemGeo = new THREE.BufferGeometry();
+  elemGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(2 * ((ET + 1) * NU + (EU + 1) * NT) * 2 * 3), 3));
+  const elem = new THREE.LineSegments(elemGeo, M.elem);
+  elem.frustumCulled = false;
+  heart.add(elem);
+
+  // epicardial fibre streamlines (helix angle ≈ −60°)
+  const FIB = 26, FSEG = 40;
+  const fibreGeo = new THREE.BufferGeometry();
+  fibreGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(FIB * FSEG * 2 * 3), 3));
+  const fibres = new THREE.LineSegments(fibreGeo, M.fibre);
+  fibres.frustumCulled = false;
+  heart.add(fibres);
+
+  // coronary vessels: [material, radius, list of (h, v)]
+  const path = (n, f) => Array.from({ length: n }, (_, k) => f(k / (n - 1)));
+  const VESSELS = [
+    [M.artery, 0.026, path(18, q => [1 - 0.93 * q, grooveV(1 - 0.93 * q)])],                         // LAD
+    [M.artery, 0.022, path(16, q => [AV_H + 0.02, grooveV(1) - 0.05 - 2.3 * q])],                   // LCx (away from the cut)
+    [M.artery, 0.016, path(10, q => [0.72 - 0.38 * q, grooveV(0.72) + 0.05 + 0.2 * q])],            // diagonal (toward the cut)
+    [M.artery, 0.014, path(10, q => [0.48 - 0.26 * q, grooveV(0.48) + 0.05 + 0.16 * q])],           // 2nd diagonal
+    [M.artery, 0.016, path(10, q => [AV_H - 0.02 - 0.55 * q, grooveV(1) - 1.25 - 0.15 * q])],      // obtuse marginal
+    [M.artery, 0.018, path(14, q => [AV_H - 0.88 * q, PDA_V])],                                     // PDA
+    [M.vein, 0.017, path(16, q => [0.97 - 0.85 * q, grooveV(0.97 - 0.85 * q) - 0.12])],             // great cardiac vein
+  ];
+  const vesselMeshes = VESSELS.map(([mat]) => { const m = new THREE.Mesh(new THREE.BufferGeometry(), mat); heart.add(m); return m; });
+
+  // Lagrangian material points (outside the cutaway) and their periodic trajectories
   const MK = [];
-  for (let i = 0; i < 4; i++) for (let j = 0; j < 7; j++) MK.push([(0.3 + 0.2 * i) * U_MAX, (j / 7) * TAU + i * 0.4]);
-  const markerGeo = new THREE.SphereGeometry(0.028, 10, 8);
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 9; j++) {
+    const v = vWall((j + 0.5 + (i % 2) * 0.5) / 9.5);
+    MK.push([(0.3 + 0.2 * i) * U_MAX, v]);
+  }
+  const markerGeo = new THREE.SphereGeometry(0.024, 16, 12);
   const markers = MK.map(() => { const m = new THREE.Mesh(markerGeo, M.marker); heart.add(m); return m; });
   const loops = MK.map(([u, v]) => {
     const pts = [];
-    for (let k = 0; k <= 40; k++) pts.push(lv(1, u, v, 0.5 - 0.5 * Math.cos((k / 40) * TAU), V(0, 0, 0)).multiplyScalar(1.012));
+    for (let k = 0; k <= 40; k++) pts.push(lv(1, u, v, 0.5 - 0.5 * Math.cos((k / 40) * TAU), V(0, 0, 0)).multiplyScalar(1.02));
     const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), M.loop);
     heart.add(l);
     return l;
+  });
+
+  // a point on the epicardium, pushed slightly outward (for vessels, fibres, markers)
+  const onEpi = (h, v, s, lift, out) => {
+    lv(1, uOf(h), v, s, out);
+    const r = Math.hypot(out.x, out.z) || 1;
+    out.x += (out.x / r) * lift; out.z += (out.z / r) * lift;
+    return out;
+  };
+
+  // ── Bake the heartbeat into morph targets ──────────────
+  // Every animated surface is a function of one contraction value s, so the relaxed (s = 0)
+  // and contracted (s = 1) shapes are computed once and the GPU blends between them.
+  const morphing = [];
+  function bake(obj, fillAt, normals = true) {
+    const geo = obj.geometry;
+    fillAt(1); if (normals) geo.computeVertexNormals();
+    const p1 = new THREE.Float32BufferAttribute(geo.attributes.position.array.slice(), 3);
+    const n1 = normals ? new THREE.Float32BufferAttribute(geo.attributes.normal.array.slice(), 3) : null;
+    fillAt(0); if (normals) geo.computeVertexNormals();
+    geo.morphAttributes.position = [p1];
+    if (n1) geo.morphAttributes.normal = [n1];
+    if (obj.updateMorphTargets) obj.updateMorphTargets();
+    obj.morphTargetInfluences = [0];
+    obj.frustumCulled = false;
+    morphing.push(obj);
+  }
+  const tA = V(0, 0, 0), tB = V(0, 0, 0);
+  bake(endo, s => fillGrid(endoGeo, 0, NU, NV, s, null, vWall));
+  bake(epi, s => fillGrid(epiGeo, 1, NU, NV, s, (fu, fv, Cc, n, idx) => { Cc[n] = epiBase[idx * 3]; Cc[n + 1] = epiBase[idx * 3 + 1]; Cc[n + 2] = epiBase[idx * 3 + 2]; }, vWall));
+  // per-vertex displacement at full contraction, for the heatmap (|d(s)| ≈ s·|d(1)|)
+  const DISP = new Float32Array((NU + 1) * (NV + 1));
+  { const p0 = epiGeo.attributes.position.array, p1 = epiGeo.morphAttributes.position[0].array;
+    for (let k = 0; k < DISP.length; k++) DISP[k] = Math.hypot(p1[k * 3] - p0[k * 3], p1[k * 3 + 1] - p0[k * 3 + 1], p1[k * 3 + 2] - p0[k * 3 + 2]); }
+  heart.children.filter(o => cutGeos.includes(o.geometry)).forEach((m, f) => bake(m, s => {
+    const g = cutGeos[f], P = g.attributes.position.array, vF = vWall(f); let n = 0;
+    for (let i = 0; i <= NU; i++) {
+      const uu = (i / NU) * U_MAX;
+      lv(0, uu, vF, s, tA); lv(1, uu, vF, s, tB);
+      for (let j = 0; j <= NT; j++) { const w = j / NT; P[n++] = lerp(tA.x, tB.x, w); P[n++] = lerp(tA.y, tB.y, w); P[n++] = lerp(tA.z, tB.z, w); }
+    }
+    g.attributes.position.needsUpdate = true;
+  }));
+  bake(rimMesh, s => {
+    const P = rimGeo.attributes.position.array;
+    for (let j = 0; j <= NV; j++) {
+      lv(0, U_MAX, vWall(j / NV), s, tA).toArray(P, j * 3);
+      lv(1, U_MAX, vWall(j / NV), s, tA).toArray(P, (NV + 1 + j) * 3);
+    }
+    rimGeo.attributes.position.needsUpdate = true;
+  });
+  bake(elem, s => {
+    const P = elemGeo.attributes.position.array; let n = 0;
+    const push = p => { P[n++] = p.x; P[n++] = p.y; P[n++] = p.z; };
+    const at = (uu, vF, w) => { lv(0, uu, vF, s, tA); lv(1, uu, vF, s, tB); return tA.lerp(tB, w); };
+    [vWall(0), vWall(1)].forEach(vF => {
+      for (let e = 0; e <= ET; e++) for (let i = 0; i < NU; i++) { push(at((i / NU) * U_MAX, vF, e / ET)); push(at(((i + 1) / NU) * U_MAX, vF, e / ET)); }
+      for (let e = 0; e <= EU; e++) for (let j = 0; j < NT; j++) { const uu = Math.max(0.02, e / EU) * U_MAX; push(at(uu, vF, j / NT)); push(at(uu, vF, (j + 1) / NT)); }
+    });
+    elemGeo.attributes.position.needsUpdate = true;
+  }, false);
+  bake(fibres, s => {
+    const P = fibreGeo.attributes.position.array; let n = 0;
+    for (let f = 0; f < FIB; f++) {
+      const v0 = (f / FIB) * TAU;
+      for (let q = 0; q < FSEG; q++) {
+        const h0 = 0.06 + 0.92 * (q / FSEG), h1 = 0.06 + 0.92 * ((q + 1) / FSEG);
+        const va = v0 + 1.25 * h0, vb = v0 + 1.25 * h1;
+        if (inCut(va) || inCut(vb)) { for (let z = 0; z < 6; z++) P[n++] = 0; continue; }
+        onEpi(h0, va, s, 0.006, tA).toArray(P, n); n += 3;
+        onEpi(h1, vb, s, 0.006, tA).toArray(P, n); n += 3;
+      }
+    }
+    fibreGeo.attributes.position.needsUpdate = true;
+  }, false);
+  VESSELS.forEach(([, rad, pts], i) => {
+    const tube = s => new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(([h, v]) => onEpi(h, v, s, rad * 0.55, V(0, 0, 0)))), pts.length * 4, rad, 10, false);
+    const g1 = tube(1), g0 = tube(0);
+    g0.morphAttributes.position = [g1.attributes.position];
+    g0.morphAttributes.normal = [g1.attributes.normal];
+    const m = vesselMeshes[i];
+    m.geometry.dispose();
+    m.geometry = g0;
+    m.updateMorphTargets();
+    m.morphTargetInfluences = [0];
+    m.frustumCulled = false;
+    morphing.push(m);
   });
 
   // ── Tri-planar echo ────────────────────────────────────
@@ -181,7 +392,7 @@ window.mountCardiac3D = function (fig, THREE) {
     return tex;
   }
   const PLANE_W = 2.5, APEX_Y = -1.66 + Y_OFF;
-  const ANG = [0, Math.PI / 3, (2 * Math.PI) / 3];
+  const ANG = [V_CUT - 0.5, V_CUT - 0.5 + Math.PI / 3, V_CUT - 0.5 + (2 * Math.PI) / 3];
   const planes = ANG.map((a, k) => {
     const mat = new THREE.MeshBasicMaterial({ map: echoTexture(k + 1), transparent: true, side: THREE.DoubleSide, depthWrite: false });
     const m = new THREE.Mesh(new THREE.PlaneGeometry(PLANE_W, PLANE_W), mat);
@@ -190,9 +401,8 @@ window.mountCardiac3D = function (fig, THREE) {
     root.add(m);
     return m;
   });
-  // contours of both walls in each plane (the ventricle is axisymmetric, so the in-plane
-  // section uses the untwisted shape; twist is out-of-plane motion that a single plane misses)
-  const CN = 40;
+  // in-plane wall contours (untwisted: twist is out-of-plane motion a single plane misses)
+  const CN = 48;
   const contours = [];
   ANG.forEach(a => [0, 1].forEach(layer => {
     const geo = new THREE.BufferGeometry();
@@ -213,7 +423,7 @@ window.mountCardiac3D = function (fig, THREE) {
   root.add(flow);
 
   // ── 3D displacement vectors ────────────────────────────
-  const AU = 8, AV = 18;
+  const AU = 9, AV = 20;
   const arrowGeo = new THREE.BufferGeometry();
   arrowGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(AU * AV * 2 * 3), 3));
   arrowGeo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(AU * AV * 2 * 3), 3));
@@ -245,13 +455,12 @@ window.mountCardiac3D = function (fig, THREE) {
     g.add(quad, edge);
     [0, 1].forEach(layer => {
       const pts = [];
-      for (let k = 0; k <= 64; k++) pts.push(lv(layer, u, (k / 64) * TAU, 0, V(0, 0, 0), false));
+      for (let k = 0; k <= 96; k++) pts.push(lv(layer, u, (k / 96) * TAU, 0, V(0, 0, 0), false));
       g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), M.ring));
     });
     mri.add(g);
     return g;
   });
-  // two long-axis slice contours
   [0, Math.PI / 2].forEach(a => [0, 1].forEach(layer => {
     const pts = [];
     for (let k = CN; k >= 0; k--) pts.push(lv(layer, (k / CN) * U_MAX, a, 0, V(0, 0, 0), false));
@@ -287,8 +496,8 @@ window.mountCardiac3D = function (fig, THREE) {
   const coarsePts = pointCloud(coarse), finePts = pointCloud(fine);
   coarsePts.material.size = 0.07;
 
-  // reconstruction, coarse → fine
-  const LEVELS = [[4, 6], [7, 12], [14, 24], [36, 64]];
+  // reconstruction, coarse → fine (closed outer surface)
+  const LEVELS = [[4, 6], [7, 12], [14, 24], [48, 96]];
   const recon = LEVELS.map(([nu, nv], i) => {
     const geo = gridGeo(nu, nv);
     fillGrid(geo, 1, nu, nv, 0);
@@ -304,14 +513,11 @@ window.mountCardiac3D = function (fig, THREE) {
     const accent = new THREE.Color(cs.getPropertyValue('--accent').trim() || '#1f3fb8');
     const ink3 = new THREE.Color(cs.getPropertyValue('--ink-3').trim() || '#646a75');
     const dark = darkMQ.matches;
-    COL.muscle = new THREE.Color(dark ? '#d9777c' : '#c4555c');
-    COL.epi = new THREE.Color(dark ? '#e6a3a3' : '#e9a8a4');
     COL.accent = accent;
-    COL.gray = ink3.clone();
-    M.endo.color.copy(COL.muscle);
-    M.rim.color.copy(COL.muscle).multiplyScalar(0.85);
-    M.wire.color.copy(dark ? new THREE.Color('#f4d0cf') : new THREE.Color('#8a3b40'));
+    M.fibre.color.set(dark ? '#ffd9cf' : '#fff0e6');
+    M.elem.color.set(dark ? '#ffe3dc' : '#fff6f0');
     M.marker.color.copy(accent);
+    M.marker.emissive.copy(accent).multiplyScalar(0.35);
     M.loop.color.copy(accent);
     M.contour.color.set(dark ? '#ffffff' : '#ffe9c7');
     // dark speckle vanishes on a dark page; let it glow additively instead
@@ -327,6 +533,7 @@ window.mountCardiac3D = function (fig, THREE) {
       pc.geometry.userData.occ.forEach((o, i) => (o ? accent : faint).toArray(col, i * 3));
       pc.geometry.attributes.color.needsUpdate = true;
     });
+    scene.environmentIntensity = dark ? 0.45 : 0.6;
   }
 
   // ── Frame ──────────────────────────────────────────────
@@ -334,8 +541,8 @@ window.mountCardiac3D = function (fig, THREE) {
   const caption = fig.querySelector('.c3d-caption');
   const metric = fig.querySelector('.c3d-metric');
   const bar = fig.querySelector('.c3d-bar');
-  const tmpA = V(0, 0, 0), tmpB = V(0, 0, 0), tmpC = new THREE.Color();
-  let lastStage = -1, W = 1, H = 1;
+  const tmpA = V(0, 0, 0), tmpB = V(0, 0, 0), tmpC = new THREE.Color(), tmpE = new THREE.Color();
+  let lastStage = -1, W = 1, H = 1, heatOn = false;
 
   function beatS(t) {
     const ph = (t / BEAT) % 1;
@@ -353,51 +560,56 @@ window.mountCardiac3D = function (fig, THREE) {
     const amp = val('beat');
     const s = beatS(t) * amp;
     const heartA = val('heart'), heat = val('heat');
-
-    // walls
-    fillGrid(endoGeo, 0, NU, NV, s);
-    fillGrid(epiGeo, 1, NU, NV, s, (fu, fv, Cc, n) => {
-      if (heat < 0.01) { COL.epi.toArray(Cc, n); return; }
-      const uu = fu * U_MAX, vv = fv * TAU;
-      const d = lv(1, uu, vv, s, tmpA).distanceTo(lv(1, uu, vv, 0, tmpB));
-      cmap(d / 0.3, tmpC).lerp(COL.epi, 1 - heat).toArray(Cc, n);
-    });
-    M.endo.opacity = heartA;
-    M.rim.opacity = heartA;
-    M.epi.opacity = val('epi') * heartA;
-    M.epi.depthWrite = M.epi.opacity > 0.9;
     heart.visible = heartA > 0.01;
 
-    // base rim
-    { const P = rimGeo.attributes.position.array;
-      for (let j = 0; j <= NV; j++) {
-        lv(0, U_MAX, (j / NV) * TAU, s, tmpA).toArray(P, j * 6);
-        lv(1, U_MAX, (j / NV) * TAU, s, tmpA).toArray(P, j * 6 + 3);
+    if (heart.visible) {
+      morphing.forEach(o => { o.morphTargetInfluences[0] = s; });
+
+      // heatmap colours (only while the 3D-motion stage is fading in or showing)
+      if (heat > 0.01 || heatOn) {
+        const Cc = epiGeo.attributes.color.array;
+        for (let idx = 0; idx < DISP.length; idx++) {
+          tmpE.fromArray(epiBase, idx * 3);
+          if (heat > 0.01) {
+            const d = s * DISP[idx];
+            cmap(d / 0.3, tmpC);
+            tmpE.lerp(tmpC, heat * (0.35 + 0.65 * clamp(d / 0.1, 0, 1)));
+          }
+          tmpE.toArray(Cc, idx * 3);
+        }
+        epiGeo.attributes.color.needsUpdate = true;
+        heatOn = heat > 0.01;
       }
-      rimGeo.attributes.position.needsUpdate = true;
-      rimGeo.computeVertexNormals(); }
+      const epiA = val('epi') * heartA;
+      M.endo.opacity = heartA;
+      M.epi.opacity = epiA;
+      M.epi.depthWrite = epiA > 0.9;
+      M.cut.opacity = heartA * (0.25 + 0.75 * epiA);
+      M.cut.depthWrite = M.cut.opacity > 0.9;
 
-    // FE wireframe
-    { const P = wireGeo.attributes.position.array; let n = 0;
-      const push = p => { P[n++] = p.x * 1.004; P[n++] = p.y; P[n++] = p.z * 1.004; };
-      for (let i = 1; i <= WU; i++) { const uu = (i / WU) * U_MAX;
-        for (let j = 0; j < NV; j++) { push(lv(1, uu, (j / NV) * TAU, s, tmpA)); push(lv(1, uu, ((j + 1) / NV) * TAU, s, tmpA)); } }
-      for (let j = 0; j < WV; j++) { const vv = (j / WV) * TAU;
-        for (let i = 0; i < NU; i++) { push(lv(1, (i / NU) * U_MAX, vv, s, tmpA)); push(lv(1, ((i + 1) / NU) * U_MAX, vv, s, tmpA)); } }
-      wireGeo.attributes.position.needsUpdate = true; }
-    M.wire.opacity = heartA * (0.5 * (1 - heat) + 0.12) * (1 - 0.5 * val('planes'));
+      const fA = val('fibres') * heartA;
+      elem.visible = fibres.visible = fA > 0.01;
+      M.elem.opacity = 0.55 * fA;
+      M.fibre.opacity = 0.42 * fA;
 
-    // material points
-    const mA = val('markers') * heartA;
-    MK.forEach(([uu, vv], i) => { lv(1, uu, vv, s, markers[i].position).multiplyScalar(1.012); markers[i].visible = mA > 0.01; loops[i].visible = mA > 0.01; });
-    M.marker.opacity = mA;
-    M.loop.opacity = 0.55 * mA;
+      const vA = val('vessels') * heartA;
+      M.artery.opacity = M.vein.opacity = vA;
+      M.artery.depthWrite = M.vein.depthWrite = vA > 0.9;
+      vesselMeshes.forEach(m => { m.visible = vA > 0.01; });
+
+      // material points
+      const mA = val('markers') * heartA;
+      MK.forEach(([uu, vv], i) => { lv(1, uu, vv, s, markers[i].position).multiplyScalar(1.02); markers[i].visible = mA > 0.01; loops[i].visible = mA > 0.01; });
+      M.marker.opacity = mA;
+      M.loop.opacity = 0.5 * mA;
+    }
 
     // echo planes, contours and in-plane optical flow
     const pA = val('planes');
     planes.forEach(p => { p.visible = pA > 0.01; p.material.opacity = 0.42 * pA; });
     contours.forEach(({ a, layer, l }) => {
       l.visible = pA > 0.01;
+      if (!l.visible) return;
       const P = l.geometry.attributes.position.array; let n = 0;
       for (let i = CN; i >= 0; i--) { lv(layer, (i / CN) * U_MAX, a, s, tmpA, false).toArray(P, n); n += 3; }
       for (let i = 0; i <= CN; i++) { lv(layer, (i / CN) * U_MAX, a + Math.PI, s, tmpA, false).toArray(P, n); n += 3; }
@@ -440,7 +652,7 @@ window.mountCardiac3D = function (fig, THREE) {
       const P = arrowGeo.attributes.position.array, Cc = arrowGeo.attributes.color.array;
       let n = 0;
       for (let i = 0; i < AU; i++) for (let j = 0; j < AV; j++) {
-        const uu = (0.2 + 0.8 * (i + 0.5) / AU) * U_MAX, vv = (j / AV) * TAU + i * 0.17;
+        const uu = (0.2 + 0.8 * (i + 0.5) / AU) * U_MAX, vv = vWall((j + 0.5 + (i % 2) * 0.5) / (AV + 0.5));
         const cur = lv(1, uu, vv, s, V(0, 0, 0)), ref = lv(1, uu, vv, 0, tmpB);
         const d = cur.clone().sub(ref);
         const out = V(cur.x, 0, cur.z).normalize().multiplyScalar(0.04);
@@ -471,12 +683,12 @@ window.mountCardiac3D = function (fig, THREE) {
       M.recon.opacity = M.reconSmooth.opacity = 0.92 * rA;
     }
 
-    // camera orbit
-    const th = t * 0.22 + 0.6;
-    const R = W < 560 ? 6.4 : 5.6;
-    cam.position.set(Math.sin(th) * R, 1.3, Math.cos(th) * R);
-    cam.lookAt(0, 0.05, 0);
-    renderer.render(scene, cam);
+    // camera: gentle sway in front of the cutaway (it stays in view)
+    const th = 0.6 + 0.5 * Math.sin(t * 0.17);
+    const R = W < 560 ? 6.2 : 5.4;
+    cam.position.set(Math.sin(th) * R, 1.45, Math.cos(th) * R);
+    cam.lookAt(0, 0.02, 0);
+    shared.frame(canvas, ctx2d, 1.05, vp => { vp(0, 0, canvas.width, canvas.height); renderer.render(scene, cam); });
 
     if (k !== lastStage) {
       steps.forEach((li, i) => li.classList.toggle('on', i === k));
@@ -492,7 +704,8 @@ window.mountCardiac3D = function (fig, THREE) {
   function resize() {
     W = Math.max(1, stage.clientWidth);
     H = Math.max(1, stage.clientHeight);
-    renderer.setSize(W, H, false);
+    canvas.width = Math.round(W * gov.dpr);
+    canvas.height = Math.round(H * gov.dpr);
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     cam.aspect = W / H;
@@ -501,11 +714,12 @@ window.mountCardiac3D = function (fig, THREE) {
   }
 
   // ── Loop, visibility, pause ────────────────────────────
-  const st = { t: 11.2, last: null, running: false, visible: false, paused: false };
+  const st = { t: 1.6, last: null, running: false, visible: false, paused: false };
   const draw = () => render(st.t);
+  const gov = window.vizGovernor(2, () => resize());
   function frame(now) {
     if (!st.running) return;
-    if (st.last !== null) st.t += Math.min((now - st.last) / 1000, 0.05);
+    if (st.last !== null) { gov.tick((now - st.last) / 1000); st.t += Math.min((now - st.last) / 1000, 0.05); }
     st.last = now;
     draw();
     requestAnimationFrame(frame);
@@ -528,7 +742,7 @@ window.mountCardiac3D = function (fig, THREE) {
     st.paused = !st.paused;
     btn.setAttribute('aria-pressed', st.paused);
     btn.setAttribute('aria-label', st.paused ? 'Play animation' : 'Pause animation');
-    btn.innerHTML = `<i class="bi bi-${st.paused ? 'play' : 'pause'}-fill" aria-hidden="true"></i>`;
+    btn.innerHTML = `<svg class="ico" aria-hidden="true"><use href="#i-${st.paused ? 'play' : 'pause'}-fill"/></svg>`;
     update();
   });
 };

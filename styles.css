@@ -55,6 +55,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px }
 strong, b { font-weight: 600; color: var(--ink) }
 img, video { display: block; max-width: 100% }
+.ico { width: 1em; height: 1em; fill: currentColor; flex-shrink: 0; vertical-align: -0.125em }
 
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 6px; z-index: 300 }
@@ -90,10 +91,10 @@ img, video { display: block; max-width: 100% }
     radial-gradient(600px 360px at 18% 30%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
     radial-gradient(520px 340px at 82% 42%, color-mix(in srgb, var(--live) 6%, transparent), transparent 70%);
 }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 56px; align-items: center }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, clamp(380px, 48%, 540px)); gap: 52px; align-items: center }
 .hero-top { display: flex; align-items: center; gap: 14px; margin-bottom: 22px }
 .hero-top .status { margin-bottom: 0 }
-.avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 38% 18%; border: 1px solid var(--line) }
+.avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line) }
 .status {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: .85rem; color: var(--ink-2);
@@ -106,7 +107,7 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
 .lede em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.16em; letter-spacing: -.005em; color: var(--accent) }
 .bio { color: var(--ink-2); font-size: 1.04rem; line-height: 1.75; max-width: 62ch; margin-bottom: 18px }
 .seeking { display: flex; gap: 8px; align-items: baseline; color: var(--ink-2); font-size: .94rem; margin-bottom: 30px }
-.seeking i { color: var(--accent) }
+.seeking .ico { color: var(--accent); transform: translateY(2px) }
 
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px }
 .btn {
@@ -151,6 +152,30 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
 .viz:hover .viz-toggle, .viz-toggle:focus-visible { opacity: 1 }
 .hero-viz .viz-toggle { bottom: auto; right: auto; top: 10px; left: 10px }
 @media (prefers-reduced-motion: reduce) { .viz-toggle { display: none } }
+
+/* 3D hero arm */
+.arm3d-canvas { display: block; width: 100%; cursor: grab }
+.arm3d-canvas.grabbing { cursor: grabbing }
+.arm3d-hint {
+  position: absolute; top: 12px; right: 12px; transition: opacity .5s, transform .5s;
+  font: 500 .66rem/1 var(--mono); color: var(--ink-2); padding: 6px 10px; border-radius: 999px;
+  border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 80%, transparent); backdrop-filter: blur(6px);
+}
+.arm3d-hint.gone { opacity: 0; transform: translateY(-4px) }
+.arm3d-ui { position: absolute; inset: 0 0 auto 0; pointer-events: none; overflow: hidden; border-radius: 16px }
+.arm3d-hud {
+  position: absolute; bottom: 12px; left: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  font: 400 .66rem/1.45 var(--mono); color: var(--ink-2); white-space: pre; text-align: left;
+  padding: 6px 9px; border-radius: 10px; border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 78%, transparent); backdrop-filter: blur(6px);
+}
+.arm3d-hud b { font-weight: 600; color: var(--ink); letter-spacing: .02em }
+.arm3d-tag {
+  position: absolute; left: 0; top: 0; white-space: nowrap; transition: opacity .25s;
+  font: 600 .66rem/1 var(--mono); padding: 4px 7px; border-radius: 999px;
+}
+.det-tag { background: var(--accent); color: var(--surface) }
+.ok-tag { background: color-mix(in srgb, var(--live) 18%, var(--surface)); color: var(--live); border: 1px solid color-mix(in srgb, var(--live) 40%, transparent) }
 
 /* 3D cardiac scene (C2BL) */
 .c3d {
@@ -213,6 +238,20 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
 .f3d-steps li { counter-increment: step; padding: 3px 10px; border-radius: 999px; color: var(--ink-3); font-weight: 500; transition: background .3s, color .3s }
 .f3d-steps li::before { content: counter(step) ". " }
 .f3d-steps li.on { background: var(--accent); color: var(--surface) }
+.f3d-format {
+  position: absolute; top: 12px; left: 12px; margin: 0; white-space: pre;
+  font: 400 .6rem/1.5 var(--mono); color: var(--ink-2);
+  background: color-mix(in srgb, var(--surface) 82%, transparent); backdrop-filter: blur(6px);
+  border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px;
+}
+.f3d-format:empty { display: none }
+@media (max-width: 860px) { .f3d-format { display: none } }
+.f3d-agent {
+  margin: 0; display: inline-flex; align-items: center; gap: 6px;
+  font: 600 .7rem/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px;
+}
+.f3d-agent::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent) }
 .f3d-caption { margin: 0; color: var(--ink-2); font-weight: 500; background: color-mix(in srgb, var(--bg-alt) 80%, transparent); padding: 1px 6px; border-radius: 6px }
 .f3d-goal {
   position: absolute; transform: translate(-50%, -100%); white-space: nowrap;
@@ -266,7 +305,7 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 7.5vw
 .pill-live { background: var(--live-bg); color: var(--live) }
 .links { font-size: .9rem; font-weight: 500 }
 .links a + a { margin-left: 16px }
-.links i { font-size: .8em }
+.links .ico { font-size: .8em }
 
 /* ── Experience ─────────────────────────────────────── */
 .role { padding: 36px 0; border-top: 1px solid var(--line) }
@@ -410,7 +449,7 @@ html:not(.js) .expand-all, html:not(.js) .role-chev { display: none }
   transition: color .2s, border-color .2s;
 }
 .pub-link:hover { color: var(--accent); border-color: var(--accent); text-decoration: none }
-.pub-link i { font-size: .72em }
+.pub-link .ico { font-size: .72em }
 
 /* ── Background ─────────────────────────────────────── */
 .bg-grid { display: grid; grid-template-columns: 1fr 1.35fr; gap: 56px }
@@ -443,11 +482,13 @@ html:not(.js) .expand-all, html:not(.js) .role-chev { display: none }
 .footer-links a { color: var(--ink-2) }
 .footer-name { font-family: var(--serif); font-size: 1.15rem; color: var(--ink) }
 .updated { color: var(--ink-3) }
+.credits { flex-basis: 100%; font-size: .75rem; color: var(--ink-3) }
+.credits a { color: var(--ink-2) }
 
 /* ── Responsive ─────────────────────────────────────── */
 @media (max-width: 860px) {
   .hero-grid { grid-template-columns: 1fr; gap: 36px }
-  .hero-viz { max-width: 520px }
+  .hero-viz { max-width: 600px }
   .bg-grid { grid-template-columns: 1fr; gap: 32px }
 }
 @media (max-width: 720px) {
