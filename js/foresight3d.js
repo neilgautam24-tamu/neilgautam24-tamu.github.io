@@ -91,9 +91,17 @@ window.mountForesight3D = function (fig, THREE, fallback, addons) {
     const accent = new THREE.Color(cs.getPropertyValue('--accent').trim() || '#1f3fb8');
     const bg = new THREE.Color(cs.getPropertyValue('--bg-alt').trim() || '#f3f1ec');
     const dark = darkMQ.matches;
-    const P = dark
-      ? { floor: '#34373e', rug: '#40444c', wall: '#2e3137', furn: '#50565f', wood: '#6b5c4b', soft: '#3d4a5c', plant: '#4f7d5b', pot: '#6d5446', skin: '#d2b4a2', shell: '#c9ced6', joint: '#17191d', past: '#8d949e', target: '#e0874f', grid: '#ffffff' }
-      : { floor: '#e8e3da', rug: '#d9d2c4', wall: '#f5f2eb', furn: '#dcd6ca', wood: '#b89f80', soft: '#9fb0c4', plant: '#77a283', pot: '#b98f73', skin: '#d9bba9', shell: '#dde1e6', joint: '#1e2126', past: '#8a9099', target: '#d9733f', grid: '#3b3f47' };
+    // the room is tinted from the page's live palette, so it follows the colour theme
+    const tok = (k, d) => new THREE.Color(cs.getPropertyValue(k).trim() || d);
+    const ink = tok('--ink', '#100d33'), ink3 = tok('--ink-3', '#6e6b8e'), ember = tok('--ember', '#f39a5c');
+    const tint = (amt, base = bg) => '#' + base.clone().lerp(ink, amt).getHexString();
+    const P = {
+      floor: tint(dark ? 0.1 : 0.06), rug: tint(dark ? 0.16 : 0.12), wall: tint(dark ? 0.05 : 0.015), furn: tint(dark ? 0.22 : 0.12),
+      soft: '#' + bg.clone().lerp(accent, dark ? 0.3 : 0.35).getHexString(), past: '#' + ink3.getHexString(), target: '#' + ember.getHexString(),
+      grid: '#' + ink.getHexString(),
+      wood: dark ? '#6e5a5a' : '#bfa58f', plant: dark ? '#4f8a76' : '#7fae98', pot: dark ? '#7a5866' : '#c49a88',
+      skin: dark ? '#d6b6a4' : '#dcbcaa', shell: dark ? '#cfcdeb' : '#e4e3f2', joint: dark ? '#120f30' : '#1a1640',
+    };
     scene.background = bg;
     scene.fog = new THREE.Fog(bg, 13, 24);
     ['floor', 'rug', 'wall', 'furn', 'wood', 'soft', 'plant', 'pot', 'skin', 'shell', 'joint', 'past'].forEach(k => M[k].color.set(P[k]));
@@ -930,6 +938,7 @@ window.mountForesight3D = function (fig, THREE, fallback, addons) {
   new ResizeObserver(resize).observe(fig);
   new IntersectionObserver(([e]) => { st.visible = e.isIntersecting; update(); }, { rootMargin: '80px' }).observe(canvas);
   darkMQ.addEventListener('change', () => { applyTheme(); draw(); });
+  window.addEventListener('vizthemechange', () => { applyTheme(); if (!st.running) draw(); }); // follow the page's theme fade
   reduceMQ.addEventListener('change', update);
 
   const oldBtn = fig.querySelector('.viz-toggle');
