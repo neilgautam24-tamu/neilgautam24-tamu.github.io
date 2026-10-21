@@ -736,6 +736,7 @@ window.mountCardiac3D = function (fig, THREE, addons) {
   new ResizeObserver(resize).observe(stage);
   new IntersectionObserver(([e]) => { st.visible = e.isIntersecting; update(); }, { rootMargin: '80px' }).observe(stage);
   darkMQ.addEventListener('change', () => { applyTheme(); draw(); });
+  window.addEventListener('vizthemechange', () => { applyTheme(); if (!st.running) draw(); }); // follow the page's theme fade
   reduceMQ.addEventListener('change', update);
   const btn = fig.querySelector('.viz-toggle');
   if (btn) btn.addEventListener('click', () => {
