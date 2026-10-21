@@ -636,6 +636,7 @@
   readColors();
   document.querySelectorAll('canvas[data-viz]').forEach(mount);
   darkMQ.addEventListener('change', () => { readColors(); mounted.forEach(m => m.draw()); });
+  window.addEventListener('vizthemechange', () => { readColors(); mounted.forEach(m => m.draw()); });
   // Canvas text needs the web font; redraw still frames once it has loaded.
   if (document.fonts) document.fonts.ready.then(() => mounted.forEach(m => m.draw()));
   reduceMQ.addEventListener('change', () => mounted.forEach(m => m.update()));
