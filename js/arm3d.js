@@ -70,7 +70,7 @@ window.mountArm3D = function (fig, THREE, addons, fallback) {
     lens: new THREE.MeshPhysicalMaterial({ color: 0x05070a, roughness: 0.05, metalness: 0.2, clearcoat: 1 }),
     ir: new THREE.MeshStandardMaterial({ color: 0x400000, emissive: 0xff2a2a, emissiveIntensity: 1.6 }),
     marker: new THREE.MeshStandardMaterial({ color: 0xf2f4f7, emissive: 0xdfe6ee, emissiveIntensity: 0.55, roughness: 0.2 }),
-    binA: new THREE.MeshStandardMaterial({ color: 0x35598f, roughness: 0.7 }),
+    binA: new THREE.MeshStandardMaterial({ color: 0x4b3fc8, roughness: 0.7 }),
     binB: new THREE.MeshStandardMaterial({ color: 0x8b939e, roughness: 0.7 }),
     shadow: new THREE.ShadowMaterial({ opacity: 0.28 }),
     grid: new THREE.LineBasicMaterial({ transparent: true, opacity: 0.12 }),
@@ -461,6 +461,7 @@ window.mountArm3D = function (fig, THREE, addons, fallback) {
     M.fov.color.copy(accent);
     M.fovFill.color.copy(accent);
     M.det.color.copy(accent);
+    M.binA.color.set(cs.getPropertyValue('--chip-b').trim() || '#5647e0'); // source bin takes the theme colour
     scene.environmentIntensity = dark ? 0.6 : 0.8;
   }
 
@@ -681,6 +682,7 @@ window.mountArm3D = function (fig, THREE, addons, fallback) {
   new ResizeObserver(resize).observe(fig);
   new IntersectionObserver(([e]) => { st.visible = e.isIntersecting; update(); }, { rootMargin: '80px' }).observe(canvas);
   darkMQ.addEventListener('change', () => { applyTheme(); draw(); });
+  window.addEventListener('vizthemechange', () => { applyTheme(); if (!st.running) draw(); }); // follow the page's theme fade
   reduceMQ.addEventListener('change', update);
 
   const oldBtn = fig.querySelector('.viz-toggle');
